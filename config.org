@@ -1,0 +1,123 @@
+#+BEGIN_SRC emacs-lisp
+(require 'package)
+
+(setq package-enable-at-startup nil)
+(add-to-list 'package-archives
+  '("melpa" . "https://melpa.org/packages/"))
+
+(package-initialize)
+
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+(use-package flycheck
+  :ensure t
+  :init (add-hook 'after-init-hook #'global-flycheck-mode)
+  )
+
+(use-package flycheck-pos-tip
+  :ensure t
+  :init (with-eval-after-load 'flycheck
+          (flycheck-pos-tip-mode))
+  )
+
+(use-package yasnippet
+  :ensure t
+  :init (yas-global-mode 1)
+  )
+
+(use-package helm
+  :ensure t
+  :defer t
+  :init (global-set-key (kbd "M-x") 'helm-M-x)
+  )
+
+(use-package company
+  :ensure t
+  :init (add-hook 'after-init-hook 'global-company-mode)
+  )
+
+(defun check-expansion ()
+  (save-excursion
+    (if (looking-at "\\_>") t
+      (backward-char 1)
+      (if (looking-at "\\.") t
+        (backward-char 1)
+        (if (looking-at "->") t nil)))))
+
+(defun do-yas-expand ()
+  (let ((yas-fallback-behavior 'return-nil))
+    (yas-expand)))
+
+(defun tab-indent-or-complete ()
+  (interactive)
+  (if (minibufferp)
+      (minibuffer-complete)
+    (if (or (not yas-minor-mode)
+            (null (do-yas-expand)))
+        (if (check-expansion)
+            (company-complete-common)
+          (indent-for-tab-command)))))
+(global-set-key [tab] 'tab-indent-or-complete)
+
+(use-package git-gutter
+  :ensure t
+  :init
+  (global-git-gutter-mode 1)
+  (git-gutter:linum-setup))
+
+
+
+(use-package which-key
+  :ensure t
+  :defer t
+  :init (which-key-mode)
+  )
+
+(use-package better-defaults
+  :ensure t
+  )
+
+(use-package atom-one-dark-theme
+  :ensure t
+  :init (add-hook 'after-init-hook
+                  (lambda () (load-theme 'atom-one-dark)))
+  )
+
+
+(use-package company-jedi
+  :ensure t
+  :init (add-hook 'python-mode-hook
+                  (lambda() (add-to-list 'company-backends 'company-jedi)))
+  )
+
+
+(use-package org-bullets
+  :ensure t
+  :init (add-hook 'org-mode-hook 'org-bullets-mode)
+  )
+
+(defalias 'yes-or-no-p 'y-or-n-p)
+(setq require-final-newline t)
+(setq mode-require-final-newline t)
+(setq-default intent-tabs-mode nil)
+(global-linum-mode 1)
+
+(setq backup-directory-alist
+      `((".*" . "~/.tmp/emacs")))
+(setq auto-save-file-name-transforms
+      `((".*" ,"~/.tmp/emacs" t)))
+
+(custom-set-variables
+ '(custom-safe-themes
+   (quote
+    ("1160f5fc215738551fce39a67b2bcf312ed07ef3568d15d53c87baa4fd1f4d4e" default)))
+ '(inhibit-startup-screen t)
+ '(package-selected-packages
+   (quote
+    (org-bullets evil yasnippet which-key use-package helm git-gutter flycheck-pos-tip company-jedi better-defaults atom-one-dark-theme))))
+
+(custom-set-faces
+ )
+#+END_SRC
