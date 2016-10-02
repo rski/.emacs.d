@@ -178,6 +178,15 @@ like a README.
 (setq org-src-fontify-natively t)
 #+END_SRC
 
+** Keybindings
+#+BEGIN_SRC emacs-lisp
+(defun visit-config ()
+  (interactive)
+  (find-file (substitute-in-file-name "$HOME/.emacs.d/config.org"))
+  )
+(global-set-key (kbd "C-c f d") 'visit-config)
+
+#+END_SRC
 ** Custom variables
 #+BEGIN_SRC emacs-lisp
 (custom-set-variables
