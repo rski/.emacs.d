@@ -3,7 +3,12 @@ Harry Schwartz has this amazing talk on youtube about [[https://www.youtube.com/
 talks about writing his emacs config in a literate style using org. I wanted to try it and 
 writing in org gives you very nice folding for free. Plus it just [[https://github.com/hrs/dotfiles/blob/master/emacs.d/configuration.org][looks so good]] and it reads
 like a README.
-
+** Some information about me
+#+BEGIN_SRC emacs-lisp
+(setq user-full-name "Romanos Skiadas"
+      user-mail-address "rom.skiad@gmail.com"
+      )
+#+END_SRC
 ** Bootstart use-package
 #+BEGIN_SRC emacs-lisp
 
