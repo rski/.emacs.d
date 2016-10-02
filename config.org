@@ -1,6 +1,13 @@
-#+BEGIN_SRC emacs-lisp
-(require 'package)
+* Why literate programming?
+Harry Schwartz has this amazing talk on youtube about [[https://www.youtube.com/watch?v=SzA2YODtgK4][getting started with org mode]], where he
+talks about writing his emacs config in a literate style using org. I wanted to try it and 
+writing in org gives you very nice folding for free. Plus it just [[https://github.com/hrs/dotfiles/blob/master/emacs.d/configuration.org][looks so good]] and it reads
+like a README.
 
+** Bootstart use-package
+#+BEGIN_SRC emacs-lisp
+
+(require 'package)
 (setq package-enable-at-startup nil)
 (add-to-list 'package-archives
   '("melpa" . "https://melpa.org/packages/"))
@@ -10,6 +17,11 @@
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
+
+#+END_SRC 
+
+** Flycheck with hovering pos-tip
+#+BEGIN_SRC emacs-lisp
 
 (use-package flycheck
   :ensure t
@@ -22,22 +34,51 @@
           (flycheck-pos-tip-mode))
   )
 
-(use-package yasnippet
-  :ensure t
-  :init (yas-global-mode 1)
-  )
+#+END_SRC
 
+** Helm
+#+BEGIN_SRC emacs-lisp
 (use-package helm
   :ensure t
   :defer t
   :init (global-set-key (kbd "M-x") 'helm-M-x)
   )
+#+END_SRC
 
+** Autocompletion and snippets with yasnippet
+*** Configure company to start globaly
+**** TODO configure ycmd backend too
+
+#+BEGIN_SRC emacs-lisp
 (use-package company
   :ensure t
   :init (add-hook 'after-init-hook 'global-company-mode)
   )
+#+END_SRC
 
+*** Python config for company
+
+#+BEGIN_SRC emacs-lisp
+(use-package company-jedi
+  :ensure t
+  :init (add-hook 'python-mode-hook
+                  (lambda() (add-to-list 'company-backends 'company-jedi)))
+  )
+#+END_SRC
+
+*** Configure yasnippet
+#+BEGIN_SRC emacs-lisp
+
+(use-package yasnippet
+  :ensure t
+  :init (yas-global-mode 1)
+  )
+
+#+END_SRC
+
+*** Configure tab to not clash with yas, company and indent 
+**** TODO fix the problem where pressing tab in company makes selecting a completion mandatory
+#+BEGIN_SRC emacs-lisp
 (defun check-expansion ()
   (save-excursion
     (if (looking-at "\\_>") t
@@ -59,56 +100,81 @@
         (if (check-expansion)
             (company-complete-common)
           (indent-for-tab-command)))))
-(global-set-key [tab] 'tab-indent-or-complete)
 
+(global-set-key [tab] 'tab-indent-or-complete)
+#+END_SRC
+
+** Git configuration
+*** Configure git-gutter to work with linum
+#+BEGIN_SRC emacs-lisp
 (use-package git-gutter
   :ensure t
   :init
   (global-git-gutter-mode 1)
   (git-gutter:linum-setup))
 
+#+END_SRC
 
+** Niceties
+*** Which key to show possible candidates for keystrokes after a prefix like C-c
 
+#+BEGIN_SRC emacs-lisp
 (use-package which-key
   :ensure t
   :defer t
   :init (which-key-mode)
   )
+#+END_SRC
 
+*** Better defaults.
+    Remove toolbars, scroll bars, etc, remember pointer when closing file, mouse yank insert at point,
+    sets require-final-newline, indent-tabs set to nil, other useful stuff
+
+#+BEGIN_SRC emacs-lisp
 (use-package better-defaults
   :ensure t
   )
+#+END_SRC
 
-(use-package atom-one-dark-theme
-  :ensure t
-  :init (add-hook 'after-init-hook
-                  (lambda () (load-theme 'atom-one-dark)))
-  )
+*** Better defaults written by me
 
-
-(use-package company-jedi
-  :ensure t
-  :init (add-hook 'python-mode-hook
-                  (lambda() (add-to-list 'company-backends 'company-jedi)))
-  )
-
-
-(use-package org-bullets
-  :ensure t
-  :init (add-hook 'org-mode-hook 'org-bullets-mode)
-  )
-
+#+BEGIN_SRC emacs-lisp
 (defalias 'yes-or-no-p 'y-or-n-p)
-(setq require-final-newline t)
-(setq mode-require-final-newline t)
-(setq-default intent-tabs-mode nil)
 (global-linum-mode 1)
-
 (setq backup-directory-alist
       `((".*" . "~/.tmp/emacs")))
 (setq auto-save-file-name-transforms
       `((".*" ,"~/.tmp/emacs" t)))
 
+#+END_SRC
+
+** Theming
+*** Atom-one-dark a best theme
+
+#+BEGIN_SRC emacs-lisp
+(use-package atom-one-dark-theme
+  :ensure t
+  :init (add-hook 'after-init-hook
+                  (lambda () (load-theme 'atom-one-dark)))
+  )
+#+END_SRC
+
+** Org mode
+*** Org bullets converts starts into bullets
+#+BEGIN_SRC emacs-lisp
+(use-package org-bullets
+  :ensure t
+  :init (add-hook 'org-mode-hook 'org-bullets-mode)
+  )
+#+END_SRC
+
+*** Make literate programming better
+#+BEGIN_SRC emacs-lisp
+(setq org-src-fontify-natively t)
+#+END_SRC
+
+** Custom variables
+#+BEGIN_SRC emacs-lisp
 (custom-set-variables
  '(custom-safe-themes
    (quote
