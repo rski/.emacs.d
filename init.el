@@ -5,4 +5,4 @@
 ;; You may delete these explanatory comments.
 (package-initialize)
 
-(org-babel-load-file "/home/rski/.emacs.d/config.org")
+(org-babel-load-file "~/.emacs.d/config.org")
