@@ -193,11 +193,7 @@ like a README.
  '(custom-safe-themes
    (quote
     ("1160f5fc215738551fce39a67b2bcf312ed07ef3568d15d53c87baa4fd1f4d4e" default)))
- '(inhibit-startup-screen t)
- '(package-selected-packages
-   (quote
-    (org-bullets evil yasnippet which-key use-package helm git-gutter flycheck-pos-tip company-jedi better-defaults atom-one-dark-theme))))
-
+ '(inhibit-startup-screen t))
 (custom-set-faces
  )
 #+END_SRC
