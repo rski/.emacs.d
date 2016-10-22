@@ -1,3 +1,5 @@
 .python-environments/
 config.el
 places
+backups/
+elpa/
