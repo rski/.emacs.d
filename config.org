@@ -127,7 +127,7 @@ like a README.
 (use-package evil
   :ensure t
   :init
-  (evil mode 1)
+  (evil-mode 1)
   (define-key evil-normal-state-map (kbd ":") 'evil-ex)
   (define-key evil-visual-state-map (kbd ":") 'evil-ex)
   (define-key evil-motion-state-map (kbd ":") 'evil-ex)
