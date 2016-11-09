@@ -152,7 +152,7 @@ like a README.
       `((".*" . "~/.tmp/emacs")))
 (setq auto-save-file-name-transforms
       `((".*" ,"~/.tmp/emacs" t)))
-
+(setq visible-bell nil)
 #+END_SRC
 
 ** Theming
@@ -161,11 +161,10 @@ like a README.
 #+BEGIN_SRC emacs-lisp
 (use-package atom-one-dark-theme
   :ensure t
-  :init (add-hook 'after-init-hook
-                  (lambda () (load-theme 'atom-one-dark)))
+  :init (load-theme 'atom-one-dark 'no-confirm)
   )
 #+END_SRC
-
+    
 ** Org mode
 *** Org bullets converts starts into bullets
 #+BEGIN_SRC emacs-lisp
