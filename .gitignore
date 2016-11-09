@@ -1,5 +1,3 @@
-.python-environments/
-config.el
-places
-backups/
-elpa/
+*
+!config.org
+!init.el
