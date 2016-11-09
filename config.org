@@ -1,3 +1,4 @@
+#+STARTUP: showeverything
 * Why literate programming?
 Harry Schwartz has this amazing talk on youtube about [[https://www.youtube.com/watch?v=SzA2YODtgK4][getting started with org mode]], where he
 talks about writing his emacs config in a literate style using org. I wanted to try it and 
