@@ -113,6 +113,15 @@
 (global-set-key [tab] 'tab-indent-or-complete)
 #+END_SRC
 
+* Languages
+  Packages for getting better support for various languages
+
+** Puppet
+   Use puppet-mode from Vox Pupuli
+   #+BEGIN_SRC emacs-lisp
+   (use-package puppet-mode :ensure t)
+   #+END_SRC
+   
 * Git configuration
   TODO Magit
 ** Configure git-gutter, make it work with linum
