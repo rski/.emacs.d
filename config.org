@@ -41,11 +41,16 @@ like a README.
 #+END_SRC
 
 ** Helm
+   Set the helm coomand prefix to C-c h because C-x c is scary close to C-x C-c
 #+BEGIN_SRC emacs-lisp
 (use-package helm
   :ensure t
   :defer t
-  :init (global-set-key (kbd "M-x") 'helm-M-x)
+  :init
+  (require 'helm-config)
+  (global-set-key (kbd "C-c h") 'helm-command-prefix)
+  (global-unset-key (kbd "C-x c"))
+  (global-set-key (kbd "M-x") 'helm-M-x)
   )
 #+END_SRC
 
@@ -202,9 +207,6 @@ like a README.
 ** Custom variables
 #+BEGIN_SRC emacs-lisp
 (custom-set-variables
- '(custom-safe-themes
-   (quote
-    ("1160f5fc215738551fce39a67b2bcf312ed07ef3568d15d53c87baa4fd1f4d4e" default)))
  '(inhibit-startup-screen t))
 (custom-set-faces
  )
