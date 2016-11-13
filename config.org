@@ -216,6 +216,14 @@
 )
 #+END_SRC
 
+* Projectile
+** Base projectile package
+   Enable projectile globally, then C-c p is the prefix for projectile.
+#+BEGIN_SRC emacs-lisp
+(use-package projectile
+  :ensure t
+  :init (projectile-global-mode))
+#+END_SRC
 * Various Keybindings
 #+BEGIN_SRC emacs-lisp
 (defun visit-config ()
