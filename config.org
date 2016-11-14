@@ -3,6 +3,15 @@
   talks about writing his emacs config in a literate style using org. I wanted to try it and
   writing in org gives you very nice folding for free. Plus it just [[https://github.com/hrs/dotfiles/blob/master/emacs.d/configuration.org][looks so good]] and it reads
   like a README.
+* Some assistance functions
+** Global hook
+   Use dolist to simulate adding a "global-hook"
+#+BEGIN_SRC emacs-lisp
+(defun add-global-hook (func)
+  (dolist (hook '(prog-mode-hook text-mode-hook conf-mode-hook))
+  (add-hook hook func))
+)
+#+END_SRC
 * Some information about me
 #+BEGIN_SRC emacs-lisp
 (setq user-full-name "Romanos Skiadas"
@@ -149,8 +158,8 @@
 #+BEGIN_SRC emacs-lisp
 (use-package ws-butler
   :ensure t
-  :init (dolist (hook '(prog-mode-hook text-mode-hook conf-mode-hook))
-  (add-hook hook 'ws-butler-mode))
+  :init
+  (add-global-hook 'ws-butler-mode)
   :diminish ws-butler-mode)
 
 (setq-default show-trailing-whitespace t)
@@ -234,6 +243,15 @@
   :config (setq projectile-switch-project-action 'neotree-projectile-action)
 )
 #+END_SRC
+* Paredit
+#+BEGIN_SRC emacs-lisp
+(use-package paredit
+  :ensure t
+  :init (add-global-hook 'enable-paredit-mode)
+  :diminish paredit-mode
+)
+
+#+END_SRC
 * Various Keybindings
 #+BEGIN_SRC emacs-lisp
 (defun visit-config ()
@@ -241,7 +259,6 @@
   (find-file (substitute-in-file-name "$HOME/.emacs.d/config.org"))
   )
 (global-set-key (kbd "C-c f d") 'visit-config)
-
 #+END_SRC
 * Custom variables
 #+BEGIN_SRC emacs-lisp
