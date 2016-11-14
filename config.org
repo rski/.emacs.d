@@ -224,6 +224,16 @@
   :ensure t
   :init (projectile-global-mode))
 #+END_SRC
+
+* Nerdtree
+  Bind f8 to toggling neotree and also switch the project when projectile-switch-project is called.
+#+BEGIN_SRC emacs-lisp
+(use-package neotree
+  :ensure t
+  :bind ([f8] . neotree-toggle)
+  :config (setq projectile-switch-project-action 'neotree-projectile-action)
+)
+#+END_SRC
 * Various Keybindings
 #+BEGIN_SRC emacs-lisp
 (defun visit-config ()
