@@ -132,7 +132,16 @@
    #+END_SRC
 
 * Git configuration
-  TODO Magit
+** Magit
+   The best thing since sliced bread and normal bread.
+   vc is the built-in version control system and it is disabled because I don't use it really.
+#+BEGIN_SRC emacs-lisp
+(use-package magit
+  :bind
+  ("C-c g s" . magit-status)
+  :ensure t)
+(setq vc-handled-backends nil)
+#+END_SRC
 ** Configure git-gutter, make it work with linum
 #+BEGIN_SRC emacs-lisp
 (use-package git-gutter
@@ -151,8 +160,7 @@
   :ensure t
   :defer t
   :init (which-key-mode)
-  :diminish which-key-mode
-  )
+  :diminish which-key-mode)
 #+END_SRC
 
 ** Whitespace
@@ -165,7 +173,6 @@
 
 (setq-default show-trailing-whitespace t)
 #+END_SRC
-
 
 ** Better defaults.
     Remove toolbars, scroll bars, etc, remember pointer when closing file, mouse yank insert at point,
