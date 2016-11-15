@@ -151,6 +151,11 @@
 #+BEGIN_SRC emacs-lisp
 (use-package git-gutter
   :ensure t
+  :config
+  (setq git-gutter:update-interval 2
+        git-gutter:hide-gutter t
+        git-gutter:ask-p nil
+        git-gutter:verbosity 0)
   :init
   (global-git-gutter-mode 1)
   (git-gutter:linum-setup))
