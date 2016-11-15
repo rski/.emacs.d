@@ -154,9 +154,12 @@
   :init
   (global-git-gutter-mode 1)
   (git-gutter:linum-setup))
-
 #+END_SRC
-
+** Add a hook to refresh git-gutter after magit stuff happens
+#+BEGIN_SRC emacs-lisp
+(add-hook 'magit-post-refresh-hook
+          #'git-gutter:update-all-windows)
+#+END_SRC
 * Niceties
 ** Which key to show possible candidates for keystrokes after a prefix like C-c
 
