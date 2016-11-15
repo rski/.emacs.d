@@ -139,6 +139,11 @@
 (use-package magit
   :bind
   ("C-c g s" . magit-status)
+  ("C-c g d" . magit-diff-dwim)
+  ("C-c g g" . magit-dispatch-popup)
+  ("C-c g p" . magit-push-popup)
+  ("C-c g P" . magit-pull-popup)
+  ("C-c g c" . magit-commit)
   :ensure t)
 (setq vc-handled-backends nil)
 #+END_SRC
