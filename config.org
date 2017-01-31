@@ -129,7 +129,6 @@
     :ensure t
     :init (add-to-list 'company-backends 'company-anaconda))
 #+END_SRC
-
 ** Puppet
    Use puppet-mode from Vox Pupuli
    #+BEGIN_SRC emacs-lisp
@@ -169,15 +168,22 @@
 
 #+BEGIN_SRC emacs-lisp
 
-(use-package evil
-  :ensure t
-  :init
-  (evil-mode 1)
-  (define-key evil-normal-state-map (kbd ";") 'evil-ex)
-  (define-key evil-visual-state-map (kbd ";") 'evil-ex)
-  (define-key evil-motion-state-map (kbd ";") 'evil-ex)
-)
+  (use-package evil
+    :ensure t
+    :init
+    (evil-mode 1)
+    (define-key evil-normal-state-map (kbd ";") 'evil-ex)
+    (define-key evil-visual-state-map (kbd ";") 'evil-ex)
+    (define-key evil-motion-state-map (kbd ";") 'evil-ex)
+  )
 
+  (use-package evil-leader
+    :ensure t
+    :init
+    (global-evil-leader-mode 1)
+    (evil-leader/set-leader "<SPC>")
+    (evil-leader/set-key "pt" 'neotree-toggle)
+)
 #+END_SRC
 
 * Niceties
@@ -271,14 +277,14 @@
   :init (projectile-global-mode))
 #+END_SRC
 
-* Nerdtree
-  Bind f8 to toggling neotree and also switch the project when projectile-switch-project is called.
+* Neotree
+  Toggle neotree with SPCpt and switch the project when projectile-switch-project is called.
 #+BEGIN_SRC emacs-lisp
 (use-package neotree
   :ensure t
-  :bind ([f8] . neotree-toggle)
-  :config (setq projectile-switch-project-action 'neotree-projectile-action)
-)
+  :config (progn
+    (setq projectile-switch-project-action 'neotree-projectile-action)
+    (evil-leader/set-key "pt" 'neotree-toggle)))
 #+END_SRC
 * Paredit
 #+BEGIN_SRC emacs-lisp
