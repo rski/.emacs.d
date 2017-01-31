@@ -51,15 +51,16 @@
 * Helm
    Set the helm coomand prefix to C-c h because C-x c is scary close to C-x C-c
 #+BEGIN_SRC emacs-lisp
-(use-package helm
-  :ensure t
-  :defer t
-  :init
-  (require 'helm-config)
-  (global-set-key (kbd "C-c h") 'helm-command-prefix)
-  (global-unset-key (kbd "C-x c"))
-  (global-set-key (kbd "M-x") 'helm-M-x)
-  )
+  (use-package helm
+    :ensure t
+    :defer t
+    :init
+    (require 'helm-config)
+    (global-set-key (kbd "C-c h") 'helm-command-prefix)
+    (global-unset-key (kbd "C-x c"))
+    (global-set-key (kbd "M-x") 'helm-M-x)
+    (global-set-key (kbd "M-i") 'helm-imenu)
+    )
 #+END_SRC
 
 * Autocompletion and snippets
