@@ -223,6 +223,7 @@
 (setq auto-save-file-name-transforms
       `((".*" ,"~/.tmp/emacs" t)))
 (setq visible-bell nil)
+(setq inhibit-startup-screen t)
 #+END_SRC
 
 * Theming
@@ -295,11 +296,4 @@
   (find-file (substitute-in-file-name "$HOME/.emacs.d/config.org"))
   )
 (global-set-key (kbd "C-c f d") 'visit-config)
-#+END_SRC
-* Custom variables
-#+BEGIN_SRC emacs-lisp
-(custom-set-variables
- '(inhibit-startup-screen t))
-(custom-set-faces
- )
 #+END_SRC
