@@ -140,18 +140,18 @@
    The best thing since sliced bread and normal bread.
    vc is the built-in version control system and it is disabled because I don't use it really.
 #+BEGIN_SRC emacs-lisp
-(use-package magit
-  :bind
-  ("C-c g s" . magit-status)
-  ("C-c g d" . magit-diff-dwim)
-  ("C-c g g" . magit-dispatch-popup)
-  ("C-c g p" . magit-push-popup)
-  ("C-c g P" . magit-pull-popup)
-  ("C-c g c" . magit-commit)
-  ("C-c g b b" . magit-branch-and-checkout)
-  ("C-c g b c" . magit-checkout)
-  :ensure t)
-(setq vc-handled-backends nil)
+  (use-package magit
+    :config
+    (evil-leader/set-key "gs" 'magit-status)
+    (evil-leader/set-key "gd" 'magit-diff-dwim)
+    (evil-leader/set-key "gg" 'magit-dispatch-popup)
+    (evil-leader/set-key "gp" 'magit-push-popup)
+    (evil-leader/set-key "gP" 'magit-pull-popup)
+    (evil-leader/set-key "gc" 'magit-commit-popup)
+    (evil-leader/set-key "gbb" 'magit-branch-and-checkout)
+    (evil-leader/set-key "gbc" 'magit-checkout)
+    :ensure t)
+  (setq vc-handled-backends nil)
 #+END_SRC
 ** Configure git-gutter, make it work with linum
 #+BEGIN_SRC emacs-lisp
@@ -264,7 +264,7 @@
   :bind ("C-c t" . shell-pop)
   :config (custom-set-variables
             '(shell-pop-shell-type (quote ("ansi-term" "*ansi-term*" (lambda nil (ansi-term shell-pop-term-shell)))))
-            '(shell-pop-full-span t))
+            '(shell-pop-full-span nil))
 )
 #+END_SRC
 
@@ -301,5 +301,5 @@
   (interactive)
   (find-file (substitute-in-file-name "$HOME/.emacs.d/config.org"))
   )
-(global-set-key (kbd "C-c f d") 'visit-config)
+(evil-leader/set-key "fed" 'visit-config)
 #+END_SRC
