@@ -74,16 +74,6 @@
   )
 #+END_SRC
 
-*** Python config for company using company-jedi
-
-#+BEGIN_SRC emacs-lisp
-(use-package company-jedi
-  :ensure t
-  :init (add-hook 'python-mode-hook
-                  (lambda() (add-to-list 'company-backends 'company-jedi)))
-  )
-#+END_SRC
-
 ** Configure yasnippet
 **** TODO add snippets, keybidings etc
 #+BEGIN_SRC emacs-lisp
@@ -125,6 +115,20 @@
 
 * Languages
   Packages for getting better support for various languages
+
+** Python
+   Python config for company using anaconda for documentation and autocompletion
+
+#+BEGIN_SRC emacs-lisp
+  (use-package anaconda-mode
+    :ensure t
+    :init (add-hook 'python-mode-hook 'anaconda-mode)
+    (add-hook 'python-mode-hook 'anaconda-eldoc-mode))
+
+  (use-package company-anaconda
+    :ensure t
+    :init (add-to-list 'company-backends 'company-anaconda))
+#+END_SRC
 
 ** Puppet
    Use puppet-mode from Vox Pupuli
