@@ -75,42 +75,10 @@
 #+END_SRC
 
 ** Configure yasnippet
-**** TODO add snippets, keybidings etc
 #+BEGIN_SRC emacs-lisp
-
 (use-package yasnippet
   :ensure t
-  :init (yas-global-mode 1)
-  )
-
-#+END_SRC
-
-** Configure tab to not clash with yas, company and indent
-**** TODO fix the problem where pressing tab in company makes selecting a completion mandatory
-#+BEGIN_SRC emacs-lisp
-(defun check-expansion ()
-  (save-excursion
-    (if (looking-at "\\_>") t
-      (backward-char 1)
-      (if (looking-at "\\.") t
-        (backward-char 1)
-        (if (looking-at "->") t nil)))))
-
-(defun do-yas-expand ()
-  (let ((yas-fallback-behavior 'return-nil))
-    (yas-expand)))
-
-(defun tab-indent-or-complete ()
-  (interactive)
-  (if (minibufferp)
-      (minibuffer-complete)
-    (if (or (not yas-minor-mode)
-            (null (do-yas-expand)))
-        (if (check-expansion)
-            (company-complete-common)
-          (indent-for-tab-command)))))
-
-(global-set-key [tab] 'tab-indent-or-complete)
+  :init (yas-global-mode 1))
 #+END_SRC
 
 * Languages
@@ -120,14 +88,12 @@
    Python config for company using anaconda for documentation and autocompletion
 
 #+BEGIN_SRC emacs-lisp
-  (use-package anaconda-mode
+(add-to-list 'package-archives
+             '("elpy" . "https://jorgenschaefer.github.io/packages/"))
+  (use-package elpy
     :ensure t
-    :init (add-hook 'python-mode-hook 'anaconda-mode)
-    (add-hook 'python-mode-hook 'anaconda-eldoc-mode))
+    :init (elpy-enable))
 
-  (use-package company-anaconda
-    :ensure t
-    :init (add-to-list 'company-backends 'company-anaconda))
 #+END_SRC
 ** Puppet
    Use puppet-mode from Vox Pupuli
@@ -141,15 +107,11 @@
    vc is the built-in version control system and it is disabled because I don't use it really.
 #+BEGIN_SRC emacs-lisp
   (use-package magit
-    :config
-    (evil-leader/set-key "gs" 'magit-status)
-    (evil-leader/set-key "gd" 'magit-diff-dwim)
-    (evil-leader/set-key "gg" 'magit-dispatch-popup)
-    (evil-leader/set-key "gp" 'magit-push-popup)
-    (evil-leader/set-key "gP" 'magit-pull-popup)
-    (evil-leader/set-key "gc" 'magit-commit-popup)
-    (evil-leader/set-key "gbb" 'magit-branch-and-checkout)
-    (evil-leader/set-key "gbc" 'magit-checkout)
+    :bind
+    (("C-c gs" . magit-status)
+     ("C-c gd" . magit-diff-dwim)
+     ("C-c gg" . magit-dispatch-popup)
+     ("C-c gc" . magit-commit-popup))
     :ensure t)
   (setq vc-handled-backends nil)
 #+END_SRC
@@ -162,28 +124,6 @@
   :init
   (global-git-gutter-mode 1)
   (git-gutter:linum-setup))
-#+END_SRC
-
-* Evil mode
-
-#+BEGIN_SRC emacs-lisp
-
-  (use-package evil
-    :ensure t
-    :init
-    (evil-mode 1)
-    (define-key evil-normal-state-map (kbd ";") 'evil-ex)
-    (define-key evil-visual-state-map (kbd ";") 'evil-ex)
-    (define-key evil-motion-state-map (kbd ";") 'evil-ex)
-  )
-
-  (use-package evil-leader
-    :ensure t
-    :init
-    (global-evil-leader-mode 1)
-    (evil-leader/set-leader "<SPC>")
-    (evil-leader/set-key "pt" 'neotree-toggle)
-)
 #+END_SRC
 
 * Niceties
@@ -282,24 +222,22 @@
 #+BEGIN_SRC emacs-lisp
 (use-package neotree
   :ensure t
-  :config (progn
-    (setq projectile-switch-project-action 'neotree-projectile-action)
-    (evil-leader/set-key "pt" 'neotree-toggle)))
+  :config  (setq projectile-switch-project-action 'neotree-projectile-action)
+  :bind  (("C-c l" . neotree-toggle)))
 #+END_SRC
-* Paredit
+* Smartparens
 #+BEGIN_SRC emacs-lisp
-(use-package paredit
+(use-package smartparens
   :ensure t
-  :init (add-global-hook 'enable-paredit-mode)
-  :diminish paredit-mode
-)
+  :init (add-global-hook 'smartparens-mode)
+  :diminish smartparens-mode)
 
 #+END_SRC
 * Various Keybindings
 #+BEGIN_SRC emacs-lisp
-(defun visit-config ()
-  (interactive)
-  (find-file (substitute-in-file-name "$HOME/.emacs.d/config.org"))
-  )
-(evil-leader/set-key "fed" 'visit-config)
+  (defun visit-config ()
+    (interactive)
+    (find-file (substitute-in-file-name "$HOME/.emacs.d/config.org"))
+    )
+  (global-set-key (kbd "C-c fd") 'visit-config)
 #+END_SRC
