@@ -32,7 +32,8 @@
 
 #+END_SRC
 
-* Flycheck with hovering pos-tip
+* Autocorrection
+** Flycheck with hovering pos-tip
 #+BEGIN_SRC emacs-lisp
 
 (use-package flycheck
@@ -47,9 +48,14 @@
   )
 
 #+END_SRC
+** Flyspell
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'text-mode-hook (lambda () (flyspell-mode 1)))
+  (add-hook 'prog-mode-hook (lambda () (flyspell-prog-mode 1)))
 
+#+END_SRC
 * Helm
-   Set the helm coomand prefix to C-c h because C-x c is scary close to C-x C-c
+   Set the helm command prefix to C-c h because C-x c is scary close to C-x C-c
 #+BEGIN_SRC emacs-lisp
   (use-package helm
     :ensure t
