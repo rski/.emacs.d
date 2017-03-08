@@ -25,6 +25,8 @@
 (setq package-enable-at-startup nil)
 (add-to-list 'package-archives
   '("melpa" . "https://melpa.org/packages/"))
+(add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/"))
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -116,6 +118,12 @@
            ("\\.markdown\\'" . markdown-mode))
     ;; TODO set markdown-command properly
     :init (setq markdown-command "multimarkdown"))
+#+END_SRC
+** Scala
+#+BEGIN_SRC emacs-lisp
+(use-package ensime
+  :ensure t
+  :pin melpa-stable)
 #+END_SRC
 * Git configuration
 ** Magit
