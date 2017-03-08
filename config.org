@@ -199,6 +199,16 @@
 #+END_SRC
 
 * Org mode
+** Install org from the repos
+#+BEGIN_SRC emacs-lisp
+  (use-package org
+    :ensure t
+    :bind (("\C-col" . org-store-link)
+           ("\C-coa" . org-agenda)
+           ("\C-coc" . org-capture)
+           ("\C-cob" . org-iswitchb)))
+#+END_SRC
+
 ** Org bullets converts starts into bullets
 #+BEGIN_SRC emacs-lisp
 (use-package org-bullets
