@@ -66,9 +66,7 @@
     (require 'helm-config)
     (global-set-key (kbd "C-c h") 'helm-command-prefix)
     (global-unset-key (kbd "C-x c"))
-    (global-set-key (kbd "M-x") 'helm-M-x)
-    (global-set-key (kbd "M-i") 'helm-imenu)
-    )
+    (global-set-key (kbd "M-x") 'helm-M-x))
 #+END_SRC
 
 * Autocompletion and snippets
@@ -148,6 +146,15 @@
   :init
   (global-git-gutter-mode 1)
   (git-gutter:linum-setup))
+#+END_SRC
+
+* Navigation
+** Imenu to bring up a poppup imenu at point
+   This is nicer than the helm one and it also supports narrowing down
+#+BEGIN_SRC emacs-lisp
+(use-package popup-imenu
+  :ensure t
+  :bind ("M-i" . popup-imenu))
 #+END_SRC
 
 * Niceties
