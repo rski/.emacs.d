@@ -207,15 +207,16 @@
 ** Better defaults written by me
 
 #+BEGIN_SRC emacs-lisp
-(defalias 'yes-or-no-p 'y-or-n-p)
-(global-linum-mode 1)
-(setq column-number-mode 1)
-(setq backup-directory-alist
-      `((".*" . "~/.tmp/emacs")))
-(setq auto-save-file-name-transforms
-      `((".*" ,"~/.tmp/emacs" t)))
-(setq visible-bell nil)
-(setq inhibit-startup-screen t)
+  (defalias 'yes-or-no-p 'y-or-n-p)
+  (global-linum-mode 1)
+  (setq column-number-mode 1)
+  (setq backup-directory-alist
+        `((".*" . "~/.tmp/emacs")))
+  (setq auto-save-file-name-transforms
+        `((".*" ,"~/.tmp/emacs" t)))
+  (setq visible-bell nil)
+  (setq inhibit-startup-screen t)
+  (add-to-list 'auto-mode-alist '("Cask" . emacs-lisp-mode))
 #+END_SRC
 
 * Theming
