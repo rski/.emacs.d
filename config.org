@@ -237,34 +237,44 @@
     :bind (("\C-col" . org-store-link)
            ("\C-coa" . org-agenda)
            ("\C-coc" . org-capture)
-           ("\C-cob" . org-iswitchb)))
+           ("\C-cob" . org-iswitchb))
+    :config (setq org-directory (expand-file-name "~/Documents/org")))
 #+END_SRC
 
 ** Org bullets converts starts into bullets
 #+BEGIN_SRC emacs-lisp
 (use-package org-bullets
   :ensure t
-  :init (add-hook 'org-mode-hook 'org-bullets-mode)
-  )
+  :init (add-hook 'org-mode-hook 'org-bullets-mode))
 #+END_SRC
 ** Presentations
 *** Org (for some reason called ox-reveal too, kinda confusing) reveal for exporting to reveal.js
+
 #+BEGIN_SRC emacs-lisp
     (use-package ox-reveal
       :ensure t
       :config (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
       :init (add-hook 'org-mode 'reveal-mode))
 #+END_SRC
+
 *** htmlize for syntax highlighting in org presentations
+
 #+BEGIN_SRC emacs-lisp
   (use-package htmlize
     :ensure t)
 #+END_SRC
+
 ** Make literate programming better
+
 #+BEGIN_SRC emacs-lisp
 (setq org-src-fontify-natively t)
 #+END_SRC
 
+** Org capture: saving notes
+*** Set the org-capture file for my agenda files
+#+BEGIN_SRC emacs-lisp
+  (setq org-default-notes-file (concat org-directory "/notes.org"))
+#+END_SRC
 * Terminal
 ** Shell pop package
 #+BEGIN_SRC emacs-lisp
