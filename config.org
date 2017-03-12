@@ -72,7 +72,6 @@
 
 * Autocompletion and snippets
 ** Company
-**** TODO configure ycmd backend too
 *** Configure the base company package
 #+BEGIN_SRC emacs-lisp
   (use-package company
@@ -92,7 +91,7 @@
   Packages for getting better support for various languages
 
 ** Python
-   Python config for company using anaconda for documentation and autocompletion
+   Python config for company using elpy which much like an idea really.
 
 #+BEGIN_SRC emacs-lisp
 (add-to-list 'package-archives
@@ -200,11 +199,10 @@
 
 #+BEGIN_SRC emacs-lisp
 (use-package better-defaults
-  :ensure t
-  )
+  :ensure t)
 #+END_SRC
 
-** Better defaults written by me
+** Other little nice settings
 
 #+BEGIN_SRC emacs-lisp
   (defalias 'yes-or-no-p 'y-or-n-p)
@@ -225,8 +223,7 @@
 #+BEGIN_SRC emacs-lisp
 (use-package atom-one-dark-theme
   :ensure t
-  :init (load-theme 'atom-one-dark 'no-confirm)
-  )
+  :init (load-theme 'atom-one-dark 'no-confirm))
 #+END_SRC
 
 * Org mode
