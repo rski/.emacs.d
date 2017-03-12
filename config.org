@@ -301,7 +301,15 @@
   :config  (setq projectile-switch-project-action 'neotree-projectile-action)
   :bind  (("C-c l" . neotree-toggle)))
 #+END_SRC
-* Smartparens
+* Editing
+** Undo tree
+#+BEGIN_SRC emacs-lisp
+  (use-package undo-tree
+    :config (global-undo-tree-mode 1)
+    :bind (("C-/" . undo)
+           ("C-c C-/" . undo-tree-redo)))
+#+END_SRC
+** Smartparens
 #+BEGIN_SRC emacs-lisp
 (use-package smartparens
   :ensure t
