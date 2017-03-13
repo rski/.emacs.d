@@ -218,12 +218,12 @@
 #+END_SRC
 
 * Theming
-** Atom-one-dark a best theme
+** Zenburn is nice
 
 #+BEGIN_SRC emacs-lisp
-(use-package atom-one-dark-theme
+(use-package zenburn-theme
   :ensure t
-  :init (load-theme 'atom-one-dark 'no-confirm))
+  :init (load-theme 'zenburn 'no-confirm))
 #+END_SRC
 
 * Org mode
