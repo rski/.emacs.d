@@ -218,12 +218,12 @@
 #+END_SRC
 
 * Theming
-** Zenburn is nice
+** monokai does nice highlighting of src blocks in org
 
 #+BEGIN_SRC emacs-lisp
-(use-package zenburn-theme
+(use-package monokai-theme
   :ensure t
-  :init (load-theme 'zenburn 'no-confirm))
+  :init (load-theme 'monokai 'no-confirm))
 #+END_SRC
 
 * Org mode
