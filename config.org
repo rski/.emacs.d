@@ -272,6 +272,26 @@
 #+BEGIN_SRC emacs-lisp
   (setq org-default-notes-file (concat org-directory "/notes.org"))
 #+END_SRC
+
+** Autocomplete org keywords
+   Snippet courtesy of purple_arrows: http://emacs.stackexchange.com/questions/21171/company-mode-completion-for-org-keywords
+#+BEGIN_SRC emacs-lisp
+(defun org-keyword-backend (command &optional arg &rest ignored)
+  (interactive (list 'interactive))
+  (cl-case command
+    (interactive (company-begin-backend 'org-keyword-backend))
+    (prefix (and (eq major-mode 'org-mode)
+                 (cons (company-grab-line "^#\\+\\(\\w*\\)" 1)
+                       t)))
+    (candidates (mapcar #'upcase
+                        (cl-remove-if-not
+                         (lambda (c) (string-prefix-p arg c))
+                         (pcomplete-completions))))
+    (ignore-case t)
+    (duplicates t)))
+(add-to-list 'company-backends 'org-keyword-backend)
+#+END_SRC
+
 * Terminal
 ** Shell pop package
 #+BEGIN_SRC emacs-lisp
