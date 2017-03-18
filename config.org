@@ -140,6 +140,18 @@
     :after 'company
     :init (add-to-list 'company-backends 'company-lua))
 #+END_SRC
+
+** Web dev
+*** web mode is really good
+#+BEGIN_SRC emacs-lisp
+  (use-package web-mode
+    :config
+    (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+    (setq web-mode-engines-alist
+          '(("django" . "\\.html\\'")))
+    (setq web-mode-enable-auto-closing t)
+    (setq web-mode-enable-css-colorization t))
+#+END_SRC
 * Git configuration
 ** Magit
    The best thing since sliced bread and normal bread.
