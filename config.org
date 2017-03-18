@@ -220,6 +220,12 @@
   (add-to-list 'auto-mode-alist '("Cask" . emacs-lisp-mode))
 #+END_SRC
 
+*** Autorvert mode to reload buffer if file changes
+    mostly because i still do git checkout from terminals
+#+BEGIN_SRC emacs-lisp
+  (global-auto-revert-mode 1)
+#+END_SRC
+
 * Theming
 ** monokai does nice highlighting of src blocks in org
 
