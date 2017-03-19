@@ -165,6 +165,12 @@
     (setq web-mode-enable-auto-closing t)
     (setq web-mode-enable-css-colorization t))
 #+END_SRC
+
+** Dockerfile mode for docker
+#+begin_src emacs-lisp
+  (use-package dockerfile-mode
+    :defer t)
+#+end_src
 * Git configuration
 ** Magit
    The best thing since sliced bread and normal bread.
