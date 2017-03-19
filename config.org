@@ -93,7 +93,8 @@
 #+BEGIN_SRC emacs-lisp
 (use-package yasnippet
   :ensure t
-  :init (yas-global-mode 1))
+  :init (yas-global-mode 1)
+  :bind (("C-c y" . yas-insert-snippet)))
 #+END_SRC
 
 * Languages
