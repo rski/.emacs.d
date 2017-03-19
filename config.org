@@ -78,6 +78,12 @@
            ("M-y" . helm-show-kill-ring)
            ("C-x C-f" . helm-find-files)))
 #+END_SRC
+** helm-tramp
+   Use the ssh/config file in tramp
+#+BEGIN_SRC emacs-lisp
+  (use-package helm-tramp
+    :defer t)
+#+END_SRC
 
 * Autocompletion and snippets
 ** Company
