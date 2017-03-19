@@ -34,6 +34,12 @@
   (package-install 'use-package))
 (setq use-package-always-ensure t)
 #+END_SRC
+** M-x try RET package installs a package in /tmp
+   Good for trying out packages without tying to them
+#+begin_src emacs-lisp
+  (use-package try
+    :ensure t)
+#+end_src
 
 * Autocorrection
 ** Flycheck with hovering pos-tip
