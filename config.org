@@ -255,6 +255,7 @@
     mostly because i still do git checkout from terminals
 #+BEGIN_SRC emacs-lisp
   (global-auto-revert-mode 1)
+  (diminish auto-revert-mode)
 #+END_SRC
 
 * Theming
