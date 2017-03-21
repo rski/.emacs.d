@@ -107,14 +107,16 @@
   Packages for getting better support for various languages
 
 ** Python
-   Python config for company using elpy which much like an idea really.
+   Python config for company using elpy which much like an ide really.
 
 #+BEGIN_SRC emacs-lisp
-(add-to-list 'package-archives
-             '("elpy" . "https://jorgenschaefer.github.io/packages/"))
-  (use-package elpy
-    :ensure t
-    :init (elpy-enable))
+  (add-to-list 'package-archives
+               '("elpy" . "https://jorgenschaefer.github.io/packages/"))
+    (use-package elpy
+      :ensure t
+      :init (elpy-enable)
+      (delete 'elpy-module-flymake elpy-modules)
+      (delete 'elpy-module-highlight-indentation elpy-modules))
 
 #+END_SRC
 ** Puppet
