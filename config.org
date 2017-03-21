@@ -394,11 +394,19 @@
   :diminish smartparens-mode)
 
 #+END_SRC
-* Various Keybindings
+* Make visiting and reloading the config easy
+** Visit the config file
 #+BEGIN_SRC emacs-lisp
-  (defun visit-config ()
+  (defun rski/visit-config ()
     (interactive)
-    (find-file (substitute-in-file-name "$HOME/.emacs.d/config.org"))
-    )
-  (global-set-key (kbd "C-c fd") 'visit-config)
+    (find-file (substitute-in-file-name "$HOME/.emacs.d/config.org")))
+  (global-set-key (kbd "C-c fd") 'rski/visit-config)
+#+END_SRC
+** Load the config with babel
+#+BEGIN_SRC emacs-lisp
+  (defun rski/load-config ()
+    (interactive)
+    (setq config-file (substitute-in-file-name "$HOME/.emacs.d/config.org"))
+    (org-babel-load-file config-file))
+  (global-set-key (kbd "C-c fr") 'rski/load-config)
 #+END_SRC
