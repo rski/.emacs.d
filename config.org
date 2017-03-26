@@ -392,7 +392,21 @@
   :ensure t
   :init (add-global-hook 'smartparens-mode)
   :diminish smartparens-mode)
-
+#+END_SRC
+** Selected: do things on a region
+   When a region is marked, press s single binding and get things done quickly
+#+BEGIN_SRC emacs-lisp
+(use-package selected
+  :diminish selected-minor-mode
+  :config
+  (selected-global-mode t)
+  :bind (:map selected-keymap
+              ("q" . selected-off)
+              ("u" . upcase-region)
+              ("d" . downcase-region)
+              ("c" . count-words-region)
+              ("i" . indent-region)
+              ("w" . copy-region-as-kill)))
 #+END_SRC
 * Make visiting and reloading the config easy
 ** Visit the config file
