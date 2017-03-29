@@ -386,7 +386,6 @@
 #+BEGIN_SRC emacs-lisp
 (use-package neotree
   :ensure t
-  :config  (setq projectile-switch-project-action 'neotree-projectile-action)
   :bind  (("C-c l" . neotree-toggle)))
 #+END_SRC
 * Editing
