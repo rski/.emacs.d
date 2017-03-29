@@ -355,6 +355,11 @@
   :ensure t
   :init (projectile-global-mode))
 #+END_SRC
+** Helm projectile for easily switching projects and files in the project
+#+BEGIN_SRC emacs-lisp
+  (use-package helm-projectile
+    :config (helm-projectile-on))
+#+END_SRC
 ** Helm-ag is required for helm-projectile-ag below
 #+BEGIN_SRC emacs-lisp
   (use-package helm-ag
