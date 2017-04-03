@@ -2,3 +2,6 @@
 !config.org
 !init.el
 !snippets/
+!.travis.yml
+!.travis_config.el
+!index.html

@@ -1,0 +1,14 @@
+language: emacs-lisp
+sudo: true
+dist: trusty
+skip_cleanup: true
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+script:
+  - sudo apt-get install emacs
+  - HOME=/tmp emacs -Q --batch -l $TRAVIS_BUILD_DIR/.travis_config.el config.org -f org-html-export-to-html --kill
+  - mv config.html index.html
+notifications:
+  email: false
