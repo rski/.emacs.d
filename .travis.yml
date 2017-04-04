@@ -17,8 +17,8 @@ script:
   - make -f emacs-travis.mk install_emacs
   - touch ~/.emacs-custom.el
   - ln -s $TRAVIS_BUILD_DIR ~/.emacs.d
-  - emacs --batch -l init.el --kill
-  - emacs --batch -l init.el config.org -f org-html-export-to-html --kill
+  - emacs --batch --kill
+  - emacs --batch config.org -f org-html-export-to-html --kill
   - mv config.html index.html
 notifications:
   email: false
