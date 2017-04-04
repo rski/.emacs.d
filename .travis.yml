@@ -2,13 +2,23 @@ language: emacs-lisp
 sudo: true
 dist: trusty
 skip_cleanup: true
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -y ispell
+env:
+  - EMACS_VERSION=25.1
 deploy:
   provider: pages
   skip_cleanup: true
   github_token: $GITHUB_TOKEN
 script:
-  - sudo apt-get install emacs
-  - HOME=/tmp emacs -Q --batch -l $TRAVIS_BUILD_DIR/.travis_config.el config.org -f org-html-export-to-html --kill
+  - export PATH="$HOME/bin:$PATH"
+  - wget 'https://raw.githubusercontent.com/flycheck/emacs-travis/master/emacs-travis.mk'
+  - make -f emacs-travis.mk install_emacs
+  - touch ~/.emacs-custom.el
+  - ln -s $TRAVIS_BUILD_DIR ~/.emacs.d
+  - emacs --batch -l init.el --kill
+  - emacs --batch -l init.el config.org -f org-html-export-to-html --kill
   - mv config.html index.html
 notifications:
   email: false
