@@ -283,7 +283,11 @@
   :ensure t
   :init (load-theme 'monokai 'no-confirm))
 #+END_SRC
-
+** Fonts
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute 'default nil
+                    :family "DejaVu Sans Mono" :height 105)
+#+END_SRC
 * Org mode
 ** Install org from the repos
 #+BEGIN_SRC emacs-lisp
