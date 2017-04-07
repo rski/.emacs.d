@@ -51,7 +51,6 @@
 * Autocorrection
 ** Flycheck with hovering pos-tip
 #+BEGIN_SRC emacs-lisp
-
     (use-package flycheck
       :ensure t
       :init (add-hook 'after-init-hook #'global-flycheck-mode)
@@ -68,13 +67,11 @@
       :ensure t
       :init (with-eval-after-load 'flycheck
               (flycheck-pos-tip-mode)))
-
 #+END_SRC
 ** Flyspell
 #+BEGIN_SRC emacs-lisp
   (add-hook 'text-mode-hook (lambda () (flyspell-mode 1)))
   (add-hook 'prog-mode-hook 'flyspell-prog-mode)
-
 #+END_SRC
 * Helm
    Set the helm command prefix to C-c h because C-x c is scary close to C-x C-c
@@ -193,10 +190,7 @@
 #+BEGIN_SRC emacs-lisp
   (use-package magit
     :bind
-    (("C-c gs" . magit-status)
-     ("C-c gd" . magit-diff-dwim)
-     ("C-c gg" . magit-dispatch-popup)
-     ("C-c gc" . magit-commit-popup))
+    (("C-c g" . magit-status))
     :ensure t)
   (setq vc-handled-backends nil)
 #+END_SRC
