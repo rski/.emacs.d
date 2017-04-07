@@ -196,13 +196,18 @@
 #+END_SRC
 ** Configure git-gutter, make it work with linum
 #+BEGIN_SRC emacs-lisp
-(use-package git-gutter
-  :ensure t
-  :config
-  (setq git-gutter:update-interval 0)
-  :init
-  (global-git-gutter-mode 1)
-  (git-gutter:linum-setup))
+  (use-package git-gutter
+    :ensure t
+    :config
+    (setq git-gutter:update-interval 0.1)
+    (defhydra rski-git-gutter-hydra ()
+          "Move between changes in file"
+          ("n" git-gutter:next-hunk "next")
+          ("p" git-gutter:previous-hunk "previous"))
+    :init
+    (global-git-gutter-mode 1)
+    (git-gutter:linum-setup)
+    :bind (("C-c m g" . rski-git-gutter-hydra/body)))
 #+END_SRC
 
 * Navigation
