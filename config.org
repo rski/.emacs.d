@@ -52,16 +52,22 @@
 ** Flycheck with hovering pos-tip
 #+BEGIN_SRC emacs-lisp
 
-(use-package flycheck
-  :ensure t
-  :init (add-hook 'after-init-hook #'global-flycheck-mode)
-  )
+    (use-package flycheck
+      :ensure t
+      :init (add-hook 'after-init-hook #'global-flycheck-mode)
+      :bind (("C-c e" . rski-flycheck-hydra/body))
+      :config
+      (defhydra rski-flycheck-hydra ()
+        "Move around flycheck errors"
+        ("n" flycheck-next-error "next")
+        ("p" flycheck-previous-error "previous")
+        ("f" flycheck-first-error "first")
+        ("l" flycheck-list-errors "list")))
 
-(use-package flycheck-pos-tip
-  :ensure t
-  :init (with-eval-after-load 'flycheck
-          (flycheck-pos-tip-mode))
-  )
+    (use-package flycheck-pos-tip
+      :ensure t
+      :init (with-eval-after-load 'flycheck
+              (flycheck-pos-tip-mode)))
 
 #+END_SRC
 ** Flyspell
@@ -221,6 +227,13 @@
     :ensure t
     :defer t
     :bind (("M-i" . swiper-helm)))
+#+END_SRC
+** Hydra: bindings that stick around
+   Tired of pressing C-c ! n C-c ! n C-c ! p again and again to go through the errors?
+   Hydra can make this C-c ! n n n n p n etc!
+#+BEGIN_SRC emacs-lisp
+  (use-package hydra
+    :ensure t)
 #+END_SRC
 * Niceties
 *** Which key to show possible candidates for keystrokes after a prefix like C-c
