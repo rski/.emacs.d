@@ -183,6 +183,11 @@
   (use-package dockerfile-mode
     :defer t)
 #+end_src
+** c/c++
+#+BEGIN_SRC emacs-lisp
+  (use-package company-c-headers
+    :config (add-to-list 'company-backends 'company-c-headers))
+#+END_SRC
 * Git configuration
 ** Magit
    The best thing since sliced bread and normal bread.
