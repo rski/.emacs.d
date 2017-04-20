@@ -244,6 +244,11 @@
   (use-package hydra
     :ensure t)
 #+END_SRC
+** Subword mode: move inside camelcase
+   e.g  |SomeWord (M-f) \to Some|Word
+#+BEGIN_SRC emacs-lisp
+  (global-subword-mode 1)
+#+END_SRC
 * Niceties
 *** Which key to show possible candidates for keystrokes after a prefix like C-c
 
