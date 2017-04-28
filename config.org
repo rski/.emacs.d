@@ -117,17 +117,19 @@
   Packages for getting better support for various languages
 
 ** Python
-   Python config for company using elpy which much like an ide really.
+   Python config for company using anaconda.
+#+BEGIN_SRC emacs-lisp
+      (use-package anaconda-mode
+        :ensure t
+        :init
+        (add-hook 'python-mode-hook 'anaconda-mode)
+        (add-hook 'python-mode-hook 'anaconda-eldoc-mode))
+#+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-  (add-to-list 'package-archives
-               '("elpy" . "https://jorgenschaefer.github.io/packages/"))
-    (use-package elpy
-      :ensure t
-      :init (elpy-enable)
-      (delete 'elpy-module-flymake elpy-modules)
-      (delete 'elpy-module-highlight-indentation elpy-modules))
-
+  (use-package company-anaconda
+    :after company
+    :init (add-to-list 'company-backends '(company-anaconda :with company-capf)))
 #+END_SRC
 ** Puppet
    Use puppet-mode from Vox Pupuli
