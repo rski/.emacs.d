@@ -387,34 +387,44 @@
 )
 #+END_SRC
 
-* Projectile
-** Base projectile package
+* Navigation
+** dumb-jump
+   Like ggtags and xref but within the current project
+#+BEGIN_SRC emacs-lisp
+(use-package dumb-jump
+  :bind (("M-g o" . dumb-jump-go-other-window)
+	 ("M-g j" . dumb-jump-go)
+	 ("M-g x" . dumb-jump-go-prefer-external)
+	 ("M-g z" . dumb-jump-go-prefer-external-other-window))
+   :config (setq dumb-jump-selector 'helm)
+   :init (dumb-jump-mode))
+#+END_SRC
+** Projectile
+*** Base projectile package
    Enable projectile globally, then C-c p is the prefix for projectile.
 #+BEGIN_SRC emacs-lisp
 (use-package projectile
   :ensure t
   :init (projectile-global-mode))
 #+END_SRC
-** Helm projectile for easily switching projects and files in the project
+*** Helm projectile for easily switching projects and files in the project
 #+BEGIN_SRC emacs-lisp
   (use-package helm-projectile
     :config (helm-projectile-on))
 #+END_SRC
-** Helm-ag is required for helm-projectile-ag below
+*** Helm-ag is required for helm-projectile-ag below
 #+BEGIN_SRC emacs-lisp
   (use-package helm-ag
     :ensure t
     :defer t)
 #+END_SRC
-** Helm projectile for some projectile niceness with helm
-
+*** Helm projectile for some projectile niceness with helm
 #+BEGIN_SRC emacs-lisp
   (use-package helm-projectile
     :ensure t
     :bind ("M-I" . helm-projectile-ag))
 #+END_SRC
-
-* Neotree
+** Neotree
   Toggle neotree with SPCpt and switch the project when projectile-switch-project is called.
 #+BEGIN_SRC emacs-lisp
 (use-package neotree
