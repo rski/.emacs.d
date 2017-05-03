@@ -28,18 +28,18 @@
 #+END_SRC
 * Bootstart use-package
 #+BEGIN_SRC emacs-lisp
+  (require 'package)
+  (setq package-enable-at-startup nil)
+  (add-to-list 'package-archives
+    '("melpa" . "https://melpa.org/packages/"))
+  (add-to-list 'package-archives
+               '("melpa-stable" . "https://stable.melpa.org/packages/"))
 
-(require 'package)
-(setq package-enable-at-startup nil)
-(add-to-list 'package-archives
-  '("melpa" . "https://melpa.org/packages/"))
-(add-to-list 'package-archives
-             '("melpa-stable" . "https://stable.melpa.org/packages/"))
-
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-(setq use-package-always-ensure t)
+  (unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
+  (setq use-package-always-ensure t)
+  (package-refresh-contents t)
 #+END_SRC
 ** M-x try RET package installs a package in /tmp
    Good for trying out packages without tying to them
