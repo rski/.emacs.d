@@ -442,10 +442,15 @@
 #+END_SRC
 ** Smartparens
 #+BEGIN_SRC emacs-lisp
-(use-package smartparens
-  :ensure t
-  :init (add-global-hook 'smartparens-mode)
-  :diminish smartparens-mode)
+  (use-package smartparens
+    :ensure t
+    :init (add-global-hook 'smartparens-mode)
+    :config (defhydra rski-smartparens-hydra ()
+            "Edit parens"
+            ("l" sp-forward-slurp-sexp "s-back")
+            ("h" sp-backward-slurp-sexp "s-fwd"))
+    :bind (("C-c m s" . rski-smartparens-hydra/body))
+    :diminish smartparens-mode)
 #+END_SRC
 ** Selected: do things on a region
    When a region is marked, press s single binding and get things done quickly
