@@ -449,6 +449,7 @@
             "Edit parens"
             ("l" sp-forward-slurp-sexp "s-back")
             ("h" sp-backward-slurp-sexp "s-fwd"))
+            (sp-local-pair 'emacs-lisp-mode "'" nil :actions nil)
     :bind (("C-c m s" . rski-smartparens-hydra/body))
     :diminish smartparens-mode)
 #+END_SRC
