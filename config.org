@@ -375,6 +375,11 @@
 (add-to-list 'company-backends 'org-keyword-backend)
 #+END_SRC
 
+** Plot with gnuplot
+   org-plot/gnuplot requires the gnuplot lib
+   #+BEGIN_SRC emacs-lisp
+     (use-package gnuplot)
+   #+END_SRC
 * Terminal
 ** Shell pop package
 #+BEGIN_SRC emacs-lisp
