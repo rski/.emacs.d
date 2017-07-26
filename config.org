@@ -318,7 +318,7 @@
            ("\C-coa" . org-agenda)
            ("\C-coc" . org-capture)
            ("\C-cob" . org-iswitchb))
-    :config (setq org-directory (expand-file-name "~/Documents/org")))
+    :config (setq org-directory (expand-file-name "~/org")))
 #+END_SRC
 
 ** Org bullets converts starts into bullets
