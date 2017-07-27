@@ -179,6 +179,12 @@
     (setq web-mode-enable-auto-closing t)
     (setq web-mode-enable-css-colorization t))
 #+END_SRC
+*** emmet to expand html
+    #+BEGIN_SRC emacs-lisp
+                (use-package emmet-mode
+                  :init (add-hook 'web-mode-hook 'emmet-mode)
+                        (add-hook 'html-mode-hook 'emmet-mode))
+    #+END_SRC
 
 ** Dockerfile mode for docker
 #+begin_src emacs-lisp
