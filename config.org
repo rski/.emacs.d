@@ -195,6 +195,17 @@
 #+BEGIN_SRC emacs-lisp
    (add-to-list 'auto-mode-alist '("\\.yang\\'" . js-mode))
 #+END_SRC
+** Nixos
+*** Nix-mode for file editing
+   #+BEGIN_SRC emacs-lisp
+     (use-package nix-mode)
+   #+END_SRC
+*** Nix-company has great autocompletion
+   #+BEGIN_SRC emacs-lisp
+     (use-package company-nixos-options
+       :after  company
+       :init (add-to-list 'company-backends 'company-nixos-options))
+   #+END_SRC
 * Git configuration
 ** Magit
    The best thing since sliced bread and normal bread.
