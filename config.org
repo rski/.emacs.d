@@ -1,0 +1,514 @@
+* Why literate programming?
+  Harry Schwartz has this amazing talk on youtube about [[https://www.youtube.com/watch?v=SzA2YODtgK4][getting started with org mode]], where he
+  talks about writing his emacs config in a literate style using org. I wanted to try it and
+  writing in org gives you very nice folding for free. Plus it just [[https://github.com/hrs/dotfiles/blob/master/emacs.d/configuration.org][looks so good]] and it reads
+  like a README.
+* Some assistance functions
+** A hack because the built-in org is old
+   org-define-error being unbound shows up as an error the first time the config is bootstrapped.
+   I don't care much, but this needs to be worked around for Travis.
+#+BEGIN_SRC emacs-lisp
+(if (not (fboundp 'org-define-error))
+    (defun org-define-error (name msg)
+      (message "In dummy org-define-error")))
+#+END_SRC
+** Global hook
+   Use dolist to simulate adding a "global-hook"
+#+BEGIN_SRC emacs-lisp
+(defun add-global-hook (func)
+  (dolist (hook '(prog-mode-hook text-mode-hook conf-mode-hook))
+  (add-hook hook func))
+)
+#+END_SRC
+* Some information about me
+#+BEGIN_SRC emacs-lisp
+(setq user-full-name "Romanos Skiadas"
+      user-mail-address "rom.skiad@gmail.com"
+      )
+#+END_SRC
+* Bootstart use-package
+#+BEGIN_SRC emacs-lisp
+  (require 'package)
+  (setq package-enable-at-startup nil)
+  (add-to-list 'package-archives
+    '("melpa" . "https://melpa.org/packages/"))
+  (add-to-list 'package-archives
+               '("melpa-stable" . "https://stable.melpa.org/packages/"))
+
+  (unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
+  (setq use-package-always-ensure t)
+  (package-refresh-contents t)
+#+END_SRC
+** M-x try RET package installs a package in /tmp
+   Good for trying out packages without tying to them
+#+begin_src emacs-lisp
+  (use-package try
+    :ensure t)
+#+end_src
+
+* Autocorrection
+** Flycheck with hovering pos-tip
+#+BEGIN_SRC emacs-lisp
+    (use-package flycheck
+      :ensure t
+      :init (add-hook 'after-init-hook #'global-flycheck-mode)
+      :bind (("C-c e" . rski-flycheck-hydra/body))
+      :config
+      (defhydra rski-flycheck-hydra ()
+        "Move around flycheck errors"
+        ("n" flycheck-next-error "next")
+        ("p" flycheck-previous-error "previous")
+        ("f" flycheck-first-error "first")
+        ("l" flycheck-list-errors "list")))
+
+    (use-package flycheck-pos-tip
+      :ensure t
+      :init (with-eval-after-load 'flycheck
+              (flycheck-pos-tip-mode)))
+#+END_SRC
+** Flyspell
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'text-mode-hook (lambda () (flyspell-mode 1)))
+  (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+#+END_SRC
+* Helm
+   Set the helm command prefix to C-c h because C-x c is scary close to C-x C-c
+#+BEGIN_SRC emacs-lisp
+  (use-package helm
+    :ensure t
+    :defer t
+    :config (setq helm-ff-skip-boring-files t)
+    :init
+    (progn (require 'helm-config)
+           (helm-mode 1))
+    :bind (("C-c h" . helm-command-prefix)
+           ("M-x" . helm-M-x)
+           ("M-y" . helm-show-kill-ring)
+           ("C-x C-f" . helm-find-files)))
+#+END_SRC
+** helm-tramp
+   Use the ssh/config file in tramp
+#+BEGIN_SRC emacs-lisp
+  (use-package helm-tramp
+    :defer t)
+#+END_SRC
+
+* Autocompletion and snippets
+** Company
+*** Configure the base company package
+#+BEGIN_SRC emacs-lisp
+  (use-package company
+    :ensure t
+    :init (add-hook 'after-init-hook 'global-company-mode)
+    (setq company-minimum-prefix-length 1))
+#+END_SRC
+
+** Configure yasnippet
+#+BEGIN_SRC emacs-lisp
+(use-package yasnippet
+  :ensure t
+  :init (yas-global-mode 1)
+  :bind (("C-c y" . yas-insert-snippet)))
+#+END_SRC
+
+* Languages
+  Packages for getting better support for various languages
+
+** Python
+   Python config for company using anaconda.
+#+BEGIN_SRC emacs-lisp
+      (use-package anaconda-mode
+        :ensure t
+        :init
+        (add-hook 'python-mode-hook 'anaconda-mode)
+        (add-hook 'python-mode-hook 'anaconda-eldoc-mode))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (use-package company-anaconda
+    :after company
+    :init (add-to-list 'company-backends '(company-anaconda :with company-capf)))
+#+END_SRC
+** Puppet
+   Use puppet-mode from Vox Pupuli
+   #+BEGIN_SRC emacs-lisp
+   (use-package puppet-mode :ensure t)
+   #+END_SRC
+** Markdown
+#+BEGIN_SRC emacs-lisp
+  (use-package markdown-mode
+    :ensure t
+    :commands (markdown-mode gfm-mode)
+    :mode (("README\\.md\\'" . gfm-mode)
+           ("\\.md\\'" . markdown-mode)
+           ("\\.markdown\\'" . markdown-mode))
+    ;; TODO set markdown-command properly
+    :init (setq markdown-command "multimarkdown"))
+#+END_SRC
+** Scala
+#+BEGIN_SRC emacs-lisp
+(use-package ensime
+  :ensure t
+  :pin melpa-stable)
+#+END_SRC
+** Lua because I use Awesome
+*** A lua mode for the basics
+#+BEGIN_SRC emacs-lisp
+  (use-package lua-mode
+    :ensure t)
+#+END_SRC
+*** Autocomplete too, although it seems to not work with the awesome libs
+#+BEGIN_SRC emacs-lisp
+  (use-package company-lua
+    :ensure t
+    :defer t
+    :after 'company
+    :init (add-to-list 'company-backends 'company-lua))
+#+END_SRC
+
+** Web dev
+*** web mode is really good
+#+BEGIN_SRC emacs-lisp
+  (use-package web-mode
+    :config
+    (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+    (setq web-mode-engines-alist
+          '(("django" . "\\.html\\'")))
+    (setq web-mode-enable-auto-closing t)
+    (setq web-mode-enable-css-colorization t))
+#+END_SRC
+*** emmet to expand html
+    #+BEGIN_SRC emacs-lisp
+                (use-package emmet-mode
+                  :init (add-hook 'web-mode-hook 'emmet-mode)
+                        (add-hook 'html-mode-hook 'emmet-mode))
+    #+END_SRC
+
+** Dockerfile mode for docker
+#+begin_src emacs-lisp
+  (use-package dockerfile-mode
+    :defer t)
+#+end_src
+** c/c++
+#+BEGIN_SRC emacs-lisp
+  (use-package company-c-headers
+    :config (add-to-list 'company-backends 'company-c-headers))
+#+END_SRC
+** Yang
+   Just get some highlighting going on
+#+BEGIN_SRC emacs-lisp
+   (add-to-list 'auto-mode-alist '("\\.yang\\'" . js-mode))
+#+END_SRC
+** Nixos
+*** Nix-mode for file editing
+   #+BEGIN_SRC emacs-lisp
+     (use-package nix-mode)
+   #+END_SRC
+*** Nix-company has great autocompletion
+   #+BEGIN_SRC emacs-lisp
+     (use-package company-nixos-options
+       :after  company
+       :init (add-to-list 'company-backends 'company-nixos-options))
+   #+END_SRC
+* Git configuration
+** Magit
+   The best thing since sliced bread and normal bread.
+   vc is the built-in version control system and it is disabled because I don't use it really.
+#+BEGIN_SRC emacs-lisp
+  (use-package magit
+    :bind
+    (("C-c g" . magit-status))
+    :ensure t)
+  (setq vc-handled-backends nil)
+#+END_SRC
+** Configure git-gutter, make it work with linum
+#+BEGIN_SRC emacs-lisp
+  (use-package git-gutter
+    :ensure t
+    :config
+    (setq git-gutter:update-interval 0.1)
+    (defhydra rski-git-gutter-hydra ()
+          "Move between changes in file"
+          ("n" git-gutter:next-hunk "next")
+          ("p" git-gutter:previous-hunk "previous"))
+    :init
+    (global-git-gutter-mode 1)
+    (git-gutter:linum-setup)
+    :bind (("C-c m g" . rski-git-gutter-hydra/body)))
+#+END_SRC
+
+* Navigation
+** Swiper for more fine-grained search in a buffer
+*** The swiper package that uses helm
+#+BEGIN_SRC emacs-lisp
+  (use-package swiper-helm
+    :ensure t
+    :defer t
+    :bind (("M-i" . swiper-helm)))
+#+END_SRC
+** Hydra: bindings that stick around
+   Tired of pressing C-c ! n C-c ! n C-c ! p again and again to go through the errors?
+   Hydra can make this C-c ! n n n n p n etc!
+#+BEGIN_SRC emacs-lisp
+  (use-package hydra
+    :ensure t)
+#+END_SRC
+** Subword mode: move inside camelcase
+   e.g  |SomeWord (M-f) \to Some|Word
+#+BEGIN_SRC emacs-lisp
+  (global-subword-mode 1)
+#+END_SRC
+** Moving between windows
+   #+BEGIN_SRC emacs-lisp
+     (global-set-key (kbd "H-j") 'other-window)
+     (global-set-key (kbd "H-k") (lambda () (interactive) (other-window -1)))
+     (global-set-key (kbd "H-0") 'delete-window)
+   #+END_SRC
+* Niceties
+*** Which key to show possible candidates for keystrokes after a prefix like C-c
+
+#+BEGIN_SRC emacs-lisp
+(use-package which-key
+:ensure t
+:defer t
+:init (which-key-mode)
+:diminish which-key-mode)
+#+END_SRC
+
+** Whitespace
+#+BEGIN_SRC emacs-lisp
+(use-package ws-butler
+  :ensure t
+  :init
+  (add-global-hook 'ws-butler-mode)
+  :diminish ws-butler-mode)
+
+(setq-default show-trailing-whitespace t)
+#+END_SRC
+
+** Better defaults.
+    Remove toolbars, scroll bars, etc, remember pointer when closing file, mouse yank insert at point,
+    sets require-final-newline, indent-tabs set to nil, other useful stuff
+
+#+BEGIN_SRC emacs-lisp
+(use-package better-defaults
+  :ensure t)
+#+END_SRC
+
+** Other little nice settings
+
+#+BEGIN_SRC emacs-lisp
+  (defalias 'yes-or-no-p 'y-or-n-p)
+  (global-linum-mode 1)
+  (setq column-number-mode 1)
+  (setq backup-directory-alist
+        `((".*" . "~/.tmp/emacs")))
+  (setq auto-save-file-name-transforms
+        `((".*" ,"~/.tmp/emacs" t)))
+  (setq visible-bell nil)
+  (setq inhibit-startup-screen t)
+  (add-to-list 'auto-mode-alist '("Cask" . emacs-lisp-mode))
+#+END_SRC
+
+*** Autorvert mode to reload buffer if file changes
+    mostly because i still do git checkout from terminals
+#+BEGIN_SRC emacs-lisp
+  (global-auto-revert-mode 1)
+  (diminish auto-revert-mode)
+#+END_SRC
+
+* Theming
+** monokai does nice highlighting of src blocks in org
+
+#+BEGIN_SRC emacs-lisp
+(use-package monokai-theme
+  :ensure t
+  :init (load-theme 'monokai 'no-confirm))
+#+END_SRC
+** Fonts
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute 'default nil
+                    :family "DejaVu Sans Mono" :height 105)
+#+END_SRC
+* Org mode
+** Install org from the repos
+#+BEGIN_SRC emacs-lisp
+  (use-package org
+    :ensure t
+    :bind (("\C-col" . org-store-link)
+           ("\C-coa" . org-agenda)
+           ("\C-coc" . org-capture)
+           ("\C-cob" . org-iswitchb))
+    :config (setq org-directory (expand-file-name "~/org")))
+#+END_SRC
+
+** Org bullets converts starts into bullets
+#+BEGIN_SRC emacs-lisp
+(use-package org-bullets
+  :ensure t
+  :init (add-hook 'org-mode-hook 'org-bullets-mode))
+#+END_SRC
+** Presentations
+*** Org (for some reason called ox-reveal too, kinda confusing) reveal for exporting to reveal.js
+
+#+BEGIN_SRC emacs-lisp
+    (use-package ox-reveal
+      :ensure t
+      :config (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
+      :init (add-hook 'org-mode 'reveal-mode))
+#+END_SRC
+
+*** htmlize for syntax highlighting in org presentations
+
+#+BEGIN_SRC emacs-lisp
+  (use-package htmlize
+    :ensure t)
+#+END_SRC
+
+** Make literate programming better
+
+#+BEGIN_SRC emacs-lisp
+(setq org-src-fontify-natively t)
+#+END_SRC
+
+** Org capture: saving notes
+*** Set the org-capture file for my agenda files
+#+BEGIN_SRC emacs-lisp
+  (setq org-default-notes-file (concat org-directory "/notes.org"))
+#+END_SRC
+
+** Autocomplete org keywords
+   Snippet courtesy of purple_arrows: http://emacs.stackexchange.com/questions/21171/company-mode-completion-for-org-keywords
+#+BEGIN_SRC emacs-lisp
+(defun org-keyword-backend (command &optional arg &rest ignored)
+  (interactive (list 'interactive))
+  (cl-case command
+    (interactive (company-begin-backend 'org-keyword-backend))
+    (prefix (and (eq major-mode 'org-mode)
+                 (cons (company-grab-line "^#\\+\\(\\w*\\)" 1)
+                       t)))
+    (candidates (mapcar #'upcase
+                        (cl-remove-if-not
+                         (lambda (c) (string-prefix-p arg c))
+                         (pcomplete-completions))))
+    (ignore-case t)
+    (duplicates t)))
+(add-to-list 'company-backends 'org-keyword-backend)
+#+END_SRC
+
+** Plot with gnuplot
+   org-plot/gnuplot requires the gnuplot lib
+   #+BEGIN_SRC emacs-lisp
+     (use-package gnuplot)
+   #+END_SRC
+* Terminal
+** Shell pop package
+#+BEGIN_SRC emacs-lisp
+(use-package shell-pop
+  :ensure t
+  :bind ("C-c t" . shell-pop)
+  :config (custom-set-variables
+            '(shell-pop-shell-type (quote ("ansi-term" "*ansi-term*" (lambda nil (ansi-term shell-pop-term-shell)))))
+            '(shell-pop-full-span nil))
+)
+#+END_SRC
+
+* Navigation
+** dumb-jump
+   Like ggtags and xref but within the current project
+#+BEGIN_SRC emacs-lisp
+(use-package dumb-jump
+  :bind (("M-g o" . dumb-jump-go-other-window)
+	 ("M-g j" . dumb-jump-go)
+	 ("M-g x" . dumb-jump-go-prefer-external)
+	 ("M-g z" . dumb-jump-go-prefer-external-other-window))
+   :config (setq dumb-jump-selector 'helm)
+   :init (dumb-jump-mode))
+#+END_SRC
+** Projectile
+*** Base projectile package
+   Enable projectile globally, then C-c p is the prefix for projectile.
+#+BEGIN_SRC emacs-lisp
+(use-package projectile
+  :ensure t
+  :init (projectile-global-mode))
+#+END_SRC
+*** Helm projectile for easily switching projects and files in the project
+#+BEGIN_SRC emacs-lisp
+  (use-package helm-projectile
+    :config (helm-projectile-on))
+#+END_SRC
+*** Helm-ag is required for helm-projectile-ag below
+#+BEGIN_SRC emacs-lisp
+  (use-package helm-ag
+    :ensure t
+    :defer t)
+#+END_SRC
+*** Helm projectile for some projectile niceness with helm
+#+BEGIN_SRC emacs-lisp
+  (use-package helm-projectile
+    :ensure t
+    :bind ("M-I" . helm-projectile-ag))
+#+END_SRC
+** Neotree
+  Toggle neotree with SPCpt and switch the project when projectile-switch-project is called.
+#+BEGIN_SRC emacs-lisp
+(use-package neotree
+  :ensure t
+  :bind  (("C-c l" . neotree-toggle)))
+#+END_SRC
+* Editing
+** Undo tree
+#+BEGIN_SRC emacs-lisp
+  (use-package undo-tree
+    :config (global-undo-tree-mode 1)
+    :ensure t
+    :bind (("C-/" . undo)
+           ("C-c C-/" . undo-tree-redo)))
+#+END_SRC
+** Smartparens
+#+BEGIN_SRC emacs-lisp
+  (use-package smartparens
+    :ensure t
+    :init (add-global-hook 'smartparens-mode)
+    :config (defhydra rski-smartparens-hydra ()
+            "Edit parens"
+            ("l" sp-forward-slurp-sexp "s-back")
+            ("h" sp-backward-slurp-sexp "s-fwd"))
+            (require 'smartparens-config)
+    :bind (("C-c m s" . rski-smartparens-hydra/body))
+    :diminish smartparens-mode)
+#+END_SRC
+** Selected: do things on a region
+   When a region is marked, press s single binding and get things done quickly
+#+BEGIN_SRC emacs-lisp
+(use-package selected
+  :diminish selected-minor-mode
+  :config
+  (selected-global-mode t)
+  :bind (:map selected-keymap
+              ("q" . selected-off)
+              ("u" . upcase-region)
+              ("d" . downcase-region)
+              ("c" . count-words-region)
+              ("i" . indent-region)
+              ("w" . copy-region-as-kill)))
+#+END_SRC
+* Make visiting and reloading the config easy
+** Visit the config file
+#+BEGIN_SRC emacs-lisp
+  (defun rski/visit-config ()
+    (interactive)
+    (find-file (substitute-in-file-name "$HOME/.emacs.d/config.org")))
+  (global-set-key (kbd "H-d") 'rski/visit-config)
+#+END_SRC
+** Load the config with babel
+#+BEGIN_SRC emacs-lisp
+  (defun rski/load-config ()
+    (interactive)
+    (setq config-file (substitute-in-file-name "$HOME/.emacs.d/config.org"))
+    (org-babel-load-file config-file))
+  (global-set-key (kbd "H-r") 'rski/load-config)
+#+END_SRC

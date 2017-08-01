@@ -1,0 +1,1273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>config</title>
+<!-- 2017-08-01 Tue 21:23 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Travis CI User" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">config</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Why literate programming?</a></li>
+<li><a href="#sec-2">2. Some assistance functions</a>
+<ul>
+<li><a href="#sec-2-1">2.1. A hack because the built-in org is old</a></li>
+<li><a href="#sec-2-2">2.2. Global hook</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">3. Some information about me</a></li>
+<li><a href="#sec-4">4. Bootstart use-package</a>
+<ul>
+<li><a href="#sec-4-1">4.1. M-x try RET package installs a package in /tmp</a></li>
+</ul>
+</li>
+<li><a href="#sec-5">5. Autocorrection</a>
+<ul>
+<li><a href="#sec-5-1">5.1. Flycheck with hovering pos-tip</a></li>
+<li><a href="#sec-5-2">5.2. Flyspell</a></li>
+</ul>
+</li>
+<li><a href="#sec-6">6. Helm</a>
+<ul>
+<li><a href="#sec-6-1">6.1. helm-tramp</a></li>
+</ul>
+</li>
+<li><a href="#sec-7">7. Autocompletion and snippets</a>
+<ul>
+<li><a href="#sec-7-1">7.1. Company</a>
+<ul>
+<li><a href="#sec-7-1-1">7.1.1. Configure the base company package</a></li>
+</ul>
+</li>
+<li><a href="#sec-7-2">7.2. Configure yasnippet</a></li>
+</ul>
+</li>
+<li><a href="#sec-8">8. Languages</a>
+<ul>
+<li><a href="#sec-8-1">8.1. Python</a></li>
+<li><a href="#sec-8-2">8.2. Puppet</a></li>
+<li><a href="#sec-8-3">8.3. Markdown</a></li>
+<li><a href="#sec-8-4">8.4. Scala</a></li>
+<li><a href="#sec-8-5">8.5. Lua because I use Awesome</a>
+<ul>
+<li><a href="#sec-8-5-1">8.5.1. A lua mode for the basics</a></li>
+<li><a href="#sec-8-5-2">8.5.2. Autocomplete too, although it seems to not work with the awesome libs</a></li>
+</ul>
+</li>
+<li><a href="#sec-8-6">8.6. Web dev</a>
+<ul>
+<li><a href="#sec-8-6-1">8.6.1. web mode is really good</a></li>
+<li><a href="#sec-8-6-2">8.6.2. emmet to expand html</a></li>
+</ul>
+</li>
+<li><a href="#sec-8-7">8.7. Dockerfile mode for docker</a></li>
+<li><a href="#sec-8-8">8.8. c/c++</a></li>
+<li><a href="#sec-8-9">8.9. Yang</a></li>
+<li><a href="#sec-8-10">8.10. Nixos</a>
+<ul>
+<li><a href="#sec-8-10-1">8.10.1. Nix-mode for file editing</a></li>
+<li><a href="#sec-8-10-2">8.10.2. Nix-company has great autocompletion</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-9">9. Git configuration</a>
+<ul>
+<li><a href="#sec-9-1">9.1. Magit</a></li>
+<li><a href="#sec-9-2">9.2. Configure git-gutter, make it work with linum</a></li>
+</ul>
+</li>
+<li><a href="#sec-10">10. Navigation</a>
+<ul>
+<li><a href="#sec-10-1">10.1. Swiper for more fine-grained search in a buffer</a>
+<ul>
+<li><a href="#sec-10-1-1">10.1.1. The swiper package that uses helm</a></li>
+</ul>
+</li>
+<li><a href="#sec-10-2">10.2. Hydra: bindings that stick around</a></li>
+<li><a href="#sec-10-3">10.3. Subword mode: move inside camelcase</a></li>
+<li><a href="#sec-10-4">10.4. Moving between windows</a></li>
+</ul>
+</li>
+<li><a href="#sec-11">11. Niceties</a>
+<ul>
+<li>
+<ul>
+<li><a href="#sec-11-0-1">11.0.1. Which key to show possible candidates for keystrokes after a prefix like C-c</a></li>
+</ul>
+</li>
+<li><a href="#sec-11-1">11.1. Whitespace</a></li>
+<li><a href="#sec-11-2">11.2. Better defaults.</a></li>
+<li><a href="#sec-11-3">11.3. Other little nice settings</a>
+<ul>
+<li><a href="#sec-11-3-1">11.3.1. Autorvert mode to reload buffer if file changes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-12">12. Theming</a>
+<ul>
+<li><a href="#sec-12-1">12.1. monokai does nice highlighting of src blocks in org</a></li>
+<li><a href="#sec-12-2">12.2. Fonts</a></li>
+</ul>
+</li>
+<li><a href="#sec-13">13. Org mode</a>
+<ul>
+<li><a href="#sec-13-1">13.1. Install org from the repos</a></li>
+<li><a href="#sec-13-2">13.2. Org bullets converts starts into bullets</a></li>
+<li><a href="#sec-13-3">13.3. Presentations</a>
+<ul>
+<li><a href="#sec-13-3-1">13.3.1. Org (for some reason called ox-reveal too, kinda confusing) reveal for exporting to reveal.js</a></li>
+<li><a href="#sec-13-3-2">13.3.2. htmlize for syntax highlighting in org presentations</a></li>
+</ul>
+</li>
+<li><a href="#sec-13-4">13.4. Make literate programming better</a></li>
+<li><a href="#sec-13-5">13.5. Org capture: saving notes</a>
+<ul>
+<li><a href="#sec-13-5-1">13.5.1. Set the org-capture file for my agenda files</a></li>
+</ul>
+</li>
+<li><a href="#sec-13-6">13.6. Autocomplete org keywords</a></li>
+<li><a href="#sec-13-7">13.7. Plot with gnuplot</a></li>
+</ul>
+</li>
+<li><a href="#sec-14">14. Terminal</a>
+<ul>
+<li><a href="#sec-14-1">14.1. Shell pop package</a></li>
+</ul>
+</li>
+<li><a href="#sec-15">15. Navigation</a>
+<ul>
+<li><a href="#sec-15-1">15.1. dumb-jump</a></li>
+<li><a href="#sec-15-2">15.2. Projectile</a>
+<ul>
+<li><a href="#sec-15-2-1">15.2.1. Base projectile package</a></li>
+<li><a href="#sec-15-2-2">15.2.2. Helm projectile for easily switching projects and files in the project</a></li>
+<li><a href="#sec-15-2-3">15.2.3. Helm-ag is required for helm-projectile-ag below</a></li>
+<li><a href="#sec-15-2-4">15.2.4. Helm projectile for some projectile niceness with helm</a></li>
+</ul>
+</li>
+<li><a href="#sec-15-3">15.3. Neotree</a></li>
+</ul>
+</li>
+<li><a href="#sec-16">16. Editing</a>
+<ul>
+<li><a href="#sec-16-1">16.1. Undo tree</a></li>
+<li><a href="#sec-16-2">16.2. Smartparens</a></li>
+<li><a href="#sec-16-3">16.3. Selected: do things on a region</a></li>
+</ul>
+</li>
+<li><a href="#sec-17">17. Make visiting and reloading the config easy</a>
+<ul>
+<li><a href="#sec-17-1">17.1. Visit the config file</a></li>
+<li><a href="#sec-17-2">17.2. Load the config with babel</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Why literate programming?</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Harry Schwartz has this amazing talk on youtube about <a href="https://www.youtube.com/watch?v=SzA2YODtgK4">getting started with org mode</a>, where he
+talks about writing his emacs config in a literate style using org. I wanted to try it and
+writing in org gives you very nice folding for free. Plus it just <a href="https://github.com/hrs/dotfiles/blob/master/emacs.d/configuration.org">looks so good</a> and it reads
+like a README.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Some assistance functions</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> A hack because the built-in org is old</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+org-define-error being unbound shows up as an error the first time the config is bootstrapped.
+I don't care much, but this needs to be worked around for Travis.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(if (not (fboundp 'org-define-error))
+    (defun org-define-error (name msg)
+      (message "In dummy org-define-error")))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Global hook</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+Use dolist to simulate adding a "global-hook"
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(defun add-global-hook (func)
+  (dolist (hook '(prog-mode-hook text-mode-hook conf-mode-hook))
+  (add-hook hook func))
+)
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Some information about me</h2>
+<div class="outline-text-2" id="text-3">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq user-full-name "Romanos Skiadas"
+      user-mail-address "rom.skiad@gmail.com"
+      )
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Bootstart use-package</h2>
+<div class="outline-text-2" id="text-4">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(require 'package)
+(setq package-enable-at-startup nil)
+(add-to-list 'package-archives
+  '("melpa" . "https://melpa.org/packages/"))
+(add-to-list 'package-archives
+	     '("melpa-stable" . "https://stable.melpa.org/packages/"))
+
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+(setq use-package-always-ensure t)
+(package-refresh-contents t)
+</pre>
+</div>
+</div>
+<div id="outline-container-sec-4-1" class="outline-3">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> M-x try RET package installs a package in /tmp</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+Good for trying out packages without tying to them
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package try
+  :ensure t)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Autocorrection</h2>
+<div class="outline-text-2" id="text-5">
+</div><div id="outline-container-sec-5-1" class="outline-3">
+<h3 id="sec-5-1"><span class="section-number-3">5.1</span> Flycheck with hovering pos-tip</h3>
+<div class="outline-text-3" id="text-5-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package flycheck
+  :ensure t
+  :init (add-hook 'after-init-hook #'global-flycheck-mode)
+  :bind (("C-c e" . rski-flycheck-hydra/body))
+  :config
+  (defhydra rski-flycheck-hydra ()
+    "Move around flycheck errors"
+    ("n" flycheck-next-error "next")
+    ("p" flycheck-previous-error "previous")
+    ("f" flycheck-first-error "first")
+    ("l" flycheck-list-errors "list")))
+
+(use-package flycheck-pos-tip
+  :ensure t
+  :init (with-eval-after-load 'flycheck
+	  (flycheck-pos-tip-mode)))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-5-2" class="outline-3">
+<h3 id="sec-5-2"><span class="section-number-3">5.2</span> Flyspell</h3>
+<div class="outline-text-3" id="text-5-2">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(add-hook 'text-mode-hook (lambda () (flyspell-mode 1)))
+(add-hook 'prog-mode-hook 'flyspell-prog-mode)
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> Helm</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Set the helm command prefix to C-c h because C-x c is scary close to C-x C-c
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package helm
+  :ensure t
+  :defer t
+  :config (setq helm-ff-skip-boring-files t)
+  :init
+  (progn (require 'helm-config)
+	 (helm-mode 1))
+  :bind (("C-c h" . helm-command-prefix)
+	 ("M-x" . helm-M-x)
+	 ("M-y" . helm-show-kill-ring)
+	 ("C-x C-f" . helm-find-files)))
+</pre>
+</div>
+</div>
+<div id="outline-container-sec-6-1" class="outline-3">
+<h3 id="sec-6-1"><span class="section-number-3">6.1</span> helm-tramp</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+Use the ssh/config file in tramp
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package helm-tramp
+  :defer t)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> Autocompletion and snippets</h2>
+<div class="outline-text-2" id="text-7">
+</div><div id="outline-container-sec-7-1" class="outline-3">
+<h3 id="sec-7-1"><span class="section-number-3">7.1</span> Company</h3>
+<div class="outline-text-3" id="text-7-1">
+</div><div id="outline-container-sec-7-1-1" class="outline-4">
+<h4 id="sec-7-1-1"><span class="section-number-4">7.1.1</span> Configure the base company package</h4>
+<div class="outline-text-4" id="text-7-1-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package company
+  :ensure t
+  :init (add-hook 'after-init-hook 'global-company-mode)
+  (setq company-minimum-prefix-length 1))
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-7-2" class="outline-3">
+<h3 id="sec-7-2"><span class="section-number-3">7.2</span> Configure yasnippet</h3>
+<div class="outline-text-3" id="text-7-2">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package yasnippet
+  :ensure t
+  :init (yas-global-mode 1)
+  :bind (("C-c y" . yas-insert-snippet)))
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8"><span class="section-number-2">8</span> Languages</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+Packages for getting better support for various languages
+</p>
+</div>
+
+<div id="outline-container-sec-8-1" class="outline-3">
+<h3 id="sec-8-1"><span class="section-number-3">8.1</span> Python</h3>
+<div class="outline-text-3" id="text-8-1">
+<p>
+Python config for company using anaconda.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package anaconda-mode
+  :ensure t
+  :init
+  (add-hook 'python-mode-hook 'anaconda-mode)
+  (add-hook 'python-mode-hook 'anaconda-eldoc-mode))
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package company-anaconda
+  :after company
+  :init (add-to-list 'company-backends '(company-anaconda :with company-capf)))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-8-2" class="outline-3">
+<h3 id="sec-8-2"><span class="section-number-3">8.2</span> Puppet</h3>
+<div class="outline-text-3" id="text-8-2">
+<p>
+Use puppet-mode from Vox Pupuli
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package puppet-mode :ensure t)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-8-3" class="outline-3">
+<h3 id="sec-8-3"><span class="section-number-3">8.3</span> Markdown</h3>
+<div class="outline-text-3" id="text-8-3">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+	 ("\\.md\\'" . markdown-mode)
+	 ("\\.markdown\\'" . markdown-mode))
+  ;; TODO set markdown-command properly
+  :init (setq markdown-command "multimarkdown"))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-8-4" class="outline-3">
+<h3 id="sec-8-4"><span class="section-number-3">8.4</span> Scala</h3>
+<div class="outline-text-3" id="text-8-4">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package ensime
+  :ensure t
+  :pin melpa-stable)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-8-5" class="outline-3">
+<h3 id="sec-8-5"><span class="section-number-3">8.5</span> Lua because I use Awesome</h3>
+<div class="outline-text-3" id="text-8-5">
+</div><div id="outline-container-sec-8-5-1" class="outline-4">
+<h4 id="sec-8-5-1"><span class="section-number-4">8.5.1</span> A lua mode for the basics</h4>
+<div class="outline-text-4" id="text-8-5-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package lua-mode
+  :ensure t)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-8-5-2" class="outline-4">
+<h4 id="sec-8-5-2"><span class="section-number-4">8.5.2</span> Autocomplete too, although it seems to not work with the awesome libs</h4>
+<div class="outline-text-4" id="text-8-5-2">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package company-lua
+  :ensure t
+  :defer t
+  :after 'company
+  :init (add-to-list 'company-backends 'company-lua))
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-8-6" class="outline-3">
+<h3 id="sec-8-6"><span class="section-number-3">8.6</span> Web dev</h3>
+<div class="outline-text-3" id="text-8-6">
+</div><div id="outline-container-sec-8-6-1" class="outline-4">
+<h4 id="sec-8-6-1"><span class="section-number-4">8.6.1</span> web mode is really good</h4>
+<div class="outline-text-4" id="text-8-6-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package web-mode
+  :config
+  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+  (setq web-mode-engines-alist
+	'(("django" . "\\.html\\'")))
+  (setq web-mode-enable-auto-closing t)
+  (setq web-mode-enable-css-colorization t))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-8-6-2" class="outline-4">
+<h4 id="sec-8-6-2"><span class="section-number-4">8.6.2</span> emmet to expand html</h4>
+<div class="outline-text-4" id="text-8-6-2">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package emmet-mode
+  :init (add-hook 'web-mode-hook 'emmet-mode)
+	(add-hook 'html-mode-hook 'emmet-mode))
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-8-7" class="outline-3">
+<h3 id="sec-8-7"><span class="section-number-3">8.7</span> Dockerfile mode for docker</h3>
+<div class="outline-text-3" id="text-8-7">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package dockerfile-mode
+  :defer t)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-8-8" class="outline-3">
+<h3 id="sec-8-8"><span class="section-number-3">8.8</span> c/c++</h3>
+<div class="outline-text-3" id="text-8-8">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package company-c-headers
+  :config (add-to-list 'company-backends 'company-c-headers))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-8-9" class="outline-3">
+<h3 id="sec-8-9"><span class="section-number-3">8.9</span> Yang</h3>
+<div class="outline-text-3" id="text-8-9">
+<p>
+Just get some highlighting going on
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(add-to-list 'auto-mode-alist '("\\.yang\\'" . js-mode))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-8-10" class="outline-3">
+<h3 id="sec-8-10"><span class="section-number-3">8.10</span> Nixos</h3>
+<div class="outline-text-3" id="text-8-10">
+</div><div id="outline-container-sec-8-10-1" class="outline-4">
+<h4 id="sec-8-10-1"><span class="section-number-4">8.10.1</span> Nix-mode for file editing</h4>
+<div class="outline-text-4" id="text-8-10-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package nix-mode)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-8-10-2" class="outline-4">
+<h4 id="sec-8-10-2"><span class="section-number-4">8.10.2</span> Nix-company has great autocompletion</h4>
+<div class="outline-text-4" id="text-8-10-2">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package company-nixos-options
+  :after  company
+  :init (add-to-list 'company-backends 'company-nixos-options))
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-9" class="outline-2">
+<h2 id="sec-9"><span class="section-number-2">9</span> Git configuration</h2>
+<div class="outline-text-2" id="text-9">
+</div><div id="outline-container-sec-9-1" class="outline-3">
+<h3 id="sec-9-1"><span class="section-number-3">9.1</span> Magit</h3>
+<div class="outline-text-3" id="text-9-1">
+<p>
+The best thing since sliced bread and normal bread.
+vc is the built-in version control system and it is disabled because I don't use it really.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package magit
+  :bind
+  (("C-c g" . magit-status))
+  :ensure t)
+(setq vc-handled-backends nil)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-9-2" class="outline-3">
+<h3 id="sec-9-2"><span class="section-number-3">9.2</span> Configure git-gutter, make it work with linum</h3>
+<div class="outline-text-3" id="text-9-2">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package git-gutter
+  :ensure t
+  :config
+  (setq git-gutter:update-interval 0.1)
+  (defhydra rski-git-gutter-hydra ()
+	"Move between changes in file"
+	("n" git-gutter:next-hunk "next")
+	("p" git-gutter:previous-hunk "previous"))
+  :init
+  (global-git-gutter-mode 1)
+  (git-gutter:linum-setup)
+  :bind (("C-c m g" . rski-git-gutter-hydra/body)))
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-10" class="outline-2">
+<h2 id="sec-10"><span class="section-number-2">10</span> Navigation</h2>
+<div class="outline-text-2" id="text-10">
+</div><div id="outline-container-sec-10-1" class="outline-3">
+<h3 id="sec-10-1"><span class="section-number-3">10.1</span> Swiper for more fine-grained search in a buffer</h3>
+<div class="outline-text-3" id="text-10-1">
+</div><div id="outline-container-sec-10-1-1" class="outline-4">
+<h4 id="sec-10-1-1"><span class="section-number-4">10.1.1</span> The swiper package that uses helm</h4>
+<div class="outline-text-4" id="text-10-1-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package swiper-helm
+  :ensure t
+  :defer t
+  :bind (("M-i" . swiper-helm)))
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-10-2" class="outline-3">
+<h3 id="sec-10-2"><span class="section-number-3">10.2</span> Hydra: bindings that stick around</h3>
+<div class="outline-text-3" id="text-10-2">
+<p>
+Tired of pressing C-c ! n C-c ! n C-c ! p again and again to go through the errors?
+Hydra can make this C-c ! n n n n p n etc!
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package hydra
+  :ensure t)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-10-3" class="outline-3">
+<h3 id="sec-10-3"><span class="section-number-3">10.3</span> Subword mode: move inside camelcase</h3>
+<div class="outline-text-3" id="text-10-3">
+<p>
+e.g  |SomeWord (M-f) &rarr; Some|Word
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(global-subword-mode 1)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-10-4" class="outline-3">
+<h3 id="sec-10-4"><span class="section-number-3">10.4</span> Moving between windows</h3>
+<div class="outline-text-3" id="text-10-4">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(global-set-key (kbd "H-j") 'other-window)
+(global-set-key (kbd "H-k") (lambda () (interactive) (other-window -1)))
+(global-set-key (kbd "H-0") 'delete-window)
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-11" class="outline-2">
+<h2 id="sec-11"><span class="section-number-2">11</span> Niceties</h2>
+<div class="outline-text-2" id="text-11">
+</div><div id="outline-container-sec-11-0-1" class="outline-4">
+<h4 id="sec-11-0-1"><span class="section-number-4">11.0.1</span> Which key to show possible candidates for keystrokes after a prefix like C-c</h4>
+<div class="outline-text-4" id="text-11-0-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package which-key
+:ensure t
+:defer t
+:init (which-key-mode)
+:diminish which-key-mode)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-11-1" class="outline-3">
+<h3 id="sec-11-1"><span class="section-number-3">11.1</span> Whitespace</h3>
+<div class="outline-text-3" id="text-11-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package ws-butler
+  :ensure t
+  :init
+  (add-global-hook 'ws-butler-mode)
+  :diminish ws-butler-mode)
+
+(setq-default show-trailing-whitespace t)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-11-2" class="outline-3">
+<h3 id="sec-11-2"><span class="section-number-3">11.2</span> Better defaults.</h3>
+<div class="outline-text-3" id="text-11-2">
+<p>
+Remove toolbars, scroll bars, etc, remember pointer when closing file, mouse yank insert at point,
+sets require-final-newline, indent-tabs set to nil, other useful stuff
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package better-defaults
+  :ensure t)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-11-3" class="outline-3">
+<h3 id="sec-11-3"><span class="section-number-3">11.3</span> Other little nice settings</h3>
+<div class="outline-text-3" id="text-11-3">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(defalias 'yes-or-no-p 'y-or-n-p)
+(global-linum-mode 1)
+(setq column-number-mode 1)
+(setq backup-directory-alist
+      `((".*" . "~/.tmp/emacs")))
+(setq auto-save-file-name-transforms
+      `((".*" ,"~/.tmp/emacs" t)))
+(setq visible-bell nil)
+(setq inhibit-startup-screen t)
+(add-to-list 'auto-mode-alist '("Cask" . emacs-lisp-mode))
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-11-3-1" class="outline-4">
+<h4 id="sec-11-3-1"><span class="section-number-4">11.3.1</span> Autorvert mode to reload buffer if file changes</h4>
+<div class="outline-text-4" id="text-11-3-1">
+<p>
+mostly because i still do git checkout from terminals
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(global-auto-revert-mode 1)
+(diminish auto-revert-mode)
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-12" class="outline-2">
+<h2 id="sec-12"><span class="section-number-2">12</span> Theming</h2>
+<div class="outline-text-2" id="text-12">
+</div><div id="outline-container-sec-12-1" class="outline-3">
+<h3 id="sec-12-1"><span class="section-number-3">12.1</span> monokai does nice highlighting of src blocks in org</h3>
+<div class="outline-text-3" id="text-12-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package monokai-theme
+  :ensure t
+  :init (load-theme 'monokai 'no-confirm))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-12-2" class="outline-3">
+<h3 id="sec-12-2"><span class="section-number-3">12.2</span> Fonts</h3>
+<div class="outline-text-3" id="text-12-2">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(set-face-attribute 'default nil
+		    :family "DejaVu Sans Mono" :height 105)
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-13" class="outline-2">
+<h2 id="sec-13"><span class="section-number-2">13</span> Org mode</h2>
+<div class="outline-text-2" id="text-13">
+</div><div id="outline-container-sec-13-1" class="outline-3">
+<h3 id="sec-13-1"><span class="section-number-3">13.1</span> Install org from the repos</h3>
+<div class="outline-text-3" id="text-13-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package org
+  :ensure t
+  :bind (("\C-col" . org-store-link)
+	 ("\C-coa" . org-agenda)
+	 ("\C-coc" . org-capture)
+	 ("\C-cob" . org-iswitchb))
+  :config (setq org-directory (expand-file-name "~/org")))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-13-2" class="outline-3">
+<h3 id="sec-13-2"><span class="section-number-3">13.2</span> Org bullets converts starts into bullets</h3>
+<div class="outline-text-3" id="text-13-2">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package org-bullets
+  :ensure t
+  :init (add-hook 'org-mode-hook 'org-bullets-mode))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-13-3" class="outline-3">
+<h3 id="sec-13-3"><span class="section-number-3">13.3</span> Presentations</h3>
+<div class="outline-text-3" id="text-13-3">
+</div><div id="outline-container-sec-13-3-1" class="outline-4">
+<h4 id="sec-13-3-1"><span class="section-number-4">13.3.1</span> Org (for some reason called ox-reveal too, kinda confusing) reveal for exporting to reveal.js</h4>
+<div class="outline-text-4" id="text-13-3-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package ox-reveal
+  :ensure t
+  :config (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
+  :init (add-hook 'org-mode 'reveal-mode))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-13-3-2" class="outline-4">
+<h4 id="sec-13-3-2"><span class="section-number-4">13.3.2</span> htmlize for syntax highlighting in org presentations</h4>
+<div class="outline-text-4" id="text-13-3-2">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package htmlize
+  :ensure t)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-13-4" class="outline-3">
+<h3 id="sec-13-4"><span class="section-number-3">13.4</span> Make literate programming better</h3>
+<div class="outline-text-3" id="text-13-4">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq org-src-fontify-natively t)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-13-5" class="outline-3">
+<h3 id="sec-13-5"><span class="section-number-3">13.5</span> Org capture: saving notes</h3>
+<div class="outline-text-3" id="text-13-5">
+</div><div id="outline-container-sec-13-5-1" class="outline-4">
+<h4 id="sec-13-5-1"><span class="section-number-4">13.5.1</span> Set the org-capture file for my agenda files</h4>
+<div class="outline-text-4" id="text-13-5-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq org-default-notes-file (concat org-directory "/notes.org"))
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-13-6" class="outline-3">
+<h3 id="sec-13-6"><span class="section-number-3">13.6</span> Autocomplete org keywords</h3>
+<div class="outline-text-3" id="text-13-6">
+<p>
+Snippet courtesy of purple<sub>arrows</sub>: <a href="http://emacs.stackexchange.com/questions/21171/company-mode-completion-for-org-keywords">http://emacs.stackexchange.com/questions/21171/company-mode-completion-for-org-keywords</a>
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(defun org-keyword-backend (command &amp;optional arg &amp;rest ignored)
+  (interactive (list 'interactive))
+  (cl-case command
+    (interactive (company-begin-backend 'org-keyword-backend))
+    (prefix (and (eq major-mode 'org-mode)
+		 (cons (company-grab-line "^#\\+\\(\\w*\\)" 1)
+		       t)))
+    (candidates (mapcar #'upcase
+			(cl-remove-if-not
+			 (lambda (c) (string-prefix-p arg c))
+			 (pcomplete-completions))))
+    (ignore-case t)
+    (duplicates t)))
+(add-to-list 'company-backends 'org-keyword-backend)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-13-7" class="outline-3">
+<h3 id="sec-13-7"><span class="section-number-3">13.7</span> Plot with gnuplot</h3>
+<div class="outline-text-3" id="text-13-7">
+<p>
+org-plot/gnuplot requires the gnuplot lib
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package gnuplot)
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-14" class="outline-2">
+<h2 id="sec-14"><span class="section-number-2">14</span> Terminal</h2>
+<div class="outline-text-2" id="text-14">
+</div><div id="outline-container-sec-14-1" class="outline-3">
+<h3 id="sec-14-1"><span class="section-number-3">14.1</span> Shell pop package</h3>
+<div class="outline-text-3" id="text-14-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package shell-pop
+  :ensure t
+  :bind ("C-c t" . shell-pop)
+  :config (custom-set-variables
+	    '(shell-pop-shell-type (quote ("ansi-term" "*ansi-term*" (lambda nil (ansi-term shell-pop-term-shell)))))
+	    '(shell-pop-full-span nil))
+)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-15" class="outline-2">
+<h2 id="sec-15"><span class="section-number-2">15</span> Navigation</h2>
+<div class="outline-text-2" id="text-15">
+</div><div id="outline-container-sec-15-1" class="outline-3">
+<h3 id="sec-15-1"><span class="section-number-3">15.1</span> dumb-jump</h3>
+<div class="outline-text-3" id="text-15-1">
+<p>
+Like ggtags and xref but within the current project
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package dumb-jump
+  :bind (("M-g o" . dumb-jump-go-other-window)
+	 ("M-g j" . dumb-jump-go)
+	 ("M-g x" . dumb-jump-go-prefer-external)
+	 ("M-g z" . dumb-jump-go-prefer-external-other-window))
+   :config (setq dumb-jump-selector 'helm)
+   :init (dumb-jump-mode))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-15-2" class="outline-3">
+<h3 id="sec-15-2"><span class="section-number-3">15.2</span> Projectile</h3>
+<div class="outline-text-3" id="text-15-2">
+</div><div id="outline-container-sec-15-2-1" class="outline-4">
+<h4 id="sec-15-2-1"><span class="section-number-4">15.2.1</span> Base projectile package</h4>
+<div class="outline-text-4" id="text-15-2-1">
+<p>
+Enable projectile globally, then C-c p is the prefix for projectile.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package projectile
+  :ensure t
+  :init (projectile-global-mode))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-15-2-2" class="outline-4">
+<h4 id="sec-15-2-2"><span class="section-number-4">15.2.2</span> Helm projectile for easily switching projects and files in the project</h4>
+<div class="outline-text-4" id="text-15-2-2">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package helm-projectile
+  :config (helm-projectile-on))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-15-2-3" class="outline-4">
+<h4 id="sec-15-2-3"><span class="section-number-4">15.2.3</span> Helm-ag is required for helm-projectile-ag below</h4>
+<div class="outline-text-4" id="text-15-2-3">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package helm-ag
+  :ensure t
+  :defer t)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-15-2-4" class="outline-4">
+<h4 id="sec-15-2-4"><span class="section-number-4">15.2.4</span> Helm projectile for some projectile niceness with helm</h4>
+<div class="outline-text-4" id="text-15-2-4">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package helm-projectile
+  :ensure t
+  :bind ("M-I" . helm-projectile-ag))
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-15-3" class="outline-3">
+<h3 id="sec-15-3"><span class="section-number-3">15.3</span> Neotree</h3>
+<div class="outline-text-3" id="text-15-3">
+<p>
+Toggle neotree with SPCpt and switch the project when projectile-switch-project is called.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package neotree
+  :ensure t
+  :bind  (("C-c l" . neotree-toggle)))
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-16" class="outline-2">
+<h2 id="sec-16"><span class="section-number-2">16</span> Editing</h2>
+<div class="outline-text-2" id="text-16">
+</div><div id="outline-container-sec-16-1" class="outline-3">
+<h3 id="sec-16-1"><span class="section-number-3">16.1</span> Undo tree</h3>
+<div class="outline-text-3" id="text-16-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package undo-tree
+  :config (global-undo-tree-mode 1)
+  :ensure t
+  :bind (("C-/" . undo)
+	 ("C-c C-/" . undo-tree-redo)))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-16-2" class="outline-3">
+<h3 id="sec-16-2"><span class="section-number-3">16.2</span> Smartparens</h3>
+<div class="outline-text-3" id="text-16-2">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package smartparens
+  :ensure t
+  :init (add-global-hook 'smartparens-mode)
+  :config (defhydra rski-smartparens-hydra ()
+	  "Edit parens"
+	  ("l" sp-forward-slurp-sexp "s-back")
+	  ("h" sp-backward-slurp-sexp "s-fwd"))
+	  (require 'smartparens-config)
+  :bind (("C-c m s" . rski-smartparens-hydra/body))
+  :diminish smartparens-mode)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-16-3" class="outline-3">
+<h3 id="sec-16-3"><span class="section-number-3">16.3</span> Selected: do things on a region</h3>
+<div class="outline-text-3" id="text-16-3">
+<p>
+When a region is marked, press s single binding and get things done quickly
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package selected
+  :diminish selected-minor-mode
+  :config
+  (selected-global-mode t)
+  :bind (:map selected-keymap
+	      ("q" . selected-off)
+	      ("u" . upcase-region)
+	      ("d" . downcase-region)
+	      ("c" . count-words-region)
+	      ("i" . indent-region)
+	      ("w" . copy-region-as-kill)))
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-17" class="outline-2">
+<h2 id="sec-17"><span class="section-number-2">17</span> Make visiting and reloading the config easy</h2>
+<div class="outline-text-2" id="text-17">
+</div><div id="outline-container-sec-17-1" class="outline-3">
+<h3 id="sec-17-1"><span class="section-number-3">17.1</span> Visit the config file</h3>
+<div class="outline-text-3" id="text-17-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(defun rski/visit-config ()
+  (interactive)
+  (find-file (substitute-in-file-name "$HOME/.emacs.d/config.org")))
+(global-set-key (kbd "H-d") 'rski/visit-config)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-17-2" class="outline-3">
+<h3 id="sec-17-2"><span class="section-number-3">17.2</span> Load the config with babel</h3>
+<div class="outline-text-3" id="text-17-2">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(defun rski/load-config ()
+  (interactive)
+  (setq config-file (substitute-in-file-name "$HOME/.emacs.d/config.org"))
+  (org-babel-load-file config-file))
+(global-set-key (kbd "H-r") 'rski/load-config)
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Travis CI User</p>
+<p class="date">Created: 2017-08-01 Tue 21:23</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
