@@ -260,6 +260,12 @@
 #+BEGIN_SRC emacs-lisp
   (global-subword-mode 1)
 #+END_SRC
+** Moving between windows
+   #+BEGIN_SRC emacs-lisp
+     (global-set-key (kbd "H-j") 'other-window)
+     (global-set-key (kbd "H-k") (lambda () (interactive) (other-window -1)))
+     (global-set-key (kbd "H-0") 'delete-window)
+   #+END_SRC
 * Niceties
 *** Which key to show possible candidates for keystrokes after a prefix like C-c
 
@@ -496,7 +502,7 @@
   (defun rski/visit-config ()
     (interactive)
     (find-file (substitute-in-file-name "$HOME/.emacs.d/config.org")))
-  (global-set-key (kbd "C-c fd") 'rski/visit-config)
+  (global-set-key (kbd "H-d") 'rski/visit-config)
 #+END_SRC
 ** Load the config with babel
 #+BEGIN_SRC emacs-lisp
@@ -504,5 +510,5 @@
     (interactive)
     (setq config-file (substitute-in-file-name "$HOME/.emacs.d/config.org"))
     (org-babel-load-file config-file))
-  (global-set-key (kbd "C-c fr") 'rski/load-config)
+  (global-set-key (kbd "H-r") 'rski/load-config)
 #+END_SRC
