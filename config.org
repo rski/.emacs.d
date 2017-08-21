@@ -517,3 +517,9 @@
     (org-babel-load-file config-file))
   (global-set-key (kbd "H-r") 'rski/load-config)
 #+END_SRC
+* Modeline stuff
+** Display battery and time
+   #+BEGIN_SRC emacs-lisp
+   (display-time-mode t)
+   (display-battery-mode t)
+   #+END_SRC
