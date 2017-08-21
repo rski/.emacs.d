@@ -115,7 +115,6 @@
 
 * Languages
   Packages for getting better support for various languages
-
 ** Python
    Python config for company using anaconda.
 #+BEGIN_SRC emacs-lisp
@@ -197,9 +196,9 @@
     :config (add-to-list 'company-backends 'company-c-headers))
 #+END_SRC
 ** Yang
-   Just get some highlighting going on
+
 #+BEGIN_SRC emacs-lisp
-   (add-to-list 'auto-mode-alist '("\\.yang\\'" . js-mode))
+   (use-package yang-mode)
 #+END_SRC
 ** Nixos
 *** Nix-mode for file editing
