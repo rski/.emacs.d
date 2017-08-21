@@ -211,6 +211,45 @@
        :after  company
        :init (add-to-list 'company-backends 'company-nixos-options))
    #+END_SRC
+** Golang
+*** Base go-mode
+    Jump to def using [[https://github.com/rogpeppe/godef][godef]]
+    Automatically add/remove missing imports with [[golang.org/x/tools/cmd/goimports][gomiports]]
+   #+BEGIN_SRC emacs-lisp
+     (use-package go-mode
+       :config (setq gofmt-command "goimports")
+       :init (add-hook 'before-save-hook 'gofmt-before-save)
+       (add-hook 'go-mode-hook (lambda ()
+                                 (local-set-key (kbd "M-.") 'godef-jump)
+                                 (local-set-key (kbd "M-4 M-.") 'godef-jump-other-window)
+                                 (local-set-key (kbd "C-c C-d") 'godoc-at-point))))
+   #+END_SRC
+*** Autocompletion, requires [[https://github.com/nsf/gocode%20][gocode]] and gopath to be set to include it
+   #+BEGIN_SRC emacs-lisp
+     (use-package company-go
+       :after company
+       :init (add-hook 'go-mode-hook (lambda ()
+                               (set (make-local-variable 'company-backends) '(company-go))
+                               (company-mode))))
+   #+END_SRC
+*** Eldoc, same fashion as above
+   #+BEGIN_SRC emacs-lisp
+     (use-package go-eldoc
+       :init (add-hook 'go-mode-hook 'go-eldoc-setup))
+   #+END_SRC
+*** Guru for magic
+    #+BEGIN_SRC emacs-lisp
+      (use-package go-guru
+        :init (add-hook 'go-mode-hook 'go-guru-hl-identifier-mode))
+    #+END_SRC
+*** playground inside emacs
+    #+BEGIN_SRC emacs-lisp
+    (use-package go-playground)
+    #+END_SRC
+** Protocol buffers
+   #+BEGIN_SRC emacs-lisp
+     (use-package protobuf-mode)
+   #+END_SRC
 * Git configuration
 ** Magit
    The best thing since sliced bread and normal bread.
