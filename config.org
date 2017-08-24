@@ -564,3 +564,7 @@
    (display-time-mode t)
    (display-battery-mode t)
    #+END_SRC
+* Buffers
+  #+BEGIN_SRC emacs-lisp
+    (global-set-key (kbd "C-c r") 'rename-buffer)
+  #+END_SRC
