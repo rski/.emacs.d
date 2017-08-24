@@ -355,12 +355,6 @@
   (add-hook 'prog-mode-hook (lambda () (setq tab-width 4))) ; 8 is the default and that is waaaay to much
 #+END_SRC
 
-** Autorvert mode to reload buffer if file changes
-    mostly because i still do git checkout from terminals
-#+BEGIN_SRC emacs-lisp
-  (global-auto-revert-mode 1)
-  (diminish auto-revert-mode)
-#+END_SRC
 
 ** recompile with C-c C-c
     #+BEGIN_SRC emacs-lisp
