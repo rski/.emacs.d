@@ -126,9 +126,12 @@
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-  (use-package company-anaconda
-    :after company
-    :init (add-to-list 'company-backends '(company-anaconda :with company-capf)))
+    (use-package company-anaconda
+      :after company
+      :init (add-hook 'python-mode-hook
+                      (lambda ()
+                        (add-to-list (make-local-variable 'company-backends)
+                                     '(company-anaconda :with company-capf)))))
 #+END_SRC
 ** Puppet
    Use puppet-mode from Vox Pupuli
@@ -164,7 +167,10 @@
     :ensure t
     :defer t
     :after 'company
-    :init (add-to-list 'company-backends 'company-lua))
+    :init (add-hook 'lua-mode-hook
+                    (lambda ()
+                      (add-to-list (make-local-variable 'company-backends)
+                                   'company-lua))))
 #+END_SRC
 
 ** Web dev
@@ -193,7 +199,10 @@
 ** c/c++
 #+BEGIN_SRC emacs-lisp
   (use-package company-c-headers
-    :config (add-to-list 'company-backends 'company-c-headers))
+    :config (add-hook 'c-mode-hook
+            (lambda ()
+              (add-to-list (make-local-variable 'company-backends)
+                           'company-c-headers))))
 #+END_SRC
 ** Yang
 
@@ -209,7 +218,10 @@
    #+BEGIN_SRC emacs-lisp
      (use-package company-nixos-options
        :after  company
-       :init (add-to-list 'company-backends 'company-nixos-options))
+       :init (add-hook 'nixos-mode-hook
+                       (lambda ()
+                         (add-to-list (make-local-variable 'company-backends)
+                                      'company-nixos-options))))
    #+END_SRC
 ** Golang
 *** Base go-mode
@@ -228,9 +240,10 @@
    #+BEGIN_SRC emacs-lisp
      (use-package company-go
        :after company
-       :init (add-hook 'go-mode-hook (lambda ()
-                               (set (make-local-variable 'company-backends) '(company-go))
-                               (company-mode))))
+       :init (add-hook 'go-mode-hook
+                       (lambda ()
+                         (add-to-list (make-local-variable 'company-backends)
+                                      'go-company))))
    #+END_SRC
 *** Eldoc, same fashion as above
    #+BEGIN_SRC emacs-lisp
@@ -424,20 +437,23 @@
 ** Autocomplete org keywords
    Snippet courtesy of purple_arrows: http://emacs.stackexchange.com/questions/21171/company-mode-completion-for-org-keywords
 #+BEGIN_SRC emacs-lisp
-(defun org-keyword-backend (command &optional arg &rest ignored)
-  (interactive (list 'interactive))
-  (cl-case command
-    (interactive (company-begin-backend 'org-keyword-backend))
-    (prefix (and (eq major-mode 'org-mode)
-                 (cons (company-grab-line "^#\\+\\(\\w*\\)" 1)
-                       t)))
-    (candidates (mapcar #'upcase
-                        (cl-remove-if-not
-                         (lambda (c) (string-prefix-p arg c))
-                         (pcomplete-completions))))
-    (ignore-case t)
-    (duplicates t)))
-(add-to-list 'company-backends 'org-keyword-backend)
+  (defun org-keyword-backend (command &optional arg &rest ignored)
+    (interactive (list 'interactive))
+    (cl-case command
+      (interactive (company-begin-backend 'org-keyword-backend))
+      (prefix (and (eq major-mode 'org-mode)
+                   (cons (company-grab-line "^#\\+\\(\\w*\\)" 1)
+                         t)))
+      (candidates (mapcar #'upcase
+                          (cl-remove-if-not
+                           (lambda (c) (string-prefix-p arg c))
+                           (pcomplete-completions))))
+      (ignore-case t)
+      (duplicates t)))
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (add-to-list (make-local-variable 'company-backends)
+                           'org-keyword-backedn)))
 #+END_SRC
 
 ** Plot with gnuplot
