@@ -463,7 +463,11 @@
    #+END_SRC
 * Terminal
 ** Eshell
-
+   Because I keep forgetting
+   #+BEGIN_SRC emacs-lisp
+     (defalias 'vim 'find-file)
+     (defalias 'emacs 'find-file)
+   #+END_SRC
 * Navigation
 ** dumb-jump
    Like ggtags and xref but within the current project
