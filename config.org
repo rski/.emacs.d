@@ -446,16 +446,7 @@
      (use-package gnuplot)
    #+END_SRC
 * Terminal
-** Shell pop package
-#+BEGIN_SRC emacs-lisp
-(use-package shell-pop
-  :ensure t
-  :bind ("C-c t" . shell-pop)
-  :config (custom-set-variables
-            '(shell-pop-shell-type (quote ("ansi-term" "*ansi-term*" (lambda nil (ansi-term shell-pop-term-shell)))))
-            '(shell-pop-full-span nil))
-)
-#+END_SRC
+** Eshell
 
 * Navigation
 ** dumb-jump
