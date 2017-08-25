@@ -472,6 +472,9 @@
    #+BEGIN_SRC emacs-lisp
      (defalias 'vim 'find-file)
      (defalias 'emacs 'find-file)
+     (add-hook 'eshell-mode-hook
+               (lambda ()
+                 (linum-mode -1)))
    #+END_SRC
 * Navigation
 ** dumb-jump
