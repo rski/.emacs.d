@@ -373,12 +373,14 @@
   (add-hook 'prog-mode-hook (lambda () (setq tab-width 4))) ; 8 is the default and that is waaaay to much
 #+END_SRC
 
-
 ** recompile with C-c C-c
     #+BEGIN_SRC emacs-lisp
     (add-hook 'prog-mode-hook (lambda () (local-set-key (kbd "C-c C-c") 'recompile)))
-
     #+END_SRC
+** Folds
+   #+BEGIN_SRC emacs-lisp
+     (global-set-key (kbd "C-z") 'set-selective-display)
+   #+END_SRC
 * Theming
 ** monokai does nice highlighting of src blocks in org
 
