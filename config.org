@@ -550,6 +550,11 @@
               ("i" . indent-region)
               ("w" . copy-region-as-kill)))
 #+END_SRC
+** Comments
+   Rebind M-; to comment out lines instead of insert comments in the end
+   #+BEGIN_SRC emacs-lisp
+   (global-set-key (kbd "M-;") 'comment-line)
+   #+END_SRC
 * Make visiting and reloading the config easy
 ** Visit the config file
 #+BEGIN_SRC emacs-lisp
