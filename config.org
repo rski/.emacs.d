@@ -20,7 +20,6 @@
     '("melpa" . "https://melpa.org/packages/"))
   (add-to-list 'package-archives
                '("melpa-stable" . "https://stable.melpa.org/packages/"))
-
   (unless (package-installed-p 'use-package)
     (package-refresh-contents)
     (package-install 'use-package))
@@ -103,22 +102,20 @@
   Packages for getting better support for various languages
 ** Python
    Python config for company using anaconda.
-#+BEGIN_SRC emacs-lisp
-      (use-package anaconda-mode
-        :ensure t
-        :init
-        (add-hook 'python-mode-hook 'anaconda-mode)
-        (add-hook 'python-mode-hook 'anaconda-eldoc-mode))
-#+END_SRC
+   #+BEGIN_SRC emacs-lisp
+     (use-package anaconda-mode
+       :ensure t
+       :init
+       (add-hook 'python-mode-hook 'anaconda-mode)
+       (add-hook 'python-mode-hook 'anaconda-eldoc-mode))
 
-#+BEGIN_SRC emacs-lisp
-    (use-package company-anaconda
-      :after company
-      :init (add-hook 'python-mode-hook
-                      (lambda ()
-                        (add-to-list (make-local-variable 'company-backends)
-                                     '(company-anaconda :with company-capf)))))
-#+END_SRC
+     (use-package company-anaconda
+       :after company
+       :init (add-hook 'python-mode-hook
+                       (lambda ()
+                         (add-to-list (make-local-variable 'company-backends)
+                                      '(company-anaconda :with company-capf)))))
+   #+END_SRC
 ** Puppet
    Use puppet-mode from Vox Pupuli
    #+BEGIN_SRC emacs-lisp
