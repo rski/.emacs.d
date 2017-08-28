@@ -523,21 +523,6 @@
     :bind (("C-c m s" . rski-smartparens-hydra/body))
     :diminish smartparens-mode)
 #+END_SRC
-** Selected: do things on a region
-   When a region is marked, press s single binding and get things done quickly
-#+BEGIN_SRC emacs-lisp
-(use-package selected
-  :diminish selected-minor-mode
-  :config
-  (selected-global-mode t)
-  :bind (:map selected-keymap
-              ("q" . selected-off)
-              ("u" . upcase-region)
-              ("d" . downcase-region)
-              ("c" . count-words-region)
-              ("i" . indent-region)
-              ("w" . copy-region-as-kill)))
-#+END_SRC
 ** Comments
    Rebind M-; to comment out lines instead of insert comments in the end
    #+BEGIN_SRC emacs-lisp
