@@ -38,15 +38,7 @@
 #+BEGIN_SRC emacs-lisp
     (use-package flycheck
       :ensure t
-      :init (add-hook 'after-init-hook #'global-flycheck-mode)
-      :bind (("C-c e" . rski-flycheck-hydra/body))
-      :config
-      (defhydra rski-flycheck-hydra ()
-        "Move around flycheck errors"
-        ("n" flycheck-next-error "next")
-        ("p" flycheck-previous-error "previous")
-        ("f" flycheck-first-error "first")
-        ("l" flycheck-list-errors "list")))
+      :init (add-hook 'after-init-hook #'global-flycheck-mode))
 
     (use-package flycheck-pos-tip
       :ensure t
@@ -268,14 +260,9 @@
     :ensure t
     :config
     (setq git-gutter:update-interval 0.1)
-    (defhydra rski-git-gutter-hydra ()
-          "Move between changes in file"
-          ("n" git-gutter:next-hunk "next")
-          ("p" git-gutter:previous-hunk "previous"))
     :init
     (global-git-gutter-mode 1)
-    (git-gutter:linum-setup)
-    :bind (("C-c m g" . rski-git-gutter-hydra/body)))
+    (git-gutter:linum-setup))
 #+END_SRC
 
 * Navigation
@@ -511,7 +498,7 @@
             ("l" sp-forward-slurp-sexp "s-back")
             ("h" sp-backward-slurp-sexp "s-fwd"))
             (require 'smartparens-config)
-    :bind (("C-c m s" . rski-smartparens-hydra/body))
+    :bind (("C-c s" . rski-smartparens-hydra/body))
     :diminish smartparens-mode)
 #+END_SRC
 ** Comments
