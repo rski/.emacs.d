@@ -291,6 +291,10 @@
 #+BEGIN_SRC emacs-lisp
   (global-subword-mode 1)
 #+END_SRC
+** Bind imenu to something again
+   #+BEGIN_SRC emacs-lisp
+   (global-set-key (kbd "M-c") 'helm-semantic-or-imenu)
+   #+END_SRC
 * Niceties
 ** Oh god shut up
    #+BEGIN_SRC emacs-lisp
