@@ -449,7 +449,8 @@
      (defalias 'emacs 'find-file)
      (add-hook 'eshell-mode-hook
                (lambda ()
-                 (linum-mode -1)))
+                 (linum-mode -1)
+                 (setq show-trailing-whitespace nil)))
    #+END_SRC
 * Navigation
 ** dumb-jump
