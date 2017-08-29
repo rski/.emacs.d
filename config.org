@@ -467,9 +467,10 @@
 *** Base projectile package
    Enable projectile globally, then C-c p is the prefix for projectile.
 #+BEGIN_SRC emacs-lisp
-(use-package projectile
-  :ensure t
-  :init (projectile-global-mode))
+  (use-package projectile
+    :ensure t
+    :init (projectile-global-mode)
+          (add-to-list 'projectile-globally-ignored-directories "Godeps"))
 #+END_SRC
 *** Helm projectile for easily switching projects and files in the project
 #+BEGIN_SRC emacs-lisp
