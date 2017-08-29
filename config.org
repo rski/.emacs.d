@@ -38,7 +38,8 @@
 #+BEGIN_SRC emacs-lisp
     (use-package flycheck
       :ensure t
-      :init (add-hook 'after-init-hook #'global-flycheck-mode))
+      :init (add-hook 'after-init-hook #'global-flycheck-mode)
+      :diminish flycheck-mode)
 
     (use-package flycheck-pos-tip
       :ensure t
@@ -49,6 +50,7 @@
 #+BEGIN_SRC emacs-lisp
   (add-hook 'text-mode-hook (lambda () (flyspell-mode 1)))
   (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+  (diminish 'flyspell-mode)
 #+END_SRC
 * Helm
    Set the helm command prefix to C-c h because C-x c is scary close to C-x C-c
@@ -60,6 +62,7 @@
     :init
     (progn (require 'helm-config)
            (helm-mode 1))
+    :diminish helm-mode
     :bind (("C-c h" . helm-command-prefix)
            ("M-x" . helm-M-x)
            ("M-y" . helm-show-kill-ring)
@@ -87,6 +90,7 @@
 (use-package yasnippet
   :ensure t
   :init (yas-global-mode 1)
+  :diminish yas-minor-mode
   :bind (("C-c y" . yas-insert-snippet)))
 #+END_SRC
 
@@ -262,7 +266,8 @@
     (setq git-gutter:update-interval 0.1)
     :init
     (global-git-gutter-mode 1)
-    (git-gutter:linum-setup))
+    (git-gutter:linum-setup)
+    :diminish git-gutter-mode)
 #+END_SRC
 
 * Navigation
