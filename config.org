@@ -491,6 +491,15 @@
     :ensure t
     :bind ("M-I" . helm-projectile-ag))
 #+END_SRC
+** Beginning/End of buffer
+   Bind C-. C-, to going to the start/end of buffer, unbind the flyspell bindings that shadow these
+   #+BEGIN_SRC emacs-lisp
+     (global-set-key (kbd "C-.") 'end-of-buffer)
+     (global-set-key (kbd "C-,") 'beginning-of-buffer)
+     (with-eval-after-load "flyspell"
+       (define-key flyspell-mode-map (kbd "C-.") nil)
+       (define-key flyspell-mode-map (kbd "C-,") nil))
+   #+END_SRC
 * Editing
 ** Undo tree
 #+BEGIN_SRC emacs-lisp
