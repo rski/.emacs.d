@@ -224,12 +224,12 @@
                          (add-to-list (make-local-variable 'company-backends)
                                       'company-go))))
    #+END_SRC
-*** Eldoc, same fashion as above
+*** Eldoc, also requires gocode
    #+BEGIN_SRC emacs-lisp
      (use-package go-eldoc
        :init (add-hook 'go-mode-hook 'go-eldoc-setup))
    #+END_SRC
-*** Guru for magic
+*** Guru
     #+BEGIN_SRC emacs-lisp
       (use-package go-guru
         :init (add-hook 'go-mode-hook 'go-guru-hl-identifier-mode))
@@ -536,6 +536,7 @@
    #+BEGIN_SRC emacs-lisp
    (display-time-mode t)
    (display-battery-mode t)
+   (setq battery-mode-line-format "[%L %b%p%% %t]")
    #+END_SRC
 * Buffers
   #+BEGIN_SRC emacs-lisp
