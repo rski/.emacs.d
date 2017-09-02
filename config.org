@@ -433,7 +433,8 @@
   (add-hook 'org-mode-hook
             (lambda ()
               (add-to-list (make-local-variable 'company-backends)
-                           'org-keyword-backend)))
+                           'org-keyword-backend)
+                           (setq-local company-minimum-prefix-length 3)))
 #+END_SRC
 
 ** Plot with gnuplot
