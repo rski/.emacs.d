@@ -437,6 +437,10 @@
                            (setq-local company-minimum-prefix-length 3)))
 #+END_SRC
 
+** Agenda
+   #+BEGIN_SRC emacs-lisp
+   (setq org-agenda-files '("~/org/"))
+   #+END_SRC
 ** Plot with gnuplot
    org-plot/gnuplot requires the gnuplot lib
    #+BEGIN_SRC emacs-lisp
