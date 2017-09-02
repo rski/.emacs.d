@@ -507,7 +507,8 @@
     :config (defhydra rski-smartparens-hydra ()
             "Edit parens"
             ("l" sp-forward-slurp-sexp "s-back")
-            ("h" sp-backward-slurp-sexp "s-fwd"))
+            ("h" sp-backward-slurp-sexp "s-fwd")
+            ("u" sp-unwrap-sexp "unwrap"))
             (require 'smartparens-config)
     :bind (("C-c s" . rski-smartparens-hydra/body))
     :diminish smartparens-mode)
