@@ -261,13 +261,12 @@
 ** Configure git-gutter, make it work with linum
 #+BEGIN_SRC emacs-lisp
   (use-package git-gutter
-    :ensure t
-    :config
-    (setq git-gutter:update-interval 0.1)
-    :init
-    (global-git-gutter-mode 1)
-    (git-gutter:linum-setup)
-    :diminish git-gutter-mode)
+     :ensure t
+     :config
+     (setq git-gutter:update-interval 0.1)
+     :init
+     (global-git-gutter-mode t)
+     :diminish git-gutter-mode)
 #+END_SRC
 
 * Navigation
@@ -296,6 +295,12 @@
    (global-set-key (kbd "M-c") 'helm-semantic-or-imenu)
    #+END_SRC
 * Niceties
+** Line numbers
+   This only works with emacs26 but idc
+   #+BEGIN_SRC emacs-lisp
+     (add-hook 'prog-mode-hook (lambda () (setq display-line-numbers t)))
+     (add-hook 'text-mode-hook (lambda () (setq display-line-numbers t)))
+   #+END_SRC
 ** Oh god shut up
    #+BEGIN_SRC emacs-lisp
    (setq ring-bell-function 'ignore)
@@ -334,7 +339,6 @@
 
 #+BEGIN_SRC emacs-lisp
   (defalias 'yes-or-no-p 'y-or-n-p)
-  (global-linum-mode 1)
   (setq column-number-mode 1)
   (setq backup-directory-alist
         `((".*" . "~/.tmp/emacs")))
@@ -454,7 +458,6 @@
      (defalias 'emacs 'find-file)
      (add-hook 'eshell-mode-hook
                (lambda ()
-                 (linum-mode -1)
                  (setq show-trailing-whitespace nil)))
    #+END_SRC
 * Navigation
