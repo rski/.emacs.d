@@ -413,9 +413,9 @@
 #+END_SRC
 
 ** Org capture: saving notes
-*** Set the org-capture file for my agenda files
+*** Set the default file where agenda captures are placed
 #+BEGIN_SRC emacs-lisp
-  (setq org-default-notes-file (concat org-directory "/notes.org"))
+  (setq org-default-notes-file (concat org-directory "/agenda.org"))
 #+END_SRC
 
 ** Autocomplete org keywords
@@ -443,7 +443,8 @@
 
 ** Agenda
    #+BEGIN_SRC emacs-lisp
-   (setq org-agenda-files '("~/org/"))
+   (load-library "find-lisp")
+   (setq org-agenda-files (find-lisp-find-files "~/org" "\.org$"))
    #+END_SRC
 ** Plot with gnuplot
    org-plot/gnuplot requires the gnuplot lib
