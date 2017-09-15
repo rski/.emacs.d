@@ -240,8 +240,9 @@
     #+END_SRC
 *** go test to run tests
     #+BEGIN_SRC emacs-lisp
-    (use-package gotest
-      :bind (("C-c t" . go-test-current-file)))
+      (use-package gotest
+        :bind (:map go-mode-map
+               ("C-c t" . go-test-current-file)))
     #+END_SRC
 ** Protocol buffers
    #+BEGIN_SRC emacs-lisp
