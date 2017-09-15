@@ -538,6 +538,11 @@
        (define-key flyspell-mode-map (kbd "C-.") nil)
        (define-key flyspell-mode-map (kbd "C-,") nil))
    #+END_SRC
+** scrolling
+   one line at a time
+   #+BEGIN_SRC emacs-lisp
+     (setq scroll-conservatively 1000)
+   #+END_SRC
 * Editing
 ** Undo tree
 #+BEGIN_SRC emacs-lisp
