@@ -468,8 +468,11 @@
 
 ** Agenda
    #+BEGIN_SRC emacs-lisp
-   (load-library "find-lisp")
-   (setq org-agenda-files (find-lisp-find-files "~/org" "\.org$"))
+     (load-library "find-lisp")
+     (defun rski/set-org-agenda-files()
+       (interactive)
+       (setq org-agenda-files (find-lisp-find-files "~/org" "\.org$")))
+     (rski/set-org-agenda-files)
    #+END_SRC
 ** Plot with gnuplot
    org-plot/gnuplot requires the gnuplot lib
