@@ -313,6 +313,12 @@
      (use-package imenu-anywhere
        :bind (("C-c i" . helm-imenu-anywhere)))
    #+END_SRC
+** Avy
+   Jump to places in the buffer
+   #+BEGIN_SRC emacs-lisp
+     (use-package avy
+       :bind (("C-:" . avy-goto-char-2)))
+   #+END_SRC
 * Niceties
 ** Line numbers
    This only works with emacs26 but idc
