@@ -377,6 +377,7 @@
   (setq inhibit-startup-screen t)
   (add-to-list 'auto-mode-alist '("Cask" . emacs-lisp-mode))
   (add-hook 'prog-mode-hook (lambda () (setq tab-width 4))) ; 8 is the default and that is waaaay to much
+  (setq create-lockfiles nil);; might be a bad idea but for 99% of the time should be ok
 #+END_SRC
 
 ** recompile with C-c C-c
