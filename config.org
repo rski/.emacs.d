@@ -268,7 +268,9 @@
 #+BEGIN_SRC emacs-lisp
   (use-package magit
     :bind
-    (("C-c g" . magit-status))
+    (("C-c g" . magit-status)
+     ("C-c l c" . magit-log-current)
+     ("C-c l l" . magit-log-branches))
     :ensure t)
   (setq vc-handled-backends nil)
 #+END_SRC
