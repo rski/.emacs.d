@@ -363,6 +363,7 @@
 ** Other little nice settings
 
 #+BEGIN_SRC emacs-lisp
+  (setq sentence-end-double-space nil) ;; when filling, use one space after fullstop
   (defalias 'yes-or-no-p 'y-or-n-p)
   (setq column-number-mode 1)
   (setq backup-directory-alist
