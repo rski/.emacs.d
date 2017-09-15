@@ -308,6 +308,11 @@
    #+BEGIN_SRC emacs-lisp
    (global-set-key (kbd "M-c") 'helm-semantic-or-imenu)
    #+END_SRC
+** Imenu-anywhere gives imenu across a number of buffers
+   #+BEGIN_SRC emacs-lisp
+     (use-package imenu-anywhere
+       :bind (("C-c i" . helm-imenu-anywhere)))
+   #+END_SRC
 * Niceties
 ** Line numbers
    This only works with emacs26 but idc
