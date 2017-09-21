@@ -323,12 +323,55 @@
      (use-package avy
        :bind (("C-:" . avy-goto-char-2)))
    #+END_SRC
+** dumb-jump
+   Like ggtags and xref but within the current project
+#+BEGIN_SRC emacs-lisp
+(use-package dumb-jump
+  :bind (("M-g o" . dumb-jump-go-other-window)
+	 ("M-g j" . dumb-jump-go)
+	 ("M-g x" . dumb-jump-go-prefer-external)
+	 ("M-g z" . dumb-jump-go-prefer-external-other-window))
+   :config (setq dumb-jump-selector 'helm)
+   :init (dumb-jump-mode))
+#+END_SRC
+** Projectile
+*** Base projectile package
+   Enable projectile globally, then C-c p is the prefix for projectile.
+#+BEGIN_SRC emacs-lisp
+  (use-package projectile
+    :ensure t
+    :init (projectile-global-mode)
+          (add-to-list 'projectile-globally-ignored-directories "Godeps")
+          (projectile-cleanup-known-projects))
+#+END_SRC
+*** Helm projectile for easily switching projects and files in the project
+#+BEGIN_SRC emacs-lisp
+  (use-package helm-projectile
+    :config (helm-projectile-on))
+#+END_SRC
+*** Helm-ag is required for helm-projectile-ag below
+#+BEGIN_SRC emacs-lisp
+  (use-package helm-ag
+    :ensure t
+    :defer t)
+#+END_SRC
+*** Helm projectile for some projectile niceness with helm
+#+BEGIN_SRC emacs-lisp
+  (use-package helm-projectile
+    :ensure t
+    :bind ("M-I" . helm-projectile-ag))
+#+END_SRC
+** scrolling
+   one line at a time
+   #+BEGIN_SRC emacs-lisp
+     (setq scroll-conservatively 1000)
+   #+END_SRC
 * Niceties
 ** Line numbers
    This only works with emacs26 but idc
    #+BEGIN_SRC emacs-lisp
-     (add-hook 'prog-mode-hook (lambda () (setq display-line-numbers t)))
-     (add-hook 'text-mode-hook (lambda () (setq display-line-numbers t)))
+     (add-hook 'prog-mode-hook (lambda () (display-line-numbers-mode)))
+     (add-hook 'text-mode-hook (lambda () (display-line-numbers-mode)))
    #+END_SRC
 ** Oh god shut up
    #+BEGIN_SRC emacs-lisp
@@ -495,59 +538,6 @@
      (add-hook 'eshell-mode-hook
                (lambda ()
                  (setq show-trailing-whitespace nil)))
-   #+END_SRC
-* Navigation
-** dumb-jump
-   Like ggtags and xref but within the current project
-#+BEGIN_SRC emacs-lisp
-(use-package dumb-jump
-  :bind (("M-g o" . dumb-jump-go-other-window)
-	 ("M-g j" . dumb-jump-go)
-	 ("M-g x" . dumb-jump-go-prefer-external)
-	 ("M-g z" . dumb-jump-go-prefer-external-other-window))
-   :config (setq dumb-jump-selector 'helm)
-   :init (dumb-jump-mode))
-#+END_SRC
-** Projectile
-*** Base projectile package
-   Enable projectile globally, then C-c p is the prefix for projectile.
-#+BEGIN_SRC emacs-lisp
-  (use-package projectile
-    :ensure t
-    :init (projectile-global-mode)
-          (add-to-list 'projectile-globally-ignored-directories "Godeps")
-          (projectile-cleanup-known-projects))
-#+END_SRC
-*** Helm projectile for easily switching projects and files in the project
-#+BEGIN_SRC emacs-lisp
-  (use-package helm-projectile
-    :config (helm-projectile-on))
-#+END_SRC
-*** Helm-ag is required for helm-projectile-ag below
-#+BEGIN_SRC emacs-lisp
-  (use-package helm-ag
-    :ensure t
-    :defer t)
-#+END_SRC
-*** Helm projectile for some projectile niceness with helm
-#+BEGIN_SRC emacs-lisp
-  (use-package helm-projectile
-    :ensure t
-    :bind ("M-I" . helm-projectile-ag))
-#+END_SRC
-** Beginning/End of buffer
-   Bind C-. C-, to going to the start/end of buffer, unbind the flyspell bindings that shadow these
-   #+BEGIN_SRC emacs-lisp
-     (global-set-key (kbd "C-.") 'end-of-buffer)
-     (global-set-key (kbd "C-,") 'beginning-of-buffer)
-     (with-eval-after-load "flyspell"
-       (define-key flyspell-mode-map (kbd "C-.") nil)
-       (define-key flyspell-mode-map (kbd "C-,") nil))
-   #+END_SRC
-** scrolling
-   one line at a time
-   #+BEGIN_SRC emacs-lisp
-     (setq scroll-conservatively 1000)
    #+END_SRC
 * Editing
 ** Undo tree
