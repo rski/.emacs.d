@@ -66,7 +66,8 @@
     :bind (("C-c h" . helm-command-prefix)
            ("M-x" . helm-M-x)
            ("M-y" . helm-show-kill-ring)
-           ("C-x C-f" . helm-find-files)))
+           ("C-x C-f" . helm-find-files)
+           ([remap switch-to-buffer] . helm-mini)))
 #+END_SRC
 ** helm-tramp
    Use the ssh/config file in tramp
