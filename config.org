@@ -245,6 +245,12 @@
         :bind (:map go-mode-map
                ("C-c t" . go-test-current-file)))
     #+END_SRC
+*** go doctor for refactoring
+    #+BEGIN_SRC emacs-lisp
+      (use-package godoctor
+         :bind (:map go-mode-map
+                     ("C-c r" . godoctor-rename)))
+    #+END_SRC
 ** Protocol buffers
    #+BEGIN_SRC emacs-lisp
      (use-package protobuf-mode)
