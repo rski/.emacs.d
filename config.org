@@ -600,10 +600,6 @@
    (display-battery-mode t)
    (setq battery-mode-line-format "[%L %b%p%% %t]")
    #+END_SRC
-* Buffers
-  #+BEGIN_SRC emacs-lisp
-    (global-set-key (kbd "C-c r") 'rename-buffer)
-  #+END_SRC
 * Applications
 ** Ledger
 *** The base backage
