@@ -438,6 +438,11 @@
    #+BEGIN_SRC emacs-lisp
      (global-set-key (kbd "C-z") 'set-selective-display)
    #+END_SRC
+** Highlight todos
+   #+BEGIN_SRC emacs-lisp
+   (use-package hl-todo
+     :init (global-hl-todo-mode))
+   #+END_SRC
 * Theming
 ** monokai does nice highlighting of src blocks in org
 
