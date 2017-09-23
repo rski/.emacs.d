@@ -327,7 +327,7 @@
    Jump to places in the buffer
    #+BEGIN_SRC emacs-lisp
      (use-package avy
-       :bind (("C-:" . avy-goto-char-2)))
+       :bind (("C-o" . avy-goto-char-2)))
    #+END_SRC
 ** dumb-jump
    Like ggtags and xref but within the current project
