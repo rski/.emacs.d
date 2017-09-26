@@ -455,8 +455,7 @@
            ("\C-coa" . org-agenda)
            ("\C-coc" . org-capture)
            ("\C-cob" . org-switchb))
-    :config (setq org-directory (expand-file-name "~/org"))
-            (setq org-agenda-start-with-follow-mode t))
+    :config (setq org-directory (expand-file-name "~/org")))
 #+END_SRC
 
 ** Org bullets converts starts into bullets
