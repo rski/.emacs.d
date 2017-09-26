@@ -362,6 +362,17 @@
    #+BEGIN_SRC emacs-lisp
      (setq scroll-conservatively 1000)
    #+END_SRC
+** treemacs
+   Treemacs has a built-in persistent tag view. which i want to have.
+   It also looks amazing, much better than neotree.
+   #+BEGIN_SRC emacs-lisp
+   (use-package treemacs :defer t)
+   (use-package treemacs-projectile
+     :defer t
+     :after treemacs
+     :bind (("C-c v" . treemacs-projectile-toggle))
+     :after projectile)
+   #+END_SRC
 * Niceties
 ** Line numbers
    This only works with emacs26 but idc
