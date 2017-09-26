@@ -185,14 +185,15 @@
                            'company-c-headers))))
 #+END_SRC
 ** Yang
-
 #+BEGIN_SRC emacs-lisp
-   (use-package yang-mode)
+   (use-package yang-mode :defer t)
+   ; FIXME
+   (use-package flycheck-yang :defer t)
 #+END_SRC
 ** Nixos
 *** Nix-mode for file editing
    #+BEGIN_SRC emacs-lisp
-     (use-package nix-mode)
+     (use-package nix-mode :defer t)
    #+END_SRC
 *** Nix-company has great autocompletion
    #+BEGIN_SRC emacs-lisp
