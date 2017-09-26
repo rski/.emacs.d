@@ -330,17 +330,6 @@
      (use-package avy
        :bind (("C-o" . avy-goto-char-2)))
    #+END_SRC
-** dumb-jump
-   Like ggtags and xref but within the current project
-#+BEGIN_SRC emacs-lisp
-(use-package dumb-jump
-  :bind (("M-g o" . dumb-jump-go-other-window)
-	 ("M-g j" . dumb-jump-go)
-	 ("M-g x" . dumb-jump-go-prefer-external)
-	 ("M-g z" . dumb-jump-go-prefer-external-other-window))
-   :config (setq dumb-jump-selector 'helm)
-   :init (dumb-jump-mode))
-#+END_SRC
 ** Projectile
 *** Base projectile package
    Enable projectile globally, then C-c p is the prefix for projectile.
