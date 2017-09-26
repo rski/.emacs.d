@@ -366,6 +366,7 @@
 ** Line numbers
    This only works with emacs26 but idc
    #+BEGIN_SRC emacs-lisp
+     (setq display-line-numbers-grow-only t)
      (add-hook 'prog-mode-hook (lambda () (display-line-numbers-mode)))
      (add-hook 'text-mode-hook (lambda () (display-line-numbers-mode)))
    #+END_SRC
