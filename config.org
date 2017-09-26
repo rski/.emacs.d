@@ -444,7 +444,7 @@
 ** Fonts
 #+BEGIN_SRC emacs-lisp
 (set-face-attribute 'default nil
-                    :family "DejaVu Sans Mono" :height 105)
+                    :family "Source Code Pro" :height 105)
 #+END_SRC
 * Org mode
 ** Install org from the repos
