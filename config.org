@@ -458,6 +458,11 @@
 (set-face-attribute 'default nil
                     :family "Source Code Pro" :height 105)
 #+END_SRC
+** Rainbow delimiters
+   #+BEGIN_SRC emacs-lisp
+     (use-package rainbow-delimiters :defer t
+       :init (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode))
+   #+END_SRC
 * Org mode
 ** Install org from the repos
 #+BEGIN_SRC emacs-lisp
