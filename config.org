@@ -468,6 +468,8 @@
 #+BEGIN_SRC emacs-lisp
   (use-package org
     :ensure t
+    :init (setq org-todo-keywords
+                '((sequence "TODO" "|" "DONE" "ABANDONED")))
     :bind (("\C-col" . org-store-link)
            ("\C-coa" . org-agenda)
            ("\C-coc" . org-capture)
