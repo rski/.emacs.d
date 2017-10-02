@@ -470,6 +470,7 @@
     :ensure t
     :init (setq org-todo-keywords
                 '((sequence "TODO" "|" "DONE" "ABANDONED")))
+          (setq org-hide-leading-stars t)
     :bind (("\C-col" . org-store-link)
            ("\C-coa" . org-agenda)
            ("\C-coc" . org-capture)
@@ -477,12 +478,6 @@
     :config (setq org-directory (expand-file-name "~/org")))
 #+END_SRC
 
-** Org bullets converts starts into bullets
-#+BEGIN_SRC emacs-lisp
-(use-package org-bullets
-  :ensure t
-  :init (add-hook 'org-mode-hook 'org-bullets-mode))
-#+END_SRC
 ** Presentations
 *** Org (for some reason called ox-reveal too, kinda confusing) reveal for exporting to reveal.js
 
