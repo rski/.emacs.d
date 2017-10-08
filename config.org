@@ -671,3 +671,9 @@ to treat commas as decimal separator.")
       (interactive)
       (list-unported-remacs-funcs "~/Code/rust/remacs"))
   #+END_SRC
+* Hacks
+  Load the work in progress stuff that the world is not ready for.
+  There is horrible stuff brewing in there
+#+BEGIN_SRC emacs-lisp
+ (load-file "~/Code/hacks.el")
+#+END_SRC
