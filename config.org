@@ -556,6 +556,29 @@
                  (setq show-trailing-whitespace nil)))
    #+END_SRC
 * Editing
+** Evil
+   #+BEGIN_SRC emacs-lisp
+     (use-package evil
+       :config (evil-mode)
+       :after (evil-magit evil-leader))
+
+     (use-package evil-magit
+       :config (evil-magit-init))
+
+     (use-package evil-leader
+       :defer t
+       :init (global-evil-leader-mode)
+       :config (evil-leader/set-key "ee" 'eval-last-sexp)
+               (evil-leader/set-leader ","))
+
+     (use-package evil-escape
+       :config (evil-escape-mode))
+
+     ;; (use-package org-evil)
+     ;; (use-package evil-smartparens)
+     ;; (use-package evil-nerd-commenter)
+     ;; (use-package evil-surround)
+   #+END_SRC
 ** Undo tree
 #+BEGIN_SRC emacs-lisp
   (use-package undo-tree
