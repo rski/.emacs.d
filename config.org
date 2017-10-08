@@ -451,12 +451,19 @@
    #+END_SRC
 * Theming
 ** monokai does nice highlighting of src blocks in org
-
 #+BEGIN_SRC emacs-lisp
-(use-package monokai-theme
-  :ensure t
-  :init (load-theme 'monokai 'no-confirm))
+  (use-package monokai-theme
+    :ensure t
+    :defer t)
+    ;; :init (load-theme 'monokai 'no-confirm))
 #+END_SRC
+** atom one dark is also a good theme
+   #+BEGIN_SRC emacs-lisp
+   (use-package atom-one-dark-theme
+     :ensure t
+     :defer t
+     :init (load-theme 'atom-one-dark 'no-confirm))
+   #+END_SRC
 ** Fonts
 #+BEGIN_SRC emacs-lisp
 (set-face-attribute 'default nil
