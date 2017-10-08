@@ -7,3 +7,5 @@
 (setq custom-file "~/.emacs-custom.el")
 (load custom-file)
 (org-babel-load-file "~/.emacs.d/config.org")
+; Enables C-x n n to do narrow-to-region
+(put 'narrow-to-region 'disabled nil)
