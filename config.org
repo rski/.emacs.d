@@ -692,6 +692,19 @@ to treat commas as decimal separator.")
          (message "disabling device with id %s, hoping it's the touchpad" touchpad-id)
          (shell-command (format "xinput disable %s" touchpad-id))))
    #+END_SRC
+** Set up the keyboard
+   My keyboard config gets messed up when I plug in a keyboard (eg dock the laptop)
+   It is easier and faster to just call a command in Emacs rather than have to restart
+   awesome (IF i'm using awesome) or any other awesome-based solution.
+   This makes caps another control and right ctrl change layout
+   #+BEGIN_SRC emacs-lisp
+     (defun rski/set-up-keyboard()
+       (interactive)
+       (shell-command "setxkbmap -layout \"gb,el\" -option \"ctrl:nocaps\" -option \"grp:rctrl_toggle\""))
+
+     (rski/set-up-keyboard)
+   #+END_SRC
+
 * Hacks
   Load the work in progress stuff that the world is not ready for.
   There is horrible stuff brewing in there
