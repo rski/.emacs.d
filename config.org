@@ -38,7 +38,8 @@
 #+BEGIN_SRC emacs-lisp
   (use-package flycheck
     :ensure t
-    :init (add-hook 'after-init-hook #'global-flycheck-mode)
+    :init (setq flycheck-global-modes (not 'emacs-lisp-mode))
+          (add-hook 'after-init-hook #'global-flycheck-mode)
     :diminish flycheck-mode)
 
   ;; (use-package flycheck-pos-tip
