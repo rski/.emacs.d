@@ -680,6 +680,18 @@ to treat commas as decimal separator.")
       (interactive)
       (list-unported-remacs-funcs "~/Code/rust/remacs"))
   #+END_SRC
+* System
+  Emacs is one of the things that i will pretty much *always* start,
+  so putting my startup scripts is DE/WM agnostic
+** Disable touchpad
+   It gets in the way when typing, I use the trackpoint anyway
+   #+BEGIN_SRC emacs-lisp
+     (let* ((touchpad-id-str (shell-command-to-string "xinput list --id-only  \"SynPS/2 Synaptics TouchPad\""))
+            (touchpad-id (string-to-number touchpad-id-str)))
+       (unless (eq touchpad-id 0)
+         (message "disabling device with id %s, hoping it's the touchpad" touchpad-id)
+         (shell-command (format "xinput disable %s" touchpad-id))))
+   #+END_SRC
 * Hacks
   Load the work in progress stuff that the world is not ready for.
   There is horrible stuff brewing in there
