@@ -83,10 +83,17 @@
 #+BEGIN_SRC emacs-lisp
   (use-package company
     :ensure t
-    :init (add-hook 'after-init-hook 'global-company-mode)
+    :bind (:map company-active-map
+                ("<tab>" . company-select-next))
+    :init
+    (add-hook 'after-init-hook 'global-company-mode)
     (setq company-minimum-prefix-length 1
           company-idle-delay 0
-          company-dabbrev-downcase nil))
+          company-require-match nil
+          company-auto-complete nil
+          company-selection-wrap-around t
+          company-dabbrev-downcase nil)
+    :config (company-tng-configure-default))
 #+END_SRC
 
 ** Configure yasnippet
