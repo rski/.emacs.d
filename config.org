@@ -471,6 +471,14 @@
      :defer t
      :init (load-theme 'atom-one-dark 'no-confirm))
    #+END_SRC
+** left fringe arrow
+   Set the face for the breakpoint triangle (and whatever else uses this bitmap)
+   #+BEGIN_SRC emacs-lisp
+     (defface right-triangle-face
+       '((t :foreground "red"))
+       "Face for the right-triangle bitmap.")
+     (set-fringe-bitmap-face 'right-triangle 'right-triangle-face)
+   #+END_SRC
 ** Fonts
 #+BEGIN_SRC emacs-lisp
 (set-face-attribute 'default nil
