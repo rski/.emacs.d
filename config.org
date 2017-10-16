@@ -584,6 +584,9 @@
    #+BEGIN_SRC emacs-lisp
      (use-package evil
        :config (evil-mode)
+       :bind (:map evil-motion-state-map
+             (":" .  evil-repeat-find-char)
+             (";" . evil-ex))
        :after (evil-magit evil-leader))
 
      (use-package evil-magit
@@ -592,8 +595,11 @@
      (use-package evil-leader
        :defer t
        :init (global-evil-leader-mode)
-       :config (evil-leader/set-key "ee" 'eval-last-sexp)
-               (evil-leader/set-leader ","))
+       :config (evil-leader/set-key
+                "ee" 'eval-last-sexp
+                "f" 'helm-find-files)
+               (evil-leader/set-leader ",")
+               (evil-define-key 'normal go-mode-map (kbd "gd") 'godef-jump))
 
      (use-package evil-escape
        :config (evil-escape-mode))
