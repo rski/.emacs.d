@@ -255,7 +255,8 @@
       (use-package gotest
         :config (add-hook 'go-test-mode-hook 'visual-line-mode)
         :bind (:map go-mode-map
-               ("C-c t" . go-test-current-file)))
+               ("C-c t f" . go-test-current-file)
+               ("C-c t t" . go-test-current-test)))
     #+END_SRC
 *** go rename for refactoring
     #+BEGIN_SRC emacs-lisp
