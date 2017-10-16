@@ -36,16 +36,16 @@
 * Autocorrection
 ** Flycheck with hovering pos-tip
 #+BEGIN_SRC emacs-lisp
+  (setq x-gtk-use-system-tooltips nil) ;; workaround for disappearing numbers, FIXME
   (use-package flycheck
     :ensure t
-    :init (setq flycheck-global-modes (not 'emacs-lisp-mode))
-          (add-hook 'after-init-hook #'global-flycheck-mode)
+    :init (add-hook 'after-init-hook #'global-flycheck-mode)
     :diminish flycheck-mode)
 
-  ;; (use-package flycheck-pos-tip
-  ;;   :ensure t
-  ;;   :init (with-eval-after-load 'flycheck
-  ;;           (flycheck-pos-tip-mode)))
+  (use-package flycheck-pos-tip
+    :ensure t
+    :init (with-eval-after-load 'flycheck
+            (flycheck-pos-tip-mode)))
 #+END_SRC
 ** Flyspell
 #+BEGIN_SRC emacs-lisp
