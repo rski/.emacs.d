@@ -601,7 +601,8 @@
                 "ee" 'eval-last-sexp
                 "f" 'helm-find-files)
                (evil-leader/set-leader ",")
-               (evil-define-key 'normal go-mode-map (kbd "gd") 'godef-jump))
+               (evil-define-key 'normal go-mode-map (kbd "gd") 'godef-jump)
+               (evil-define-key 'normal go-mode-map (kbd "god") 'godef-jump-other-window))
 
      (use-package evil-escape
        :config (evil-escape-mode))
