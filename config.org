@@ -339,8 +339,7 @@
 ** Avy
    Jump to places in the buffer
    #+BEGIN_SRC emacs-lisp
-     (use-package avy
-       :bind (("C-o" . avy-goto-char-2)))
+     (use-package avy :defer t)
    #+END_SRC
 ** Projectile
 *** Base projectile package
@@ -587,7 +586,9 @@
        :config (evil-mode)
        :bind (:map evil-motion-state-map
              (":" .  evil-repeat-find-char)
-             (";" . evil-ex))
+             (";" . evil-ex)
+             :map evil-normal-state-map
+             ("c" . avy-goto-char-2))
        :after (evil-magit evil-leader))
 
      (use-package evil-magit
