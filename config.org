@@ -83,8 +83,6 @@
 #+BEGIN_SRC emacs-lisp
   (use-package company
     :ensure t
-    :bind (:map company-active-map
-                ("<tab>" . company-select-next))
     :init
     (add-hook 'after-init-hook 'global-company-mode)
     (setq company-minimum-prefix-length 1
