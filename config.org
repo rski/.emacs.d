@@ -736,7 +736,7 @@ to treat commas as decimal separator.")
 
 * Hacks
   Load the work in progress stuff that the world is not ready for.
-  There is horrible stuff brewing in there
+  There is horrible stuff brewing in there. Also work stuff that I do not want to publish.
 #+BEGIN_SRC emacs-lisp
- (load-file "~/Code/hacks.el")
+ (load-file "~/Code/emacs-brewery/init.el")
 #+END_SRC
