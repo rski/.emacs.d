@@ -218,7 +218,8 @@
     Automatically add/remove missing imports with [[golang.org/x/tools/cmd/goimports][gomiports]]
    #+BEGIN_SRC emacs-lisp
      (use-package go-mode
-       :config (setq gofmt-command "goimports")
+       :config (setq gofmt-command "goimports"
+                     gofmt-show-errors 'none) ;; what do i have flycheck for?
        :init (add-hook 'before-save-hook 'gofmt-before-save)
        (add-hook 'go-mode-hook (lambda ()
                                  (local-set-key (kbd "M-.") 'godef-jump)
