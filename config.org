@@ -604,8 +604,13 @@
        :init (global-evil-leader-mode)
        :config (evil-leader/set-key
                 "ee" 'eval-last-sexp
-                "f" 'helm-find-files)
+                "f" 'helm-find-files
+                "xb" 'helm-mini
+                "oo" 'other-window
+                "of" 'other-frame
+                "s" 'rski-smartparens-hydra/body)
                (evil-leader/set-leader ",")
+               (define-key evil-normal-state-map (kbd "C-p") 'helm-projectile-find-file)
                (evil-define-key 'normal go-mode-map (kbd "gd") 'godef-jump)
                (evil-define-key 'normal go-mode-map (kbd "god") 'godef-jump-other-window))
 
