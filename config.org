@@ -86,7 +86,7 @@
     :ensure t
     :init
     (add-hook 'after-init-hook 'global-company-mode)
-    (setq company-minimum-prefix-length 1
+    (setq company-minimum-prefix-length 3
           company-idle-delay 0
           company-require-match nil
           company-auto-complete nil
