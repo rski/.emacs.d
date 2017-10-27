@@ -600,9 +600,7 @@
        :config (evil-mode)
        :bind (:map evil-motion-state-map
              (":" .  evil-repeat-find-char)
-             (";" . evil-ex)
-             :map evil-normal-state-map
-             ("c" . avy-goto-char-2))
+             (";" . evil-ex))
        :after (evil-magit evil-leader))
 
      (use-package evil-magit
@@ -617,6 +615,9 @@
                 "xb" 'helm-mini
                 "oo" 'other-window
                 "of" 'other-frame
+                "ww" 'evil-window-next
+                "ws" 'evil-window-split
+                "c" 'avy-goto-char-2
                 "s" 'rski-smartparens-hydra/body)
                (evil-leader/set-leader ",")
                (define-key evil-normal-state-map (kbd "C-p") 'helm-projectile-find-file)
