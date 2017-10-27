@@ -13,6 +13,7 @@
       user-mail-address "rom.skiad@gmail.com")
 #+END_SRC
 * Bootstart use-package
+  use-package-cheat: config = after load, init = before load
 #+BEGIN_SRC emacs-lisp
   (require 'package)
   (setq package-enable-at-startup nil)
@@ -240,13 +241,15 @@
                                  (local-set-key (kbd "C-c C-d") 'godoc-at-point))))
    #+END_SRC
 *** Autocompletion, requires [[https://github.com/nsf/gocode%20][gocode]] and gopath to be set to include it
+    FIXME: rebind template fwd, backward and yas fwd should i ever set it up with company
    #+BEGIN_SRC emacs-lisp
      (use-package company-go
        :after company
        :init (add-hook 'go-mode-hook
                        (lambda ()
                          (add-to-list (make-local-variable 'company-backends)
-                                      'company-go))))
+                                      'company-go)))
+       :config (setq company-go-insert-arguments nil))
    #+END_SRC
 *** Eldoc, also requires gocode
    #+BEGIN_SRC emacs-lisp
