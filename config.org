@@ -59,7 +59,8 @@
   (use-package helm
     :ensure t
     :defer t
-    :config (setq helm-ff-skip-boring-files t)
+    :config (setq helm-ff-skip-boring-files t
+                  helm-buffer-max-length 50)
     :init
     (progn (require 'helm-config)
            (helm-mode 1))
