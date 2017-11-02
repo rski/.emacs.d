@@ -141,9 +141,9 @@
 #+END_SRC
 ** Scala
 #+BEGIN_SRC emacs-lisp
-(use-package ensime
-  :ensure nil
-  :pin melpa-stable)
+  ;; (use-package ensime
+    ;; :ensure nil
+    ;; :pin melpa-stable)
 #+END_SRC
 ** Lua because I use Awesome
 *** A lua mode for the basics
