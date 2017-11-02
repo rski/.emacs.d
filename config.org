@@ -646,7 +646,7 @@
      ;; (use-package org-evil)
      ;; (use-package evil-smartparens)
      ;; (use-package evil-nerd-commenter)
-     ;; (use-package evil-surround)
+     (use-package evil-surround :init (global-evil-surround-mode))
    #+END_SRC
 ** Folding
    Required by evil-fold
