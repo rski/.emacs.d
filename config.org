@@ -365,8 +365,12 @@
   (use-package projectile
     :ensure t
     :init (projectile-global-mode)
-          (add-to-list 'projectile-globally-ignored-directories "Godeps")
-          (projectile-cleanup-known-projects))
+    (add-to-list 'projectile-globally-ignored-directories "Godeps")
+    (projectile-cleanup-known-projects)
+    :config (setq projectile-mode-line
+                  '(:eval (format " Projectile[%s]"
+                                  (projectile-project-name))))
+    )
 #+END_SRC
 *** Helm projectile for easily switching projects and files in the project
 #+BEGIN_SRC emacs-lisp
