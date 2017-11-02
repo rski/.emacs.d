@@ -96,15 +96,6 @@
     :config (company-tng-configure-default))
 #+END_SRC
 
-** Configure yasnippet
-#+BEGIN_SRC emacs-lisp
-(use-package yasnippet
-  :ensure t
-  :init (yas-global-mode 1)
-  :diminish yas-minor-mode
-  :bind (("C-c y" . yas-insert-snippet)))
-#+END_SRC
-
 * Languages
   Packages for getting better support for various languages
 ** Python
