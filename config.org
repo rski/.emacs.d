@@ -471,10 +471,6 @@
     #+BEGIN_SRC emacs-lisp
     (add-hook 'prog-mode-hook (lambda () (local-set-key (kbd "C-c C-c") 'recompile)))
     #+END_SRC
-** Folds
-   #+BEGIN_SRC emacs-lisp
-     (global-set-key (kbd "C-z") 'set-selective-display)
-   #+END_SRC
 ** Highlight todos
    #+BEGIN_SRC emacs-lisp
    (use-package hl-todo
