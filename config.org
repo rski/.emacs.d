@@ -230,7 +230,7 @@
                      gofmt-show-errors nil) ;; what do i have flycheck for?
        ;; workaround not matching multiline signatures
        ;;  https://github.com/dominikh/go-mode.el/issues/57
-       ;; Just took the expressions removed the { from the end
+       ;; Just took the expressions and removed the { from the end
        (add-hook 'go-mode-hook (lambda () (setq-local imenu-generic-expression
                                                       '(("type" "^type *\\([^ \t\n\r\f]*\\)" 1)
                                                         ("func" "^func *\\(.*\\)" 1)))))
@@ -381,6 +381,13 @@
 #+END_SRC
 *** Helm projectile for some projectile niceness with helm
 #+BEGIN_SRC emacs-lisp
+  (defun rski/c-p-dwim()
+    "If inside a project, do find-file, otherwise switch to a project."
+    (interactive)
+    (if (ignore-errors (projectile-project-root))
+        (helm-projectile-find-file)
+      (helm-projectile-switch-project)))
+
   (use-package helm-projectile
     :ensure t
     :bind ("M-I" . helm-projectile-ag))
@@ -633,7 +640,7 @@
                 "c" 'avy-goto-char-2
                 "s" 'rski-smartparens-hydra/body)
                (evil-leader/set-leader ",")
-               (define-key evil-normal-state-map (kbd "C-p") 'helm-projectile-find-file)
+               (define-key evil-normal-state-map (kbd "C-p") 'rski/c-p-dwim)
                (evil-define-key 'normal go-mode-map (kbd "gd") 'godef-jump)
                (evil-define-key 'normal go-mode-map (kbd "god") 'godef-jump-other-window))
 
