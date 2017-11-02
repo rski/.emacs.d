@@ -50,8 +50,8 @@
 #+END_SRC
 ** Flyspell
 #+BEGIN_SRC emacs-lisp
-  (add-hook 'text-mode-hook (lambda () (flyspell-mode 1)))
-  (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+  (add-hook 'text-mode-hook #'flyspell-mode)
+  (add-hook 'prog-mode-hook #'flyspell-prog-mode)
   (diminish 'flyspell-mode)
 #+END_SRC
 * Helm
