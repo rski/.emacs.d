@@ -263,12 +263,13 @@
     #+END_SRC
 *** playground inside emacs
     #+BEGIN_SRC emacs-lisp
-    (use-package go-playground)
+    (use-package go-playground :defer t)
     #+END_SRC
 *** go test to run tests
     #+BEGIN_SRC emacs-lisp
       (use-package gotest
         :config (add-hook 'go-test-mode-hook 'visual-line-mode)
+                (setq go-test-verbose t) ;; passes -v to go-test so the test names show when running them
         :bind (:map go-mode-map
                ("C-c t f" . go-test-current-file)
                ("C-c t t" . go-test-current-test)))
