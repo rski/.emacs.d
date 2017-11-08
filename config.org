@@ -609,7 +609,9 @@
                (evil-leader/set-leader ",")
                (define-key evil-normal-state-map (kbd "C-p") 'rski/c-p-dwim)
                (evil-define-key 'normal go-mode-map (kbd "gd") 'godef-jump)
-               (evil-define-key 'normal go-mode-map (kbd "god") 'godef-jump-other-window))
+               (evil-define-key 'normal go-mode-map (kbd "god") 'godef-jump-other-window)
+               (evil-define-key 'visual go-mode-map (kbd "gd") 'godef-jump)
+               (evil-define-key 'visual go-mode-map (kbd "god") 'godef-jump-other-window))
 
      (use-package evil-escape
        :config (evil-escape-mode))
@@ -725,7 +727,7 @@ to treat commas as decimal separator.")
   #+END_SRC
 * System
   Emacs is one of the things that i will pretty much *always* start,
-  so putting my startup scripts is DE/WM agnostic
+  so putting my startup scripts here is DE/WM agnostic
 ** Disable touchpad
    It gets in the way when typing, I use the trackpoint anyway
    #+BEGIN_SRC emacs-lisp
@@ -738,7 +740,7 @@ to treat commas as decimal separator.")
 ** Set up the keyboard
    My keyboard config gets messed up when I plug in a keyboard (eg dock the laptop)
    It is easier and faster to just call a command in Emacs rather than have to restart
-   awesome (IF i'm using awesome) or any other awesome-based solution.
+   awesome (IF I'm using awesome) or any other awesome-based solution.
    This makes caps another control and right ctrl change layout
    #+BEGIN_SRC emacs-lisp
      (defun rski/set-up-keyboard()
