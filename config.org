@@ -461,9 +461,10 @@
 ** Better defaults.
     Remove toolbars, scroll bars, etc, remember pointer when closing file, mouse yank insert at point,
     sets require-final-newline, indent-tabs set to nil, other useful stuff
-
+    Also set it up so that files have at least one directory prefixed. This is really helpful.
 #+BEGIN_SRC emacs-lisp
 (use-package better-defaults
+  :init (setq uniquify-min-dir-content 1)
   :ensure t)
 #+END_SRC
 
