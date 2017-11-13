@@ -174,7 +174,8 @@
 #+begin_src emacs-lisp
   (use-package dockerfile-mode :defer t)
 #+end_src
-** c/c++
+** C/C++
+*** Autocomplete std headers
 #+BEGIN_SRC emacs-lisp
   (use-package company-c-headers
     :defer t
@@ -183,7 +184,8 @@
               (add-to-list (make-local-variable 'company-backends)
                            'company-c-headers))))
 #+END_SRC
-** Yang
+
+** YANG
 #+BEGIN_SRC emacs-lisp
    (use-package yang-mode :defer t)
    ; FIXME
@@ -275,6 +277,15 @@
       (use-package go-rename
          :bind (:map go-mode-map
                      ("C-c r" . go-rename)))
+    #+END_SRC
+*** metalinter
+    #+BEGIN_SRC emacs-lisp
+      (use-package flycheck-gometalinter
+        :init (add-hook 'go-mode-hook (lambda () (flycheck-select-checker 'gometalinter)))
+        :config
+        (progn
+          (setq flycheck-gometalinter-fast t)
+          (flycheck-gometalinter-setup)))
     #+END_SRC
 ** Protocol buffers
    #+BEGIN_SRC emacs-lisp
