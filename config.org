@@ -74,7 +74,7 @@
     :defer t)
 #+END_SRC
 
-* Autocompletion and snippets
+* Autocompletion
 ** Company
 *** Configure the base company package
 #+BEGIN_SRC emacs-lisp
@@ -90,6 +90,12 @@
           company-dabbrev-downcase nil)
     :config (company-tng-configure-default))
 #+END_SRC
+*** Statistics
+    #+BEGIN_SRC emacs-lisp
+    (use-package company-statistics
+      :init (add-hook 'after-init-hook 'company-statistics-mode))
+    #+END_SRC
+
 
 * Languages
   Packages for getting better support for various languages
