@@ -229,10 +229,13 @@
                      gofmt-show-errors nil) ;; what do i have flycheck for?
        ;; workaround not matching multiline signatures
        ;;  https://github.com/dominikh/go-mode.el/issues/57
-       ;; Just took the expressions and removed the { from the end
        (add-hook 'go-mode-hook (lambda () (setq-local imenu-generic-expression
                                                       '(("type" "^type *\\([^ \t\n\r\f]*(\\)" 1)
                                                         ("func" "^func \\(.*\\)(" 1)))))
+       (add-hook 'go-mode-hook (lambda () (setq-local whitespace-line-column 100)
+                                          (whitespace-mode t)))
+       (add-hook 'go-mode-hook (lambda () (setq fill-column 100)
+                                          (auto-fill-mode t)))
        :init (add-hook 'before-save-hook 'gofmt-before-save)
        (add-hook 'go-mode-hook (lambda ()
                                  (local-set-key (kbd "M-.") 'godef-jump)
