@@ -460,7 +460,8 @@
   (add-hook 'prog-mode-hook #'ws-butler-mode)
   :diminish ws-butler-mode)
 
-(setq-default show-trailing-whitespace t)
+  (add-hook 'text-mode-hook (lambda () (setq show-trailing-whitespace t)))
+  (add-hook 'prog-mode-hook (lambda () (setq show-trailing-whitespace t)))
 #+END_SRC
 
 ** Better defaults.
