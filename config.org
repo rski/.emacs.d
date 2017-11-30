@@ -405,7 +405,7 @@
     "If inside a project, do find-file, otherwise switch to a project."
     (interactive)
     (if (ignore-errors (projectile-project-root))
-        (helm-projectile-find-file)
+        (helm-projectile-switch-to-buffer)
       (helm-projectile-switch-project)))
 
   (use-package helm-projectile
