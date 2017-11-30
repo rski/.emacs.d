@@ -360,11 +360,6 @@
     :defer t
     :ensure t)
 #+END_SRC
-** Subword mode: move inside camelcase
-   e.g  |SomeWord (M-f) \to Some|Word
-#+BEGIN_SRC emacs-lisp
-  (global-subword-mode 1)
-#+END_SRC
 ** Bind imenu to something again
    #+BEGIN_SRC emacs-lisp
    (global-set-key (kbd "M-c") 'helm-semantic-or-imenu)
