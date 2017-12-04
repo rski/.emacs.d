@@ -362,7 +362,7 @@
 #+END_SRC
 ** Bind imenu to something again
    #+BEGIN_SRC emacs-lisp
-   (global-set-key (kbd "M-c") 'helm-semantic-or-imenu)
+   (global-set-key (kbd "M-o") 'helm-semantic-or-imenu)
    #+END_SRC
 ** Imenu-anywhere gives imenu across a number of buffers
    #+BEGIN_SRC emacs-lisp
