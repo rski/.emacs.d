@@ -298,7 +298,7 @@
         :config
         (progn
           (setq flycheck-gometalinter-fast t)
-          (setq flycheck-gometalinter-disable-linters '("gocyclo"))
+          (setq flycheck-gometalinter-disable-linters '("gocyclo" "goconst" "vetshadow"))
           (flycheck-gometalinter-setup)))
     #+END_SRC
 ** Protocol buffers
