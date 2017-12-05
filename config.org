@@ -516,8 +516,13 @@
    #+BEGIN_SRC emacs-lisp
    (use-package atom-one-dark-theme
      :ensure t
+     :defer t)
+   #+END_SRC
+** solarised is pretty nice too
+   #+BEGIN_SRC emacs-lisp
+   (use-package solarized-theme
      :defer t
-     :init (load-theme 'atom-one-dark 'no-confirm))
+     :init (load-theme 'solarized-dark 'no-confirm))
    #+END_SRC
 ** left fringe arrow
    Set the face for the breakpoint triangle (and whatever else uses this bitmap)
