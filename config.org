@@ -696,6 +696,10 @@
    #+BEGIN_SRC emacs-lisp
    (global-set-key (kbd "M-;") 'comment-line)
    #+END_SRC
+** Whitespace
+   #+BEGIN_SRC emacs-lisp
+    (setq whitespace-style '(face lines-tail))
+   #+END_SRC
 * Make visiting and reloading the config easy
 ** Visit the config file
 #+BEGIN_SRC emacs-lisp
