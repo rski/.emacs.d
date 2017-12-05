@@ -627,6 +627,7 @@
                 "ee" 'eval-last-sexp
                 "f" 'helm-find-files
                 "xb" 'helm-mini
+                "xkk" 'kill-current-buffer
                 "oo" 'other-window
                 "of" 'other-frame
                 "ww" 'evil-window-next
@@ -726,6 +727,12 @@ to treat commas as decimal separator.")
      (use-package flycheck-ledger
        :defer t
        :init (setq flycheck-ledger-pedantic "check-payees"))
+   #+END_SRC
+** IRC
+   Make ERC spellcheck messages before I send them
+   #+BEGIN_SRC emacs-lisp
+     (add-hook 'erc-mode-hook 'erc-spelling-mode)
+     (setq erc-pcomplete-nick-postfix ", ")
    #+END_SRC
 * Remacs
   #+BEGIN_SRC emacs-lisp
