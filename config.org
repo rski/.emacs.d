@@ -815,8 +815,9 @@ to treat commas as decimal separator.")
 #+BEGIN_SRC emacs-lisp
  (use-package brewery
    :defer t
+   :commands brewery-go-test-config ;; Whenever I open a go file, this function gets evaluated, pulling the rest of the file along with other commands that should be autoloaded but aren't, so they become available by chance. Eh.
    :ensure nil
-   :load-path "~/Code/emacs-brewery/brewery.el")
+   :load-path "~/Code/emacs-brewery/")
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
