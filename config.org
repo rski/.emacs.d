@@ -33,7 +33,11 @@
   (use-package flycheck
     :ensure t
     :init (add-hook 'after-init-hook #'global-flycheck-mode)
+          (add-hook 'flyspell-mode-hook #'flycheck-color-mode-line-mode)
     :diminish flycheck-mode)
+
+  (use-package flycheck-color-mode-line
+    :defer t)
 
   (use-package flycheck-pos-tip
     :ensure t
