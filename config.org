@@ -100,6 +100,15 @@
       :init (add-hook 'after-init-hook 'company-statistics-mode))
     #+END_SRC
 
+** Refactoring
+    #+BEGIN_SRC emacs-lisp
+      (use-package emr
+        :ensure t
+        :commands (emr-initialize)
+        :init (add-hook 'c-mode-common-hook (lambda ()
+                                              (emr-initialize)
+                                              (bind-key "C-c C-a" 'emr-c-insert-include c-mode-base-map))))
+    #+END_SRC
 
 * Languages
   Packages for getting better support for various languages
