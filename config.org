@@ -818,3 +818,10 @@ to treat commas as decimal separator.")
    :ensure nil
    :load-path "~/Code/emacs-brewery/brewery.el")
 #+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (org-babel-do-load-languages
+        'org-babel-load-languages
+        '((emacs-lisp . t)
+          (octave . t)))
+#+END_SRC
