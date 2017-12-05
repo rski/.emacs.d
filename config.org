@@ -795,6 +795,18 @@ to treat commas as decimal separator.")
        (shell-command "setxkbmap -layout \"gb,el\" -option \"ctrl:nocaps\" -option \"grp:rctrl_toggle\""))
 
      (rski/set-up-keyboard)
+     (defun rski/unmess-keyboard()
+       "I very often press caps lock before Emacs disables it and then
+       start Emacs before pressing it again. Use this function to
+       enable it again so that I can turn it off"
+       (interactive)
+       (shell-command "setxkbmap -layout \"gb,el\" -option \"\""))
+   #+END_SRC
+** Xrandr
+   #+BEGIN_SRC emacs-lisp
+        (defun rski/xrandr-vertical()
+          (interactive)
+          (shell-command "xrandr --output DP-2-1 --off --output DP-2-2 --rotate left --auto --right-of eDP-1 --output eDP-1 --auto"))
    #+END_SRC
 
 * Hacks
