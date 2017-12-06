@@ -812,6 +812,9 @@ to treat commas as decimal separator.")
         (defun rski/xrandr-vertical()
           (interactive)
           (shell-command "xrandr --output DP-2-1 --off --output DP-2-2 --rotate left --auto --right-of eDP-1 --output eDP-1 --auto"))
+        (defun rski/xrandr-auto()
+          (interactive)
+          (shell-command "xrandr --auto"))
    #+END_SRC
 
 * Hacks
