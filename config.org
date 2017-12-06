@@ -214,8 +214,6 @@
                                               ("list" "list \\(.*\\) {" 1)
                                               ("import" "import \\(.*\\) {" 1)
                                               )))))
-                                          ; FIXME
-  (use-package flycheck-yang :defer t)
 #+END_SRC
 ** Nixos
 *** Nix-mode for file editing
