@@ -206,9 +206,16 @@
 
 ** YANG
 #+BEGIN_SRC emacs-lisp
-   (use-package yang-mode :defer t)
-   ; FIXME
-   (use-package flycheck-yang :defer t)
+  (use-package yang-mode :defer t
+    :init (add-hook 'yang-mode-hook (lambda ()
+                                      (setq imenu-generic-expression
+                                            '(("leaf" "leaf \\(.*\\) {" 1)
+                                              ("container" "container \\(.*\\) {" 1)
+                                              ("list" "list \\(.*\\) {" 1)
+                                              ("import" "import \\(.*\\) {" 1)
+                                              )))))
+                                          ; FIXME
+  (use-package flycheck-yang :defer t)
 #+END_SRC
 ** Nixos
 *** Nix-mode for file editing
