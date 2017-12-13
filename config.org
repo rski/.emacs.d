@@ -766,6 +766,13 @@ to treat commas as decimal separator.")
                        ("http://nullprogram.com/feed/" blog emacs))))
 
    #+END_SRC
+** eww
+   #+BEGIN_SRC emacs-lisp
+     (defun rski/rfc (rfc)
+       (interactive "nView RFC>")
+       (eww (format "https://tools.ietf.org/html/rfc%s" rfc )))
+
+   #+END_SRC
 * Remacs
   #+BEGIN_SRC emacs-lisp
     (defun list-unported-remacs-funcs (remacs-dir)
