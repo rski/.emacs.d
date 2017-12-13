@@ -517,10 +517,6 @@
   (setq create-lockfiles nil);; might be a bad idea but for 99% of the time should be ok
 #+END_SRC
 
-** recompile with C-c C-c
-    #+BEGIN_SRC emacs-lisp
-    (add-hook 'prog-mode-hook (lambda () (local-set-key (kbd "C-c C-c") 'recompile)))
-    #+END_SRC
 ** Highlight todos
    #+BEGIN_SRC emacs-lisp
    (use-package hl-todo
