@@ -110,6 +110,11 @@
                                               (bind-key "C-c C-a" 'emr-c-insert-include c-mode-base-map))))
     #+END_SRC
 
+** Tags
+   Don't ask to keep current tags table when changing dirs
+   #+BEGIN_SRC emacs-lisp
+   (setq tags-add-tables nil)
+   #+END_SRC
 * Languages
   Packages for getting better support for various languages
 ** Python
