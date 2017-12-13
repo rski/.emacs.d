@@ -756,6 +756,16 @@ to treat commas as decimal separator.")
      (add-hook 'erc-mode-hook 'erc-spelling-mode)
      (setq erc-pcomplete-nick-postfix ", ")
    #+END_SRC
+** Feeds with elfeed
+   #+BEGIN_SRC emacs-lisp
+     (use-package elfeed
+       :defer t
+       :config (setq elfeed-feeds
+                     '(("http://planet.emacsen.org/atom.xml" emacs)
+                       ("http://steve-yegge.blogspot.com/atom.xml" blog emacs)
+                       ("http://nullprogram.com/feed/" blog emacs))))
+
+   #+END_SRC
 * Remacs
   #+BEGIN_SRC emacs-lisp
     (defun list-unported-remacs-funcs (remacs-dir)
