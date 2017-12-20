@@ -563,7 +563,7 @@
 ** Mode line
   #+BEGIN_SRC emacs-lisp
     (setq-default mode-line-format '("" mode-line-modified
-          mode-line-remote " " mode-line-buffer-identification
+          mode-line-remote " " mode-line-buffer-identification " "
           mode-line-position mode-line-modes mode-line-misc-info))
   #+END_SRC
 * Org mode
