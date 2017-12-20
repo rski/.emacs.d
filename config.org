@@ -628,6 +628,7 @@
    #+BEGIN_SRC emacs-lisp
      (use-package evil
        :config (evil-mode)
+       (define-key evil-normal-state-map (kbd "M-.") nil)
        (setq evil-fold-list
              `(((origami-mode)
                 :open-all   ,(lambda () (origami-open-all-nodes (current-buffer)))
