@@ -526,6 +526,7 @@
 ** anzu to show num of matched searches in the buffer
    #+BEGIN_SRC emacs-lisp
    (use-package anzu
+     :diminish anzu-mode
      :init (add-hook 'after-init-hook 'global-anzu-mode))
    #+END_SRC
 * Theming
@@ -673,6 +674,7 @@
                (evil-define-key 'visual go-mode-map (kbd "god") 'godef-jump-other-window))
 
      (use-package evil-escape
+       :diminish evil-escape-mode
        :config (evil-escape-mode))
 
      ;; (use-package org-evil)
