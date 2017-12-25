@@ -691,11 +691,8 @@
 ** Undo tree
 #+BEGIN_SRC emacs-lisp
   (use-package undo-tree
-    :config (global-undo-tree-mode 1)
     :ensure t
-    :defer t
-    :bind (("C-/" . undo)
-           ("C-c C-/" . undo-tree-redo)))
+    :defer t)
 #+END_SRC
 ** Smartparens
 #+BEGIN_SRC emacs-lisp
