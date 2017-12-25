@@ -344,11 +344,8 @@
    vc is the built-in version control system and it is disabled because I don't use it really.
 #+BEGIN_SRC emacs-lisp
   (use-package magit
-    :bind
-    (("C-c g" . magit-status)
-     ("C-c l c" . magit-log-current)
-     ("C-c l l" . magit-log-branches))
-    :ensure t)
+    :defer t
+    :bind ("C-c g" . magit-status))
   (setq vc-handled-backends nil)
 #+END_SRC
 ** Configure git-gutter
