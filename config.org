@@ -628,6 +628,7 @@
 ** Evil
    #+BEGIN_SRC emacs-lisp
      (use-package evil
+       :init (setq evil-want-C-u-scroll t)
        :config (evil-mode)
        (define-key evil-normal-state-map (kbd "M-.") nil)
        (setq evil-fold-list
@@ -638,6 +639,8 @@
                 :open       ,(lambda () (origami-open-node (current-buffer) (point)))
                 :open-rec   ,(lambda () (origami-open-node-recursively (current-buffer) (point)))
                 :close      ,(lambda () (origami-close-node (current-buffer) (point))))))
+       (add-to-list 'evil-emacs-state-modes 'elfeed-search-mode)
+       (add-to-list 'evil-emacs-state-modes 'elfeed-show-mode)
        :bind (:map evil-motion-state-map
              (":" .  evil-repeat-find-char)
              (";" . evil-ex))
@@ -771,7 +774,8 @@ to treat commas as decimal separator.")
        :config (setq elfeed-feeds
                      '(("http://planet.emacsen.org/atom.xml" emacs)
                        ("http://steve-yegge.blogspot.com/atom.xml" blog emacs)
-                       ("http://nullprogram.com/feed/" blog emacs))))
+                       ("http://nullprogram.com/feed/" blog emacs)
+                       ("https://jvns.ca/atom.xml" blog))))
 
    #+END_SRC
 ** eww
