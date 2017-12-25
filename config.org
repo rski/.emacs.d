@@ -26,7 +26,7 @@
   (use-package try :defer t)
 #+end_src
 
-* Autocorrection
+* Almost an IDE
 ** Flycheck
 #+BEGIN_SRC emacs-lisp
   (use-package flycheck
@@ -47,51 +47,22 @@
     (add-hook 'prog-mode-hook #'flyspell-prog-mode)
     :diminish 'flyspell-mode)
 #+END_SRC
-* Helm
-   Set the helm command prefix to C-c h because C-x c is scary close to C-x C-c
-#+BEGIN_SRC emacs-lisp
-  (use-package helm
-    :defer t
-    :config (setq helm-ff-skip-boring-files t
-                  helm-buffer-max-length 50)
-    :init (require 'helm-config)
-          (helm-mode 1)
-    :diminish helm-mode
-    :bind (("C-c h" . helm-command-prefix)
-           ("M-x" . helm-M-x)
-           ("M-y" . helm-show-kill-ring)
-           ("C-x C-f" . helm-find-files)
-           ("M-o" . 'helm-semantic-or-imenu)
-           ([remap switch-to-buffer] . helm-mini)))
-#+END_SRC
-** helm-tramp
-   Use the ssh/config file in tramp
-#+BEGIN_SRC emacs-lisp
-  (use-package helm-tramp
-    :defer t)
-#+END_SRC
+** Company to autocomplete
+  #+BEGIN_SRC emacs-lisp
+    (use-package company
+      :init
+      (add-hook 'after-init-hook 'global-company-mode)
+      (setq company-minimum-prefix-length 3
+            company-idle-delay 0
+            company-require-match nil
+            company-auto-complete nil
+            company-selection-wrap-around t
+            company-dabbrev-downcase nil)
+      :config (company-tng-configure-default))
 
-* Autocompletion
-** Company
-*** Configure the base company package
-#+BEGIN_SRC emacs-lisp
-  (use-package company
-    :init
-    (add-hook 'after-init-hook 'global-company-mode)
-    (setq company-minimum-prefix-length 3
-          company-idle-delay 0
-          company-require-match nil
-          company-auto-complete nil
-          company-selection-wrap-around t
-          company-dabbrev-downcase nil)
-    :config (company-tng-configure-default))
-#+END_SRC
-*** Statistics
-    #+BEGIN_SRC emacs-lisp
     (use-package company-statistics
       :init (add-hook 'after-init-hook 'company-statistics-mode))
-    #+END_SRC
-
+  #+END_SRC
 ** Refactoring
     #+BEGIN_SRC emacs-lisp
       (use-package emr
@@ -100,12 +71,28 @@
                                               (emr-initialize)
                                               (bind-key "C-c C-a" 'emr-c-insert-include c-mode-base-map))))
     #+END_SRC
-
 ** Tags
    Don't ask to keep current tags table when changing dirs
    #+BEGIN_SRC emacs-lisp
    (setq tags-add-tables nil)
    #+END_SRC
+* Helm
+#+BEGIN_SRC emacs-lisp
+  (use-package helm
+    :defer t
+    :config (setq helm-ff-skip-boring-files t
+                  helm-buffer-max-length 50)
+    :init (require 'helm-config)
+          (helm-mode 1)
+    :diminish helm-mode
+    :bind (([remap execute-extended-command] . helm-M-x)
+           ("M-y" . helm-show-kill-ring)
+           ("C-x C-f" . helm-find-files)
+           ("M-o" . 'helm-semantic-or-imenu)
+           ([remap switch-to-buffer] . helm-mini)))
+  (use-package helm-tramp :defer t)
+#+END_SRC
+
 * Languages
   Packages for getting better support for various languages
 ** Eldoc
@@ -120,9 +107,9 @@
        :init
        (add-hook 'python-mode-hook 'anaconda-mode)
        (add-hook 'python-mode-hook 'anaconda-eldoc-mode))
-
      (use-package company-anaconda
        :after company
+       :defer t
        :init (add-hook 'python-mode-hook
                        (lambda ()
                          (add-to-list (make-local-variable 'company-backends)
