@@ -327,15 +327,11 @@
    #+END_SRC
 ** Rust
    #+BEGIN_SRC emacs-lisp
-     (use-package rust-mode
-       :defer t
-       :config (setq rust-format-on-save t))
-   #+END_SRC
-   #+BEGIN_SRC emacs-lisp
+     (use-package rust-mode :defer t)
+
      (use-package flycheck-rust
        :config (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
-   #+END_SRC
-   #+BEGIN_SRC emacs-lisp
+
    (use-package racer
      :defer t
      :init
