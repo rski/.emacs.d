@@ -298,6 +298,7 @@
 *** go test to run tests
     #+BEGIN_SRC emacs-lisp
       (use-package gotest
+        :after go-mode
         :config
         (add-hook 'go-test-mode-hook 'visual-line-mode)
         (brewery-go-test-config)
@@ -309,6 +310,7 @@
 *** go rename for refactoring
     #+BEGIN_SRC emacs-lisp
       (use-package go-rename
+         :after go-mode
          :bind (:map go-mode-map
                      ("C-c r" . go-rename)))
     #+END_SRC
