@@ -23,16 +23,13 @@
 ** M-x try RET package installs a package in /tmp
    Good for trying out packages without tying to them
 #+begin_src emacs-lisp
-  (use-package try
-    :ensure t
-    :defer t)
+  (use-package try :defer t)
 #+end_src
 
 * Autocorrection
 ** Flycheck
 #+BEGIN_SRC emacs-lisp
   (use-package flycheck
-    :ensure t
     :init (add-hook 'after-init-hook #'global-flycheck-mode)
           (add-hook 'after-init-hook #'flycheck-pos-tip-mode)
           (add-hook 'flyspell-mode-hook #'flycheck-color-mode-line-mode)
@@ -54,7 +51,6 @@
    Set the helm command prefix to C-c h because C-x c is scary close to C-x C-c
 #+BEGIN_SRC emacs-lisp
   (use-package helm
-    :ensure t
     :defer t
     :config (setq helm-ff-skip-boring-files t
                   helm-buffer-max-length 50)
@@ -80,7 +76,6 @@
 *** Configure the base company package
 #+BEGIN_SRC emacs-lisp
   (use-package company
-    :ensure t
     :init
     (add-hook 'after-init-hook 'global-company-mode)
     (setq company-minimum-prefix-length 3
@@ -100,7 +95,6 @@
 ** Refactoring
     #+BEGIN_SRC emacs-lisp
       (use-package emr
-        :ensure t
         :commands (emr-initialize)
         :init (add-hook 'c-mode-common-hook (lambda ()
                                               (emr-initialize)
@@ -118,7 +112,6 @@
    Python config for company using anaconda.
    #+BEGIN_SRC emacs-lisp
      (use-package anaconda-mode
-       :ensure t
        :defer t
        :init
        (add-hook 'python-mode-hook 'anaconda-mode)
@@ -134,12 +127,11 @@
 ** Puppet
    Use puppet-mode from Vox Pupuli
    #+BEGIN_SRC emacs-lisp
-   (use-package puppet-mode :ensure t :defer t)
+   (use-package puppet-mode :defer t)
    #+END_SRC
 ** Markdown
 #+BEGIN_SRC emacs-lisp
   (use-package markdown-mode
-    :ensure t
     :defer t
     :commands (markdown-mode gfm-mode)
     :mode (("README\\.md\\'" . gfm-mode)
@@ -156,12 +148,11 @@
 ** Lua because I use Awesome
 *** A lua mode for the basics
 #+BEGIN_SRC emacs-lisp
-  (use-package lua-mode :ensure t :defer t)
+  (use-package lua-mode :defer t)
 #+END_SRC
 *** Autocomplete too, although it seems to not work with the awesome libs
 #+BEGIN_SRC emacs-lisp
   (use-package company-lua
-    :ensure t
     :defer t
     :after 'company
     :init (add-hook 'lua-mode-hook
@@ -353,7 +344,6 @@
 #+BEGIN_SRC emacs-lisp
   (use-package git-gutter
      :defer t
-     :ensure t
      :config (setq git-gutter:update-interval 0.1)
      :init (global-git-gutter-mode t)
      :diminish git-gutter-mode)
@@ -363,7 +353,6 @@
 *** The swiper package that uses helm
 #+BEGIN_SRC emacs-lisp
   (use-package swiper-helm
-    :ensure t
     :defer t
     :bind (("M-i" . swiper-helm)))
 #+END_SRC
@@ -371,16 +360,13 @@
    Tired of pressing C-c ! n C-c ! n C-c ! p again and again to go through the errors?
    Hydra can make this C-c ! n n n n p n etc!
 #+BEGIN_SRC emacs-lisp
-  (use-package hydra
-    :defer t
-    :ensure t)
+  (use-package hydra :defer t)
 #+END_SRC
 ** Projectile
 *** Base projectile package
    Enable projectile globally, then C-c p is the prefix for projectile.
 #+BEGIN_SRC emacs-lisp
   (use-package projectile
-    :ensure t
     :init (projectile-global-mode)
     (add-to-list 'projectile-globally-ignored-directories "Godeps")
     (projectile-cleanup-known-projects)
@@ -441,7 +427,6 @@
 ** Which key to show possible candidates for keystrokes after a prefix like C-c
   #+BEGIN_SRC emacs-lisp
     (use-package which-key
-      :ensure t
       :defer t
       :init (which-key-mode)
       :diminish which-key-mode)
@@ -449,7 +434,6 @@
 ** Whitespace
 #+BEGIN_SRC emacs-lisp
 (use-package ws-butler
-  :ensure t
   :defer t
   :init
   (add-hook 'text-mode-hook #'ws-butler-mode)
@@ -466,9 +450,7 @@
     sets require-final-newline, indent-tabs set to nil, other useful stuff
     Also set it up so that files have at least one directory prefixed. This is really helpful.
 #+BEGIN_SRC emacs-lisp
-(use-package better-defaults
-  :init (setq uniquify-min-dir-content 1)
-  :ensure t)
+(use-package better-defaults :init (setq uniquify-min-dir-content 1))
 #+END_SRC
 
 ** Other little nice settings
@@ -502,16 +484,12 @@
 * Theming
 ** monokai does nice highlighting of src blocks in org
 #+BEGIN_SRC emacs-lisp
-  (use-package monokai-theme
-    :ensure t
-    :defer t)
+  (use-package monokai-theme :defer t)
     ;; :init (load-theme 'monokai 'no-confirm))
 #+END_SRC
 ** atom one dark is also a good theme
    #+BEGIN_SRC emacs-lisp
-   (use-package atom-one-dark-theme
-     :ensure t
-     :defer t)
+   (use-package atom-one-dark-theme :defer t)
    #+END_SRC
 ** solarised is pretty nice too
    #+BEGIN_SRC emacs-lisp
@@ -547,7 +525,6 @@
 ** Install org from the repos
 #+BEGIN_SRC emacs-lisp
   (use-package org
-    :ensure t
     :defer nil ;; can't defer because my config is literate
     :init
     (setq org-todo-keywords
@@ -572,16 +549,13 @@
 *** Org (for some reason called ox-reveal too, kinda confusing) reveal for exporting to reveal.js
     #+BEGIN_SRC emacs-lisp
       (use-package ox-reveal
-        :ensure t
         :defer t
         :config (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
         :init (add-hook 'org-mode 'reveal-mode))
     #+END_SRC
 *** htmlize for syntax highlighting in org presentations
     #+BEGIN_SRC emacs-lisp
-      (use-package htmlize
-        :ensure t
-        :defer t)
+      (use-package htmlize :defer t)
     #+END_SRC
 ** Plot with gnuplot
    org-plot/gnuplot requires the gnuplot lib
@@ -650,14 +624,11 @@
    #+END_SRC
 ** Undo tree
 #+BEGIN_SRC emacs-lisp
-  (use-package undo-tree
-    :ensure t
-    :defer t)
+  (use-package undo-tree :defer t)
 #+END_SRC
 ** Smartparens
 #+BEGIN_SRC emacs-lisp
   (use-package smartparens
-    :ensure t
     :defer t
     :init
     (add-hook 'prog-mode-hook #'smartparens-mode)
