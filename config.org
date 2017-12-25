@@ -749,31 +749,6 @@ to treat commas as decimal separator.")
        (eww (format "https://tools.ietf.org/html/rfc%s" rfc )))
 
    #+END_SRC
-* Remacs
-  #+BEGIN_SRC emacs-lisp
-    (defun list-unported-remacs-funcs (remacs-dir)
-      (unless (file-directory-p remacs-dir)
-        (user-error "dir \"%s\" not found" remacs-dir))
-      (let* ((default-directory (concat (file-name-as-directory remacs-dir) "src"))
-             (defuns (shell-command-to-string "grep -rnIH \"^DEFUN\""))
-             (defun-list (split-string defuns "\n" t)))
-        (let ((buff (get-buffer-create "*unported functions*"))
-              prev-file)
-          (switch-to-buffer-other-window buff)
-          (delete-region (point-min) (point-max))
-          (org-mode)
-          (dolist (line defun-list)
-            (let ((current-file (car (split-string line ":" t))))
-              (unless (string-equal prev-file current-file)
-                (setq prev-file current-file)
-                (insert "* " prev-file "\n"))
-              (insert "  - " (cadr (split-string line "\"")) "\n")
-              )))))
-
-    (defun rski/list-unported-emacs-funcs ()
-      (interactive)
-      (list-unported-remacs-funcs "~/Code/rust/remacs"))
-  #+END_SRC
 * System
   Emacs is one of the things that i will pretty much *always* start,
   so putting my startup scripts here is DE/WM agnostic
@@ -833,3 +808,29 @@ to treat commas as decimal separator.")
         '((emacs-lisp . t)
           (octave . t)))
 #+END_SRC
+** Remacs
+   List some unported remacs functions
+  #+BEGIN_SRC emacs-lisp
+    (defun list-unported-remacs-funcs (remacs-dir)
+      (unless (file-directory-p remacs-dir)
+        (user-error "dir \"%s\" not found" remacs-dir))
+      (let* ((default-directory (concat (file-name-as-directory remacs-dir) "src"))
+             (defuns (shell-command-to-string "grep -rnIH \"^DEFUN\""))
+             (defun-list (split-string defuns "\n" t)))
+        (let ((buff (get-buffer-create "*unported functions*"))
+              prev-file)
+          (switch-to-buffer-other-window buff)
+          (delete-region (point-min) (point-max))
+          (org-mode)
+          (dolist (line defun-list)
+            (let ((current-file (car (split-string line ":" t))))
+              (unless (string-equal prev-file current-file)
+                (setq prev-file current-file)
+                (insert "* " prev-file "\n"))
+              (insert "  - " (cadr (split-string line "\"")) "\n")
+              )))))
+
+    (defun rski/list-unported-emacs-funcs ()
+      (interactive)
+      (list-unported-remacs-funcs "~/Code/rust/remacs"))
+  #+END_SRC
