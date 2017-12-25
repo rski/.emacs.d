@@ -144,7 +144,6 @@
     :mode (("README\\.md\\'" . gfm-mode)
            ("\\.md\\'" . markdown-mode)
            ("\\.markdown\\'" . markdown-mode))
-    ;; TODO set markdown-command properly
     :config (setq markdown-command "multimarkdown"))
 #+END_SRC
 ** Scala
@@ -235,11 +234,10 @@
                                       'company-nixos-options))))
    #+END_SRC
 ** Golang
-*** Set the GOPATH if it's not set
-    It's probably the default, so set and hope
+*** Warn if gopath is unset
     #+BEGIN_SRC emacs-lisp
       (unless (getenv "GOPATH")
-        (setenv "GOPATH" "~/go"))
+        (user-error "GOPATH unset"))
     #+END_SRC
 *** Base go-mode
     Jump to def using [[https://github.com/rogpeppe/godef][godef]]
