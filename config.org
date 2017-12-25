@@ -249,18 +249,20 @@
                      gofmt-show-errors nil) ;; what do i have flycheck for?
        ;; workaround not matching multiline signatures
        ;;  https://github.com/dominikh/go-mode.el/issues/57
-       (add-hook 'go-mode-hook (lambda () (setq-local imenu-generic-expression
-                                                      '(("type" "^type *\\([^ \t\n\r\f]*(\\)" 1)
-                                                        ("func" "^func \\(.*\\)(" 1)))))
-       (add-hook 'go-mode-hook (lambda () (setq-local whitespace-line-column 100)
-                                          (whitespace-mode t)))
-       (add-hook 'go-mode-hook (lambda () (setq fill-column 100)
-                                          (auto-fill-mode t)))
+       (defun rski/go-mode-setup ()
+         (setq-local imenu-generic-expression
+                     '(("type" "^type *\\([^ \t\n\r\f]*(\\)" 1)
+                       ("func" "^func \\(.*\\)(" 1)))
+         (setq-local whitespace-line-column 100)
+         (whitespace-mode t)
+         (setq fill-column 100)
+         (auto-fill-mode t))
+       (add-hook 'go-mode-hook #'rski/go-mode-setup)
        :init (add-hook 'before-save-hook 'gofmt-before-save)
-       (add-hook 'go-mode-hook (lambda ()
-                                 (local-set-key (kbd "M-.") 'godef-jump)
-                                 (local-set-key (kbd "M-4 M-.") 'godef-jump-other-window)
-                                 (local-set-key (kbd "C-c C-d") 'godoc-at-point))))
+       :bind (:map go-mode-map
+              ("M-." . godef-jump)
+              ("M-4 M-." . godef-jump-other-window)
+              ("C-c C-d" . 'godoc-at-point)))
    #+END_SRC
 *** Autocompletion, requires [[https://github.com/nsf/gocode%20][gocode]] and gopath to be set to include it
     FIXME: rebind template fwd, backward and yas fwd should i ever set it up with company
@@ -272,7 +274,7 @@
                        (lambda ()
                          (add-to-list (make-local-variable 'company-backends)
                                       'company-go)))
-       :config (setq company-go-insert-arguments nil))
+             (setq company-go-insert-arguments nil))
    #+END_SRC
 *** Eldoc, also requires gocode
    #+BEGIN_SRC emacs-lisp
