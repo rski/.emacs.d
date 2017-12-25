@@ -388,30 +388,21 @@
                   '(:eval (format " Projectile[%s]"
                                   (projectile-project-name)))))
 #+END_SRC
-*** Helm projectile for easily switching projects and files in the project
-#+BEGIN_SRC emacs-lisp
-  (use-package helm-projectile
-    :config (helm-projectile-on))
-#+END_SRC
-*** Helm-ag is required for helm-projectile-ag below
-#+BEGIN_SRC emacs-lisp
-  (use-package helm-ag
-    :ensure t
-    :defer t)
-#+END_SRC
 *** Helm projectile for some projectile niceness with helm
-#+BEGIN_SRC emacs-lisp
+  #+BEGIN_SRC emacs-lisp
+  ;Helm-ag is required for helm-projectile-ag below
+  (use-package helm-ag :defer t)
+  (use-package helm-projectile
+    :config (helm-projectile-on)
+    :commands (helm-projectile-switch-project helm-projectile-switch-to-buffer)
+    :bind ("M-I" . helm-projectile-ag))
   (defun rski/c-p-dwim()
     "If inside a project, do find-file, otherwise switch to a project."
     (interactive)
     (if (ignore-errors (projectile-project-root))
         (helm-projectile-switch-to-buffer)
       (helm-projectile-switch-project)))
-
-  (use-package helm-projectile
-    :ensure t
-    :bind ("M-I" . helm-projectile-ag))
-#+END_SRC
+  #+END_SRC
 ** scrolling
    one line at a time
    #+BEGIN_SRC emacs-lisp
@@ -618,7 +609,7 @@
        (add-to-list 'evil-emacs-state-modes 'elfeed-search-mode)
        (add-to-list 'evil-emacs-state-modes 'elfeed-show-mode)
        :bind (:map evil-motion-state-map
-             (":" .  evil-repeat-find-char)
+             (":" . evil-repeat-find-char)
              (";" . evil-ex))
        :after (evil-magit evil-leader))
 
