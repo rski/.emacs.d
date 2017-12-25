@@ -15,7 +15,10 @@
     (package-refresh-contents)
     (package-install 'use-package))
   (setq use-package-always-ensure t)
-  (package-refresh-contents t)
+  ;; async refresh for newer emacsen
+  (if (version<= emacs-version "24")
+      (package-refresh-contents)
+    (package-refresh-contents t))
 #+END_SRC
 ** M-x try RET package installs a package in /tmp
    Good for trying out packages without tying to them
