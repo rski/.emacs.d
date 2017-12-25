@@ -29,21 +29,17 @@
 #+end_src
 
 * Autocorrection
-** Flycheck with hovering pos-tip
+** Flycheck
 #+BEGIN_SRC emacs-lisp
   (use-package flycheck
     :ensure t
     :init (add-hook 'after-init-hook #'global-flycheck-mode)
+          (add-hook 'after-init-hook #'flycheck-pos-tip-mode)
           (add-hook 'flyspell-mode-hook #'flycheck-color-mode-line-mode)
     :diminish flycheck-mode)
 
-  (use-package flycheck-color-mode-line
-    :defer t)
-
-  (use-package flycheck-pos-tip
-    :ensure t
-    :init (with-eval-after-load 'flycheck
-            (flycheck-pos-tip-mode)))
+  (use-package flycheck-color-mode-line :defer t)
+  (use-package flycheck-pos-tip :defer t)
 #+END_SRC
 ** Flyspell
 #+BEGIN_SRC emacs-lisp
