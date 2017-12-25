@@ -450,6 +450,13 @@
      :after projectile)
    #+END_SRC
 * Niceties
+** Helpful
+   #+BEGIN_SRC emacs-lisp
+     (use-package helpful
+       :defer t
+       :bind (([remap describe-function] . helpful-function)
+              ([remap describe-key] . helpful-key)))
+   #+END_SRC
 ** Line numbers
    This only works with emacs26 but idc
    #+BEGIN_SRC emacs-lisp
