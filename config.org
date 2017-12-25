@@ -439,15 +439,13 @@
    (setq ring-bell-function 'ignore)
    #+END_SRC
 ** Which key to show possible candidates for keystrokes after a prefix like C-c
-
-#+BEGIN_SRC emacs-lisp
-(use-package which-key
-:ensure t
-:defer t
-:init (which-key-mode)
-:diminish which-key-mode)
-#+END_SRC
-
+  #+BEGIN_SRC emacs-lisp
+    (use-package which-key
+      :ensure t
+      :defer t
+      :init (which-key-mode)
+      :diminish which-key-mode)
+  #+END_SRC
 ** Whitespace
 #+BEGIN_SRC emacs-lisp
 (use-package ws-butler
@@ -460,6 +458,7 @@
 
   (add-hook 'text-mode-hook (lambda () (setq show-trailing-whitespace t)))
   (add-hook 'prog-mode-hook (lambda () (setq show-trailing-whitespace t)))
+  (setq whitespace-style '(face lines-tail))
 #+END_SRC
 
 ** Better defaults.
@@ -678,10 +677,6 @@
    Rebind M-; to comment out lines instead of insert comments in the end
    #+BEGIN_SRC emacs-lisp
    (global-set-key (kbd "M-;") 'comment-line)
-   #+END_SRC
-** Whitespace
-   #+BEGIN_SRC emacs-lisp
-    (setq whitespace-style '(face lines-tail))
    #+END_SRC
 * Make visiting and reloading the config easy
 ** Visit the config file
