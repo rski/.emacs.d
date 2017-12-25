@@ -108,6 +108,10 @@
    #+END_SRC
 * Languages
   Packages for getting better support for various languages
+** Eldoc
+   #+BEGIN_SRC emacs-lisp
+   (use-package eldoc :diminish eldoc-mode)
+   #+END_SRC
 ** Python
    Python config for company using anaconda.
    #+BEGIN_SRC emacs-lisp
