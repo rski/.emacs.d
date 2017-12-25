@@ -4,7 +4,6 @@
       user-mail-address "rom.skiad@gmail.com")
 #+END_SRC
 * Bootstart use-package
-  use-package-cheat: config = after load, init = before load
 #+BEGIN_SRC emacs-lisp
   (require 'package)
   (setq package-enable-at-startup nil)
@@ -60,9 +59,8 @@
     :defer t
     :config (setq helm-ff-skip-boring-files t
                   helm-buffer-max-length 50)
-    :init
-    (progn (require 'helm-config)
-           (helm-mode 1))
+    :init (require 'helm-config)
+          (helm-mode 1)
     :diminish helm-mode
     :bind (("C-c h" . helm-command-prefix)
            ("M-x" . helm-M-x)
@@ -358,18 +356,15 @@
     :ensure t)
   (setq vc-handled-backends nil)
 #+END_SRC
-** Configure git-gutter, make it work with linum
+** Configure git-gutter
 #+BEGIN_SRC emacs-lisp
   (use-package git-gutter
      :defer t
      :ensure t
-     :config
-     (setq git-gutter:update-interval 0.1)
-     :init
-     (global-git-gutter-mode t)
+     :config (setq git-gutter:update-interval 0.1)
+     :init (global-git-gutter-mode t)
      :diminish git-gutter-mode)
 #+END_SRC
-
 * Navigation
 ** Swiper for more fine-grained search in a buffer
 *** The swiper package that uses helm
@@ -620,13 +615,6 @@
    #+BEGIN_SRC emacs-lisp
      (use-package gnuplot :defer t)
    #+END_SRC
-* Terminal
-** Eshell
-   #+BEGIN_SRC emacs-lisp
-     (add-hook 'eshell-mode-hook
-               (lambda ()
-                 (setq show-trailing-whitespace nil)))
-   #+END_SRC
 * Editing
 ** Evil
    #+BEGIN_SRC emacs-lisp
@@ -709,7 +697,6 @@
             ("u" sp-unwrap-sexp "unwrap")
             ("w" sp-rewrap-sexp "rewrap"))
             (require 'smartparens-config)
-    :bind (("C-c s" . rski-smartparens-hydra/body))
     :diminish smartparens-mode)
 #+END_SRC
 ** Comments
@@ -743,6 +730,12 @@
    (setq battery-mode-line-format "[%L %b%p%% %t]")
    #+END_SRC
 * Applications
+** Eshell
+   #+BEGIN_SRC emacs-lisp
+     (add-hook 'eshell-mode-hook
+               (lambda ()
+                 (setq show-trailing-whitespace nil)))
+   #+END_SRC
 ** Ledger
 *** The base backage
    TODO
