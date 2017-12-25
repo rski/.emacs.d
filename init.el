@@ -4,8 +4,10 @@
 ;; You may delete these explanatory comments.
 (package-initialize)
 
+(setq gc-cons-threshold 80000000)
 (setq custom-file "~/.emacs-custom.el")
 (load custom-file)
 (org-babel-load-file "~/.emacs.d/config.org")
 ; Enables C-x n n to do narrow-to-region
 (put 'narrow-to-region 'disabled nil)
+(setq gc-cons-threshold 80000)
