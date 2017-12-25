@@ -360,7 +360,6 @@
   (use-package projectile
     :init (projectile-global-mode)
     (add-to-list 'projectile-globally-ignored-directories "Godeps")
-    (projectile-cleanup-known-projects)
     :config (setq projectile-mode-line
                   '(:eval (format " Projectile[%s]"
                                   (projectile-project-name)))))
