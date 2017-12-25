@@ -619,10 +619,7 @@
    #+END_SRC
 * Terminal
 ** Eshell
-   Because I keep forgetting
    #+BEGIN_SRC emacs-lisp
-     (defalias 'vim 'find-file)
-     (defalias 'emacs 'find-file)
      (add-hook 'eshell-mode-hook
                (lambda ()
                  (setq show-trailing-whitespace nil)))
