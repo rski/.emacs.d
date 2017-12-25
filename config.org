@@ -549,42 +549,42 @@
   (use-package org
     :ensure t
     :defer t ;; FIXME this doesn't actually do much for some reason
-    :init (setq org-todo-keywords
-                '((sequence "TODO" "|" "DONE" "ABANDONED")))
-          (setq org-hide-leading-stars t)
+    :init
+    (setq org-todo-keywords
+          '((sequence "TODO" "|" "DONE" "ABANDONED")))
+    (setq org-hide-leading-stars t)
     :bind (("\C-col" . org-store-link)
            ("\C-coa" . org-agenda)
            ("\C-coc" . org-capture)
            ("\C-cob" . org-switchb))
-    :config (setq org-directory (expand-file-name "~/org"))
-     (load-library "find-lisp")
-     (defun rski/set-org-agenda-files()
-       (interactive)
-       (setq org-agenda-files (find-lisp-find-files "~/org" "\.org$")))
+    :config
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((emacs-lisp . t)
+       (octave . t)))
+    (setq org-directory (expand-file-name "~/org"))
+    (defun rski/set-org-agenda-files()
+      (load-library "find-lisp")
+      (setq org-agenda-files (find-lisp-find-files "~/org" "\.org$")))
     (rski/set-org-agenda-files)
     (setq org-default-notes-file (concat org-directory "/agenda.org"))
     (setq org-src-fontify-natively t))
 #+END_SRC
-
 ** Presentations
 *** Org (for some reason called ox-reveal too, kinda confusing) reveal for exporting to reveal.js
-
-#+BEGIN_SRC emacs-lisp
-    (use-package ox-reveal
-      :ensure t
-      :defer t
-      :config (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
-      :init (add-hook 'org-mode 'reveal-mode))
-#+END_SRC
-
+    #+BEGIN_SRC emacs-lisp
+      (use-package ox-reveal
+        :ensure t
+        :defer t
+        :config (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
+        :init (add-hook 'org-mode 'reveal-mode))
+    #+END_SRC
 *** htmlize for syntax highlighting in org presentations
-
-#+BEGIN_SRC emacs-lisp
-  (use-package htmlize
-    :ensure t
-    :defer t)
-#+END_SRC
-
+    #+BEGIN_SRC emacs-lisp
+      (use-package htmlize
+        :ensure t
+        :defer t)
+    #+END_SRC
 ** Plot with gnuplot
    org-plot/gnuplot requires the gnuplot lib
    #+BEGIN_SRC emacs-lisp
@@ -792,6 +792,7 @@ to treat commas as decimal separator.")
    #+END_SRC
 
 * Hacks
+** Brewery
   Load the work in progress stuff that the world is not ready for.
   There is horrible stuff brewing in there. Also work stuff that I do not want to publish.
 #+BEGIN_SRC emacs-lisp
@@ -802,12 +803,6 @@ to treat commas as decimal separator.")
    :load-path "~/Code/emacs-brewery/")
 #+END_SRC
 
-#+BEGIN_SRC emacs-lisp
-  (org-babel-do-load-languages
-        'org-babel-load-languages
-        '((emacs-lisp . t)
-          (octave . t)))
-#+END_SRC
 ** Remacs
    List some unported remacs functions
   #+BEGIN_SRC emacs-lisp
