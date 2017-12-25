@@ -65,6 +65,7 @@
            ("M-x" . helm-M-x)
            ("M-y" . helm-show-kill-ring)
            ("C-x C-f" . helm-find-files)
+           ("M-o" . 'helm-semantic-or-imenu)
            ([remap switch-to-buffer] . helm-mini)))
 #+END_SRC
 ** helm-tramp
@@ -374,20 +375,6 @@
     :defer t
     :ensure t)
 #+END_SRC
-** Bind imenu to something again
-   #+BEGIN_SRC emacs-lisp
-   (global-set-key (kbd "M-o") 'helm-semantic-or-imenu)
-   #+END_SRC
-** Imenu-anywhere gives imenu across a number of buffers
-   #+BEGIN_SRC emacs-lisp
-     (use-package imenu-anywhere
-       :bind (("C-c i" . helm-imenu-anywhere)))
-   #+END_SRC
-** Avy
-   Jump to places in the buffer
-   #+BEGIN_SRC emacs-lisp
-     (use-package avy :defer t)
-   #+END_SRC
 ** Projectile
 *** Base projectile package
    Enable projectile globally, then C-c p is the prefix for projectile.
@@ -399,8 +386,7 @@
     (projectile-cleanup-known-projects)
     :config (setq projectile-mode-line
                   '(:eval (format " Projectile[%s]"
-                                  (projectile-project-name))))
-    )
+                                  (projectile-project-name)))))
 #+END_SRC
 *** Helm projectile for easily switching projects and files in the project
 #+BEGIN_SRC emacs-lisp
@@ -651,7 +637,6 @@
                 "of" 'other-frame
                 "ww" 'evil-window-next
                 "ws" 'evil-window-split
-                "c" 'avy-goto-char-2
                 "s" 'rski-smartparens-hydra/body)
                (evil-leader/set-leader ",")
                (define-key evil-normal-state-map (kbd "C-p") 'rski/c-p-dwim)
