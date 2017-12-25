@@ -521,6 +521,11 @@
    (use-package hl-todo
      :init (global-hl-todo-mode))
    #+END_SRC
+** anzu to show num of matched searches in the buffer
+   #+BEGIN_SRC emacs-lisp
+   (use-package anzu
+     :init (add-hook 'after-init-hook 'global-anzu-mode))
+   #+END_SRC
 * Theming
 ** monokai does nice highlighting of src blocks in org
 #+BEGIN_SRC emacs-lisp
