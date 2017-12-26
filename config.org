@@ -356,7 +356,7 @@
    Enable projectile globally, then C-c p is the prefix for projectile.
 #+BEGIN_SRC emacs-lisp
   (use-package projectile
-    :init (projectile-global-mode)
+    :init (projectile-mode)
     (add-to-list 'projectile-globally-ignored-directories "Godeps")
     :config (setq projectile-mode-line
                   '(:eval (format " Projectile[%s]"
@@ -647,8 +647,8 @@
 #+BEGIN_SRC emacs-lisp
   (defun rski/load-config ()
     (interactive)
-    (setq config-file (substitute-in-file-name "$HOME/.emacs.d/config.org"))
-    (org-babel-load-file config-file))
+    (let ((config-file (substitute-in-file-name "$HOME/.emacs.d/config.org")))
+          (org-babel-load-file config-file)))
 #+END_SRC
 * Modeline stuff
 ** Display battery and time
