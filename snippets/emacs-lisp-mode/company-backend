@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: company-backend
-# key: company-backend
-# --
-(add-hook '${1:mode}-mode-hook
-                       (lambda ()
-                        (add-to-list (make-local-variable 'company-backends)
-                                     '${2:backend})))
