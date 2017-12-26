@@ -75,8 +75,7 @@
     :defer t
     :config (setq helm-ff-skip-boring-files t
                   helm-buffer-max-length 50)
-    :init (require 'helm-config)
-          (helm-mode 1)
+    :init (helm-mode 1)
     :diminish helm-mode
     :bind (([remap execute-extended-command] . helm-M-x)
            ("M-y" . helm-show-kill-ring)
