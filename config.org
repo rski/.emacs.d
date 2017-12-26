@@ -615,7 +615,9 @@
    #+END_SRC
 ** Undo tree
 #+BEGIN_SRC emacs-lisp
-  (use-package undo-tree :defer t)
+  (use-package undo-tree
+    :defer t
+    :diminish undo-tree-mode)
 #+END_SRC
 ** Smartparens
 #+BEGIN_SRC emacs-lisp
