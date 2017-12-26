@@ -29,7 +29,8 @@
           (add-hook 'flyspell-mode-hook #'flycheck-color-mode-line-mode)
     :diminish flycheck-mode)
 
-  (use-package flycheck-color-mode-line :defer t)
+  (use-package flycheck-color-mode-line :defer t
+    :config (setq flycheck-color-mode-line-show-running nil))
   (use-package flycheck-pos-tip :defer t)
 #+END_SRC
 ** Flyspell
@@ -686,6 +687,7 @@ to treat commas as decimal separator.")
    Make ERC spellcheck messages before I send them
    #+BEGIN_SRC emacs-lisp
      (add-hook 'erc-mode-hook 'erc-spelling-mode)
+     (setq erc-autojoin-mode t)
      (setq erc-pcomplete-nick-postfix ", ")
    #+END_SRC
 ** Feeds with elfeed
