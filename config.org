@@ -551,6 +551,7 @@
 ** Evil
    #+BEGIN_SRC emacs-lisp
      (use-package evil
+       ;:defer nil
        :init (setq evil-want-C-u-scroll t)
        :config (evil-mode)
        (define-key evil-normal-state-map (kbd "M-.") nil)
@@ -567,9 +568,11 @@
        :bind (:map evil-motion-state-map
              (":" . evil-repeat-find-char)
              (";" . evil-ex))
-       :after (evil-magit evil-leader))
+       :after (evil-leader))
 
      (use-package evil-magit
+       :defer t
+       :after magit
        :config (evil-magit-init))
 
      (use-package evil-leader
