@@ -640,6 +640,7 @@
   (defun rski/visit-config ()
     (interactive)
     (find-file (substitute-in-file-name "$HOME/.emacs.d/config.org")))
+  (global-set-key (kbd "C-c v") 'rski/visit-config)
 #+END_SRC
 ** Load the config with babel
 #+BEGIN_SRC emacs-lisp
