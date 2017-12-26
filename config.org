@@ -271,6 +271,7 @@
     #+BEGIN_SRC emacs-lisp
       (use-package gotest
         :after go-mode
+        :defer t
         :config
         (add-hook 'go-test-mode-hook 'visual-line-mode)
         (brewery-go-test-config)
@@ -283,6 +284,7 @@
     #+BEGIN_SRC emacs-lisp
       (use-package go-rename
          :after go-mode
+         :defer t
          :bind (:map go-mode-map
                      ("C-c r" . go-rename)))
     #+END_SRC
