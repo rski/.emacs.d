@@ -366,6 +366,7 @@
   ;Helm-ag is required for helm-projectile-ag below
   (use-package helm-ag :defer t)
   (use-package helm-projectile
+    :defer nil
     :config (helm-projectile-on)
     :commands (helm-projectile-switch-project helm-projectile-switch-to-buffer)
     :bind ("M-I" . helm-projectile-ag))
