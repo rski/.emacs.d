@@ -20,12 +20,6 @@
       (package-refresh-contents)
     (package-refresh-contents t))
 #+END_SRC
-** M-x try RET package installs a package in /tmp
-   Good for trying out packages without tying to them
-#+begin_src emacs-lisp
-  (use-package try :defer t)
-#+end_src
-
 * Almost an IDE
 ** Flycheck
 #+BEGIN_SRC emacs-lisp
