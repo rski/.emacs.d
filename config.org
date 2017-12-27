@@ -222,6 +222,13 @@
        :defer t
        :config (setq gofmt-command "goimports"
                      gofmt-show-errors nil) ;; what do i have flycheck for?
+       (evil-define-key 'normal go-mode-map (kbd "gd") 'godef-jump)
+       (evil-define-key 'normal go-mode-map (kbd "god") 'godef-jump-other-window)
+       (evil-define-key 'normal go-mode-map (kbd "K") 'godoc-at-point)
+       (evil-define-key 'visual go-mode-map (kbd "gd") 'godef-jump)
+       (evil-define-key 'visual go-mode-map (kbd "god") 'godef-jump-other-window)
+       (evil-define-key 'visual go-mode-map (kbd "K") 'godoc-at-point)
+       (evil-define-key 'normal godoc-mode-map (kbd "q") 'quit-window)
        ;; workaround not matching multiline signatures
        ;;  https://github.com/dominikh/go-mode.el/issues/57
        (defun rski/go-mode-setup ()
@@ -398,6 +405,8 @@
    #+BEGIN_SRC emacs-lisp
      (use-package helpful
        :defer t
+       :config (evil-define-key 'normal helpful-mode-map
+                 "q" 'quit-window)
        :bind (([remap describe-function] . helpful-function)
               ([remap describe-key] . helpful-key)))
    #+END_SRC
@@ -587,11 +596,7 @@
                 "ws" 'evil-window-split
                 "s" 'rski-smartparens-hydra/body)
                (evil-leader/set-leader ",")
-               (define-key evil-normal-state-map (kbd "C-p") 'rski/c-p-dwim)
-               (evil-define-key 'normal go-mode-map (kbd "gd") 'godef-jump)
-               (evil-define-key 'normal go-mode-map (kbd "god") 'godef-jump-other-window)
-               (evil-define-key 'visual go-mode-map (kbd "gd") 'godef-jump)
-               (evil-define-key 'visual go-mode-map (kbd "god") 'godef-jump-other-window))
+               (define-key evil-normal-state-map (kbd "C-p") 'rski/c-p-dwim))
 
      (use-package evil-escape
        :diminish evil-escape-mode
