@@ -229,6 +229,9 @@
        (evil-define-key 'visual go-mode-map (kbd "god") 'godef-jump-other-window)
        (evil-define-key 'visual go-mode-map (kbd "K") 'godoc-at-point)
        (evil-define-key 'normal godoc-mode-map (kbd "q") 'quit-window)
+       (evil-leader/set-key-for-mode 'go-mode
+         "tf" 'go-test-current-file
+         "tt" 'go-test-current-test)
        ;; workaround not matching multiline signatures
        ;;  https://github.com/dominikh/go-mode.el/issues/57
        (defun rski/go-mode-setup ()
@@ -240,11 +243,7 @@
          (setq fill-column 100)
          (auto-fill-mode t))
        (add-hook 'go-mode-hook #'rski/go-mode-setup)
-       :init (add-hook 'before-save-hook 'gofmt-before-save)
-       :bind (:map go-mode-map
-              ("M-." . godef-jump)
-              ("M-4 M-." . godef-jump-other-window)
-              ("C-c C-d" . 'godoc-at-point)))
+       :init (add-hook 'before-save-hook 'gofmt-before-save))
    #+END_SRC
 *** Autocompletion, requires [[https://github.com/nsf/gocode%20][gocode]] and gopath to be set to include it
     FIXME: rebind template fwd, backward and yas fwd should i ever set it up with company
@@ -282,10 +281,7 @@
         :config
         (add-hook 'go-test-mode-hook 'visual-line-mode)
         (brewery-go-test-config)
-        (setq go-test-verbose t) ;; passes -v to go-test so the test names show when running them
-        :bind (:map go-mode-map
-               ("C-c t f" . go-test-current-file)
-               ("C-c t t" . go-test-current-test)))
+        (setq go-test-verbose t)) ;; passes -v to go-test so the test names show when running them
     #+END_SRC
 *** go rename for refactoring
     #+BEGIN_SRC emacs-lisp
