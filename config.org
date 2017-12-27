@@ -403,7 +403,7 @@
        :defer t
        :config (evil-define-key 'normal helpful-mode-map
                  "q" 'quit-window)
-       :bind (([remap describe-function] . helpful-function)
+       :bind (([remap describe-function] . helpful-callable)
               ([remap describe-key] . helpful-key)))
    #+END_SRC
 ** Line numbers
