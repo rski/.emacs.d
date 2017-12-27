@@ -582,6 +582,11 @@
              (";" . evil-ex))
        :after (evil-leader))
 
+     (use-package evil-collection
+       :defer nil
+       :after evil
+       :config (evil-collection-init))
+
      (use-package evil-leader
        :defer t
        :init (global-evil-leader-mode)
