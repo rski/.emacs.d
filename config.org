@@ -105,7 +105,7 @@
        :init (add-hook 'python-mode-hook
                        (lambda ()
                          (add-to-list (make-local-variable 'company-backends)
-                                      '(company-anaconda :with company-capf)))))
+                                      'company-anaconda))))
    #+END_SRC
 ** Puppet
    Use puppet-mode from Vox Pupuli
