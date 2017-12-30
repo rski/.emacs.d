@@ -79,7 +79,7 @@
     :diminish helm-mode
     :bind (([remap execute-extended-command] . helm-M-x)
            ("M-y" . helm-show-kill-ring)
-           ("C-x C-f" . helm-find-files)
+           ([remap find-file] . helm-find-files)
            ("M-o" . 'helm-semantic-or-imenu)
            ([remap switch-to-buffer] . helm-mini)))
   (use-package helm-tramp :defer t)
