@@ -393,7 +393,6 @@
    (use-package treemacs-projectile
      :defer t
      :after treemacs
-     :bind (("C-c v" . treemacs-projectile-toggle))
      :after projectile)
    #+END_SRC
 * Niceties
