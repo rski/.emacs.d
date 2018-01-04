@@ -71,19 +71,22 @@
 * Helm
 #+BEGIN_SRC emacs-lisp
   (use-package helm
-    :defer t
-    :config (setq helm-ff-skip-boring-files t
-                  helm-buffer-max-length 50)
     :init (helm-mode 1)
     :diminish helm-mode
     :bind (([remap execute-extended-command] . helm-M-x)
            ("M-y" . helm-show-kill-ring)
            ([remap find-file] . helm-find-files)
            ("M-o" . 'helm-semantic-or-imenu)
-           ([remap switch-to-buffer] . helm-mini)))
-  (use-package helm-tramp :defer t)
-#+END_SRC
+           ([remap switch-to-buffer] . helm-mini))
+    :config (setq helm-ff-skip-boring-files t
+                  helm-buffer-max-length 50)
 
+    (use-package swiper-helm
+      :defer t
+      :bind (("M-i" . swiper-helm)))
+
+    (use-package helm-tramp :defer t))
+#+END_SRC
 * Languages
   Packages for getting better support for various languages
 ** Python
@@ -323,15 +326,7 @@
      :init (global-git-gutter-mode t)
      :diminish git-gutter-mode)
 #+END_SRC
-* Navigation
-** Swiper for more fine-grained search in a buffer
-*** The swiper package that uses helm
-#+BEGIN_SRC emacs-lisp
-  (use-package swiper-helm
-    :defer t
-    :bind (("M-i" . swiper-helm)))
-#+END_SRC
-** Projectile
+* Projectile
   #+BEGIN_SRC emacs-lisp
     (use-package projectile
       :after evil
