@@ -536,11 +536,6 @@
     (require 'smartparens-config)
     :diminish smartparens-mode)
 #+END_SRC
-** Comments
-   Rebind M-; to comment out lines instead of insert comments in the end
-   #+BEGIN_SRC emacs-lisp
-   (global-set-key (kbd "M-;") 'comment-line)
-   #+END_SRC
 * Applications
 ** Eshell
    #+BEGIN_SRC emacs-lisp
@@ -578,6 +573,9 @@
    #+END_SRC
 * Misc
   #+BEGIN_SRC emacs-lisp
+   ;;;Rebind M-; to comment out lines instead of insert comments in the end
+   (global-set-key (kbd "M-;") 'comment-line)
+
     (defun rski/visit-config ()
       (interactive)
       (find-file (substitute-in-file-name "$HOME/.emacs.d/config.org")))
