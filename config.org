@@ -336,12 +336,6 @@
     :defer t
     :bind (("M-i" . swiper-helm)))
 #+END_SRC
-** Hydra: bindings that stick around
-   Tired of pressing C-c ! n C-c ! n C-c ! p again and again to go through the errors?
-   Hydra can make this C-c ! n n n n p n etc!
-#+BEGIN_SRC emacs-lisp
-  (use-package hydra :defer t)
-#+END_SRC
 ** Projectile
 *** Base projectile package
    Enable projectile globally, then C-c p is the prefix for projectile.
@@ -584,8 +578,7 @@
                 "of" 'other-frame
                 "ww" 'evil-window-next
                 "ws" 'evil-window-split
-                "," 'execute-extended-command
-                "s" 'rski-smartparens-hydra/body)
+                "," 'execute-extended-command)
                (evil-leader/set-leader ",")
                (define-key evil-normal-state-map (kbd "C-p") 'rski/c-p-dwim))
 
@@ -617,13 +610,13 @@
     :init
     (add-hook 'prog-mode-hook #'smartparens-mode)
     (add-hook 'text-mode-hook #'smartparens-mode)
-    :config (defhydra rski-smartparens-hydra ()
-            "Edit parens"
-            ("l" sp-forward-slurp-sexp "s-back")
-            ("h" sp-backward-slurp-sexp "s-fwd")
-            ("u" sp-unwrap-sexp "unwrap")
-            ("w" sp-rewrap-sexp "rewrap"))
-            (require 'smartparens-config)
+    :config
+    (evil-leader/set-key
+      "sl" 'sp-forward-slurp-sexp
+      "sh" 'sp-backward-slurp-sexp
+      "su" 'sp-unwrap-sexp
+      "sw" 'sp-rewrap-sexp)
+    (require 'smartparens-config)
     :diminish smartparens-mode)
 #+END_SRC
 ** Comments
