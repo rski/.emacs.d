@@ -599,6 +599,7 @@
                 "of" 'other-frame
                 "ww" 'evil-window-next
                 "ws" 'evil-window-split
+                "," 'execute-extended-command
                 "s" 'rski-smartparens-hydra/body)
                (evil-leader/set-leader ",")
                (define-key evil-normal-state-map (kbd "C-p") 'rski/c-p-dwim))
