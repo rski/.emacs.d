@@ -242,7 +242,28 @@
          (auto-fill-mode t))
        (add-hook 'go-mode-hook #'rski/go-mode-setup)
 
-       ;; running tests
+       (use-package go-eldoc :init (add-hook 'go-mode-hook 'go-eldoc-setup))
+       (use-package go-guru :init (add-hook 'go-mode-hook 'go-guru-hl-identifier-mode))
+       (use-package go-playground :defer t)
+
+       ;;; requires nfs/gocode
+       (use-package company-go
+         :after company
+         :init (add-hook 'go-mode-hook
+                         (lambda ()
+                           (add-to-list (make-local-variable 'company-backends)
+                                        'company-go)))
+                                           ;;; this is broken with company-tng
+         (setq company-go-insert-arguments nil))
+
+      ;;; requires the gometalinter binary
+       (use-package flycheck-gometalinter
+         :init (add-hook 'go-mode-hook (lambda () (flycheck-select-checker 'gometalinter)))
+         :config
+         (setq flycheck-gometalinter-fast t)
+         (setq flycheck-gometalinter-disable-linters '("gocyclo" "goconst" "vetshadow"))
+         (flycheck-gometalinter-setup))
+
        (use-package gotest
          :config
          (add-hook 'go-test-mode-hook 'visual-line-mode)
@@ -262,50 +283,10 @@
          (setq go-test-verbose t)) ;; passes -v to go-test so the test names show when running them
 
        (use-package go-rename
-         :defer t
          :init
          (evil-leader/set-key-for-mode 'go-mode
-           "rr" 'go-rename))
-       )
+           "rr" 'go-rename)))
    #+END_SRC
-*** Autocompletion, requires [[https://github.com/nsf/gocode%20][gocode]] and gopath to be set to include it
-    FIXME: rebind template fwd, backward and yas fwd should i ever set it up with company
-   #+BEGIN_SRC emacs-lisp
-     (use-package company-go
-       :after company
-       :defer t
-       :init (add-hook 'go-mode-hook
-                       (lambda ()
-                         (add-to-list (make-local-variable 'company-backends)
-                                      'company-go)))
-             (setq company-go-insert-arguments nil))
-   #+END_SRC
-*** Eldoc, also requires gocode
-   #+BEGIN_SRC emacs-lisp
-     (use-package go-eldoc
-       :defer t
-       :init (add-hook 'go-mode-hook 'go-eldoc-setup))
-   #+END_SRC
-*** Guru
-    #+BEGIN_SRC emacs-lisp
-      (use-package go-guru
-        :defer t
-        :init (add-hook 'go-mode-hook 'go-guru-hl-identifier-mode))
-    #+END_SRC
-*** playground inside emacs
-    #+BEGIN_SRC emacs-lisp
-    (use-package go-playground :defer t)
-    #+END_SRC
-*** metalinter
-    #+BEGIN_SRC emacs-lisp
-      (use-package flycheck-gometalinter
-        :init (add-hook 'go-mode-hook (lambda () (flycheck-select-checker 'gometalinter)))
-        :config
-        (progn
-          (setq flycheck-gometalinter-fast t)
-          (setq flycheck-gometalinter-disable-linters '("gocyclo" "goconst" "vetshadow"))
-          (flycheck-gometalinter-setup)))
-    #+END_SRC
 ** Protocol buffers
    #+BEGIN_SRC emacs-lisp
      (use-package protobuf-mode :defer t)
