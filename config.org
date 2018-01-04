@@ -453,25 +453,19 @@
     (setq org-agenda-files
           '("~/org/todo.org" "~/org/arista.org" "~/org/buy.org" "~/org/daily.org" "~/org/learning.org"))
     (setq org-default-notes-file (concat org-directory "/agenda.org"))
-    (setq org-src-fontify-natively t))
-#+END_SRC
-** Presentations
-*** Org (for some reason called ox-reveal too, kinda confusing) reveal for exporting to reveal.js
-    #+BEGIN_SRC emacs-lisp
-      (use-package ox-reveal
-        :defer t
-        :config (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
-        :init (add-hook 'org-mode 'reveal-mode))
+    (setq org-src-fontify-natively t)
+
+     ;;; org-plot/gnuplot requires the gnuplot lib
+    (use-package gnuplot :defer t)
+
+    ;;; org reveal (for some reason called ox-reveal too, kinda confusing) for exporting to reveal.js
+    (use-package ox-reveal
+      :defer t
+      :init (add-hook 'org-mode 'reveal-mode)
+      :config
+      (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
+      (use-package htmlize :defer t)))
     #+END_SRC
-*** htmlize for syntax highlighting in org presentations
-    #+BEGIN_SRC emacs-lisp
-      (use-package htmlize :defer t)
-    #+END_SRC
-** Plot with gnuplot
-   org-plot/gnuplot requires the gnuplot lib
-   #+BEGIN_SRC emacs-lisp
-     (use-package gnuplot :defer t)
-   #+END_SRC
 * Editing
 ** Evil
    #+BEGIN_SRC emacs-lisp
