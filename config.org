@@ -558,13 +558,6 @@
                        ("https://jvns.ca/atom.xml" blog))))
 
    #+END_SRC
-** eww
-   #+BEGIN_SRC emacs-lisp
-     (defun rski/rfc (rfc)
-       (interactive "nView RFC>")
-       (eww (format "https://tools.ietf.org/html/rfc%s" rfc)))
-
-   #+END_SRC
 * Misc
   #+BEGIN_SRC emacs-lisp
    ;;;Rebind M-; to comment out lines instead of insert comments in the end
@@ -649,4 +642,8 @@
     (defun rski/list-unported-emacs-funcs ()
       (interactive)
       (list-unported-remacs-funcs "~/Code/rust/remacs"))
+
+     (defun rski/rfc (rfc)
+       (interactive "nView RFC>")
+       (eww (format "https://tools.ietf.org/html/rfc%s" rfc)))
   #+END_SRC
