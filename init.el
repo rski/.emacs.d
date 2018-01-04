@@ -336,7 +336,7 @@
   :init (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode))
 
 (use-package org
-  :defer nil ;; can't defer because my config is literate
+  :defer t
   :init
   (setq org-todo-keywords
         '((sequence "TODO" "|" "DONE" "ABANDONED")))
