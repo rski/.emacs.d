@@ -23,13 +23,13 @@
 #+BEGIN_SRC emacs-lisp
   (use-package flycheck
     :init (add-hook 'after-init-hook #'global-flycheck-mode)
-          (add-hook 'after-init-hook #'flycheck-pos-tip-mode)
-          (add-hook 'flyspell-mode-hook #'flycheck-color-mode-line-mode)
-    :diminish flycheck-mode)
-
-  (use-package flycheck-color-mode-line :defer t
-    :config (setq flycheck-color-mode-line-show-running nil))
-  (use-package flycheck-pos-tip :defer t)
+    (add-hook 'after-init-hook #'flycheck-pos-tip-mode)
+    (add-hook 'flyspell-mode-hook #'flycheck-color-mode-line-mode)
+    :diminish flycheck-mode
+    :config
+    (use-package flycheck-color-mode-line
+      :config (setq flycheck-color-mode-line-show-running nil))
+    (use-package flycheck-pos-tip))
 #+END_SRC
 ** Flyspell
 #+BEGIN_SRC emacs-lisp
