@@ -602,9 +602,12 @@
 ** IRC
    Make ERC spellcheck messages before I send them
    #+BEGIN_SRC emacs-lisp
-     (add-hook 'erc-mode-hook 'erc-spelling-mode)
-     (setq erc-autojoin-mode t)
-     (setq erc-pcomplete-nick-postfix ", ")
+     (use-package erc
+       :defer t
+       :config
+       (add-hook 'erc-mode-hook 'erc-spelling-mode)
+       (setq erc-autojoin-mode t)
+       (setq erc-pcomplete-nick-postfix ", "))
    #+END_SRC
 ** Feeds with elfeed
    #+BEGIN_SRC emacs-lisp
@@ -621,7 +624,7 @@
    #+BEGIN_SRC emacs-lisp
      (defun rski/rfc (rfc)
        (interactive "nView RFC>")
-       (eww (format "https://tools.ietf.org/html/rfc%s" rfc )))
+       (eww (format "https://tools.ietf.org/html/rfc%s" rfc)))
 
    #+END_SRC
 * Hacks
