@@ -56,6 +56,14 @@
       (use-package company-statistics
         :config (company-statistics-mode)))
 
+    (defmacro local-backend (mode-hook backend)
+      "a macro for local company backends
+    example: (local-backend python-mode-hook company-anaconda)"
+      `(add-hook ',mode-hook
+                 (lambda ()
+                   (add-to-list (make-local-variable 'company-backends)
+                                ',backend))))
+
   #+END_SRC
 ** Refactoring
     #+BEGIN_SRC emacs-lisp
@@ -97,10 +105,7 @@
      (use-package company-anaconda
        :after company
        :defer t
-       :init (add-hook 'python-mode-hook
-                       (lambda ()
-                         (add-to-list (make-local-variable 'company-backends)
-                                      'company-anaconda))))
+       :init (local-backend python-mode-hook company-anaconda))
    #+END_SRC
 ** Puppet
    Use puppet-mode from Vox Pupuli
@@ -133,10 +138,7 @@
   (use-package company-lua
     :defer t
     :after 'company
-    :init (add-hook 'lua-mode-hook
-                    (lambda ()
-                      (add-to-list (make-local-variable 'company-backends)
-                                   'company-lua))))
+    :init (local-backend lua-mode-hook company-lua))
 #+END_SRC
 
 ** Web dev
@@ -168,10 +170,7 @@
 #+BEGIN_SRC emacs-lisp
   (use-package company-c-headers
     :defer t
-    :init (add-hook 'c-mode-hook
-            (lambda ()
-              (add-to-list (make-local-variable 'company-backends)
-                           'company-c-headers))))
+    :init (local-backend c-mode-hook company-c-headers))
 #+END_SRC
 
 ** YANG
@@ -198,10 +197,7 @@
      (use-package company-nixos-options
        :after  company
        :defer t
-       :init (add-hook 'nixos-mode-hook
-                       (lambda ()
-                         (add-to-list (make-local-variable 'company-backends)
-                                      'company-nixos-options))))
+       :init (local-backend nixos-mode-hook company-nixos-options))
    #+END_SRC
 ** Golang
 *** Warn if gopath is unset
@@ -244,11 +240,8 @@
        ;;; requires nfs/gocode
        (use-package company-go
          :after company
-         :init (add-hook 'go-mode-hook
-                         (lambda ()
-                           (add-to-list (make-local-variable 'company-backends)
-                                        'company-go)))
-                                           ;;; this is broken with company-tng
+         :init (local-backend go-mode-hook company-go)
+         ;;; this is broken with company-tng
          (setq company-go-insert-arguments nil))
 
       ;;; requires the gometalinter binary
