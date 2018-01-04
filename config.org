@@ -327,8 +327,12 @@
     :defer t
     :init (setq magit-bury-buffer-function 'magit-mode-quit-window)
     :bind ("C-c g" . magit-status)
-    :config (use-package evil-magit
-       :config (evil-magit-init)))
+    :config
+    (defun rski/magit-push-review()
+      (magit-run-git-async "push" "review"))
+    (magit-define-popup-action 'magit-push-popup ?g "Push to gerrit" 'rski/magit-push-review)
+    (use-package evil-magit
+      :config (evil-magit-init)))
   (setq vc-handled-backends nil)
 #+END_SRC
 ** Configure git-gutter
