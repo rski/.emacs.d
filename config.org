@@ -541,57 +541,6 @@
    #+BEGIN_SRC emacs-lisp
    (global-set-key (kbd "M-;") 'comment-line)
    #+END_SRC
-* Misc
-  #+BEGIN_SRC emacs-lisp
-    (defun rski/visit-config ()
-      (interactive)
-      (find-file (substitute-in-file-name "$HOME/.emacs.d/config.org")))
-    (global-set-key (kbd "C-c v") 'rski/visit-config)
-    (defun rski/load-config ()
-      (interactive)
-      (let ((config-file (substitute-in-file-name "$HOME/.emacs.d/config.org")))
-        (org-babel-load-file config-file)))
-
-    ;;; modeline
-    (setq-default mode-line-format '("" mode-line-modified
-          mode-line-remote " " mode-line-buffer-identification " "
-          mode-line-position mode-line-modes mode-line-misc-info))
-    (display-time-mode t)
-    (display-battery-mode t)
-    (setq battery-mode-line-format "[%L %b%p%% %t]")
-
-    ;;; Don't ask to keep current tags table when changing dirs
-    (setq tags-add-tables nil)
-
-    (use-package eldoc :diminish eldoc-mode)
-
-    ;;; line numbers
-    (setq display-line-numbers-grow-only t) ;; confusing otherwise
-    (add-hook 'prog-mode-hook #'display-line-numbers-mode)
-    (add-hook 'text-mode-hook #'display-line-numbers-mode)
-
-    ;;; shut up
-    (setq ring-bell-function 'ignore)
-
-    ;;; scroll one line at a time
-    (setq scroll-conservatively 1000)
-
-    (setq sentence-end-double-space nil) ;; when filling, use one space after fullstop
-    (defalias 'yes-or-no-p 'y-or-n-p)
-    (setq column-number-mode 1)
-    (setq backup-directory-alist
-          `((".*" . "~/.tmp/emacs")))
-    (setq auto-save-file-name-transforms
-          `((".*" ,"~/.tmp/emacs" t)))
-    (setq visible-bell nil)
-    (setq inhibit-startup-screen t)
-    (add-to-list 'auto-mode-alist '("Cask" . emacs-lisp-mode))
-    (add-hook 'prog-mode-hook (lambda () (setq tab-width 4))) ; 8 is the default and that is waaaay to much
-    (setq create-lockfiles nil);; might be a bad idea but for 99% of the time should be ok
-
-    ;; mostly for fixing the backup etc files being saved next to the files
-    (use-package better-defaults :init (setq uniquify-min-dir-content 1))
-   #+END_SRC
 * Applications
 ** Eshell
    #+BEGIN_SRC emacs-lisp
@@ -627,21 +576,65 @@
        (eww (format "https://tools.ietf.org/html/rfc%s" rfc)))
 
    #+END_SRC
-* Hacks
-** Brewery
-  Load the work in progress stuff that the world is not ready for.
-  There is horrible stuff brewing in there. Also work stuff that I do not want to publish.
-#+BEGIN_SRC emacs-lisp
- (use-package brewery
-   :defer t
-   :commands dlv-debug-current-test ;; Whenever I open a go file, this function gets evaluated, pulling the rest of the file along with other commands that should be autoloaded but aren't, so they become available by chance. Eh.
-   :ensure nil
-   :load-path "~/Code/emacs-brewery/")
-#+END_SRC
-
-** Remacs
-   List some unported remacs functions
+* Misc
   #+BEGIN_SRC emacs-lisp
+    (defun rski/visit-config ()
+      (interactive)
+      (find-file (substitute-in-file-name "$HOME/.emacs.d/config.org")))
+    (global-set-key (kbd "C-c v") 'rski/visit-config)
+    (defun rski/load-config ()
+      (interactive)
+      (let ((config-file (substitute-in-file-name "$HOME/.emacs.d/config.org")))
+        (org-babel-load-file config-file)))
+
+    ;;; modeline
+    (setq-default mode-line-format '("" mode-line-modified
+                                     mode-line-remote " " mode-line-buffer-identification " "
+                                     mode-line-position mode-line-modes mode-line-misc-info))
+    (display-time-mode t)
+    (display-battery-mode t)
+    (setq battery-mode-line-format "[%L %b%p%% %t]")
+
+    ;;; Don't ask to keep current tags table when changing dirs
+    (setq tags-add-tables nil)
+
+    (use-package eldoc :diminish eldoc-mode)
+
+    ;;; line numbers
+    (setq display-line-numbers-grow-only t) ;; confusing otherwise
+    (add-hook 'prog-mode-hook #'display-line-numbers-mode)
+    (add-hook 'text-mode-hook #'display-line-numbers-mode)
+
+    ;;; shut up
+    (setq ring-bell-function 'ignore)
+
+    ;;; scroll one line at a time
+    (setq scroll-conservatively 1000)
+
+    (setq sentence-end-double-space nil) ;; when filling, use one space after fullstop
+    (defalias 'yes-or-no-p 'y-or-n-p)
+    (setq column-number-mode 1)
+    (setq backup-directory-alist
+          `((".*" . "~/.tmp/emacs")))
+    (setq auto-save-file-name-transforms
+          `((".*" ,"~/.tmp/emacs" t)))
+    (setq visible-bell nil)
+    (setq inhibit-startup-screen t)
+    (add-to-list 'auto-mode-alist '("Cask" . emacs-lisp-mode))
+    (add-hook 'prog-mode-hook (lambda () (setq tab-width 4))) ; 8 is the default and that is waaaay to much
+    (setq create-lockfiles nil);; might be a bad idea but for 99% of the time should be ok
+
+    ;;; mostly for fixing the backup etc files being saved next to the files
+    (use-package better-defaults :init (setq uniquify-min-dir-content 1))
+
+    ;;; double misc after here
+    (use-package brewery
+      :defer t
+      :commands dlv-debug-current-test ;; Whenever I open a go file, this function gets evaluated, pulling the rest of the file along with other commands that should be autoloaded but aren't, so they become available by chance. Eh.
+      :ensure nil
+      :load-path "~/Code/emacs-brewery/")
+
+    ;;; List some unported remacs functions
     (defun list-unported-remacs-funcs (remacs-dir)
       (unless (file-directory-p remacs-dir)
         (user-error "dir \"%s\" not found" remacs-dir))
