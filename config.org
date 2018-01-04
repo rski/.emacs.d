@@ -545,59 +545,52 @@
 * Editing
 ** Evil
    #+BEGIN_SRC emacs-lisp
-     (use-package evil
-       :init (setq evil-want-C-u-scroll t)
-       :config (evil-mode)
-       (define-key evil-normal-state-map (kbd "M-.") nil)
-       (setq evil-fold-list
-             `(((origami-mode)
-                :open-all   ,(lambda () (origami-open-all-nodes (current-buffer)))
-                :close-all  ,(lambda () (origami-close-all-nodes (current-buffer)))
-                :toggle     ,(lambda () (origami-toggle-node (current-buffer) (point)))
-                :open       ,(lambda () (origami-open-node (current-buffer) (point)))
-                :open-rec   ,(lambda () (origami-open-node-recursively (current-buffer) (point)))
-                :close      ,(lambda () (origami-close-node (current-buffer) (point))))))
-       (add-to-list 'evil-emacs-state-modes 'elfeed-search-mode)
-       (add-to-list 'evil-emacs-state-modes 'elfeed-show-mode)
-       :bind (:map evil-motion-state-map
-                   (":" . evil-repeat-find-char)
-                   (";" . evil-ex))
-       :after (evil-leader))
-
-     (use-package evil-collection
-       :defer nil
-       :after evil
-       :config (evil-collection-init))
-
      (defun rski/indent-buffer()
        "what the fn name says"
        (interactive)
        (indent-region (point-min) (point-max)))
 
      (use-package evil-leader
-       :defer t
        :init (global-evil-leader-mode)
-       :config (evil-leader/set-key
-                 "ee" 'eval-last-sexp
-                 "xb" 'helm-mini
-                 "xkk" 'kill-current-buffer
-                 "oo" 'other-window
-                 "of" 'other-frame
-                 "ww" 'evil-window-next
-                 "ws" 'evil-window-split
-                 "ib" 'rski/indent-buffer
-                 "," 'execute-extended-command)
+       :config
+       (evil-leader/set-key
+         "ee" 'eval-last-sexp
+         "xb" 'helm-mini
+         "xkk" 'kill-current-buffer
+         "oo" 'other-window
+         "of" 'other-frame
+         "ww" 'evil-window-next
+         "ws" 'evil-window-split
+         "ib" 'rski/indent-buffer
+         "," 'execute-extended-command)
        (evil-leader/set-leader ",")
-       (define-key evil-normal-state-map (kbd "C-p") 'rski/c-p-dwim))
+       (define-key evil-normal-state-map (kbd "C-p") 'rski/c-p-dwim)
 
-     (use-package evil-escape
-       :diminish evil-escape-mode
-       :config (evil-escape-mode))
+       (use-package evil
+         :init (setq evil-want-C-u-scroll t)
+         :after evil-leader
+         :bind (:map evil-motion-state-map
+                     (":" . evil-repeat-find-char)
+                     (";" . evil-ex))
+         :config (evil-mode)
+         (define-key evil-normal-state-map (kbd "M-.") nil)
+         (setq evil-fold-list
+               `(((origami-mode)
+                  :open-all   ,(lambda () (origami-open-all-nodes (current-buffer)))
+                  :close-all  ,(lambda () (origami-close-all-nodes (current-buffer)))
+                  :toggle     ,(lambda () (origami-toggle-node (current-buffer) (point)))
+                  :open       ,(lambda () (origami-open-node (current-buffer) (point)))
+                  :open-rec   ,(lambda () (origami-open-node-recursively (current-buffer) (point)))
+                  :close      ,(lambda () (origami-close-node (current-buffer) (point))))))
+         (add-to-list 'evil-emacs-state-modes 'elfeed-search-mode)
+         (add-to-list 'evil-emacs-state-modes 'elfeed-show-mode)
 
-     ;; (use-package org-evil)
-     ;; (use-package evil-smartparens)
-     ;; (use-package evil-nerd-commenter)
-     (use-package evil-surround :init (global-evil-surround-mode))
+         (use-package evil-escape
+           :diminish evil-escape-mode
+           :config (evil-escape-mode))
+
+         (use-package evil-surround :config(global-evil-surround-mode))
+         (use-package evil-collection :config (evil-collection-init))))
    #+END_SRC
 ** Folding
    Required by evil-fold
