@@ -6,7 +6,7 @@
 * Bootstart use-package
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'package-archives
-    '("melpa" . "https://melpa.org/packages/"))
+               '("melpa" . "https://melpa.org/packages/"))
   (add-to-list 'package-archives
                '("melpa-stable" . "https://stable.melpa.org/packages/"))
   (unless (package-installed-p 'use-package)
@@ -546,7 +546,6 @@
 ** Evil
    #+BEGIN_SRC emacs-lisp
      (use-package evil
-       ;:defer nil
        :init (setq evil-want-C-u-scroll t)
        :config (evil-mode)
        (define-key evil-normal-state-map (kbd "M-.") nil)
@@ -561,8 +560,8 @@
        (add-to-list 'evil-emacs-state-modes 'elfeed-search-mode)
        (add-to-list 'evil-emacs-state-modes 'elfeed-show-mode)
        :bind (:map evil-motion-state-map
-             (":" . evil-repeat-find-char)
-             (";" . evil-ex))
+                   (":" . evil-repeat-find-char)
+                   (";" . evil-ex))
        :after (evil-leader))
 
      (use-package evil-collection
@@ -570,20 +569,26 @@
        :after evil
        :config (evil-collection-init))
 
+     (defun rski/indent-buffer()
+       "what the fn name says"
+       (interactive)
+       (indent-region (point-min) (point-max)))
+
      (use-package evil-leader
        :defer t
        :init (global-evil-leader-mode)
        :config (evil-leader/set-key
-                "ee" 'eval-last-sexp
-                "xb" 'helm-mini
-                "xkk" 'kill-current-buffer
-                "oo" 'other-window
-                "of" 'other-frame
-                "ww" 'evil-window-next
-                "ws" 'evil-window-split
-                "," 'execute-extended-command)
-               (evil-leader/set-leader ",")
-               (define-key evil-normal-state-map (kbd "C-p") 'rski/c-p-dwim))
+                 "ee" 'eval-last-sexp
+                 "xb" 'helm-mini
+                 "xkk" 'kill-current-buffer
+                 "oo" 'other-window
+                 "of" 'other-frame
+                 "ww" 'evil-window-next
+                 "ws" 'evil-window-split
+                 "ib" 'rski/indent-buffer
+                 "," 'execute-extended-command)
+       (evil-leader/set-leader ",")
+       (define-key evil-normal-state-map (kbd "C-p") 'rski/c-p-dwim))
 
      (use-package evil-escape
        :diminish evil-escape-mode
