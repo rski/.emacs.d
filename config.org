@@ -416,9 +416,7 @@
      (set-face-attribute 'default nil :family "Source Code Pro" :height 105)
      (use-package monokai-theme :defer t)
      (use-package atom-one-dark-theme :defer t)
-     (use-package solarized-theme
-       :defer t
-       :init (load-theme 'solarized-dark 'no-confirm))
+     (use-package solarized-theme :init (load-theme 'solarized-dark 'no-confirm))
      ;;; left fringe arrow face (breakpoint triangle)
      (defface right-triangle-face
        '((t :foreground "red"))
