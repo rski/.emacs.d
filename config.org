@@ -615,25 +615,6 @@
                (lambda ()
                  (setq show-trailing-whitespace nil)))
    #+END_SRC
-** Ledger
-*** The base backage
-   TODO
-   (defvar ledger-environment-alist nil
-  "Variable to hold details about ledger-mode's environment.
-Adding the dotted pair (\"decimal-comma\" . t) will tell ledger
-to treat commas as decimal separator.")
-   #+BEGIN_SRC emacs-lisp
-     (use-package ledger-mode
-       :defer t
-       :config (add-to-list 'auto-mode-alist '("\\.ledger$" . ledger-mode)))
-   #+END_SRC
-*** Flycheck for in-buffer formatting and balancing
-    Pedantic means all accounts and payees need to be defined before being used
-   #+BEGIN_SRC emacs-lisp
-     (use-package flycheck-ledger
-       :defer t
-       :init (setq flycheck-ledger-pedantic "check-payees"))
-   #+END_SRC
 ** IRC
    Make ERC spellcheck messages before I send them
    #+BEGIN_SRC emacs-lisp
