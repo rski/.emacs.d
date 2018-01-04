@@ -260,7 +260,13 @@
            "tt" 'go-test-current-test
            "tv" 'rski/go-current-test-glog-verbose)
          (setq go-test-verbose t)) ;; passes -v to go-test so the test names show when running them
-         )
+
+       (use-package go-rename
+         :defer t
+         :init
+         (evil-leader/set-key-for-mode 'go-mode
+           "rr" 'go-rename))
+       )
    #+END_SRC
 *** Autocompletion, requires [[https://github.com/nsf/gocode%20][gocode]] and gopath to be set to include it
     FIXME: rebind template fwd, backward and yas fwd should i ever set it up with company
@@ -289,14 +295,6 @@
 *** playground inside emacs
     #+BEGIN_SRC emacs-lisp
     (use-package go-playground :defer t)
-    #+END_SRC
-*** go rename for refactoring
-    #+BEGIN_SRC emacs-lisp
-      (use-package go-rename
-         :after go-mode
-         :defer t
-         :bind (:map go-mode-map
-                     ("C-c r" . go-rename)))
     #+END_SRC
 *** metalinter
     #+BEGIN_SRC emacs-lisp
