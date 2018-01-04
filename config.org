@@ -68,11 +68,6 @@
                                               (emr-initialize)
                                               (bind-key "C-c C-a" 'emr-c-insert-include c-mode-base-map))))
     #+END_SRC
-** Tags
-   Don't ask to keep current tags table when changing dirs
-   #+BEGIN_SRC emacs-lisp
-   (setq tags-add-tables nil)
-   #+END_SRC
 * Helm
 #+BEGIN_SRC emacs-lisp
   (use-package helm
@@ -91,10 +86,6 @@
 
 * Languages
   Packages for getting better support for various languages
-** Eldoc
-   #+BEGIN_SRC emacs-lisp
-   (use-package eldoc :diminish eldoc-mode)
-   #+END_SRC
 ** Python
    Python config for company using anaconda.
    #+BEGIN_SRC emacs-lisp
@@ -367,11 +358,6 @@
         (helm-projectile-switch-to-buffer)
       (helm-projectile-switch-project)))
   #+END_SRC
-** scrolling
-   one line at a time
-   #+BEGIN_SRC emacs-lisp
-     (setq scroll-conservatively 1000)
-   #+END_SRC
 ** treemacs
    Treemacs has a built-in persistent tag view. which i want to have.
    It also looks amazing, much better than neotree.
@@ -393,21 +379,9 @@
               ([remap describe-variable] . helpful-variable)
               ([remap describe-key] . helpful-key)))
    #+END_SRC
-** Line numbers
-   This only works with emacs26 but idc
-   #+BEGIN_SRC emacs-lisp
-     (setq display-line-numbers-grow-only t)
-     (add-hook 'prog-mode-hook #'display-line-numbers-mode)
-     (add-hook 'text-mode-hook #'display-line-numbers-mode)
-   #+END_SRC
-** Oh god shut up
-   #+BEGIN_SRC emacs-lisp
-   (setq ring-bell-function 'ignore)
-   #+END_SRC
 ** Which key to show possible candidates for keystrokes after a prefix like C-c
   #+BEGIN_SRC emacs-lisp
     (use-package which-key
-      :defer t
       :init (which-key-mode)
       :diminish which-key-mode)
   #+END_SRC
@@ -423,31 +397,6 @@
   (add-hook 'text-mode-hook (lambda () (setq show-trailing-whitespace t)))
   (add-hook 'prog-mode-hook (lambda () (setq show-trailing-whitespace t)))
   (setq whitespace-style '(face lines-tail))
-#+END_SRC
-
-** Better defaults.
-    Remove toolbars, scroll bars, etc, remember pointer when closing file, mouse yank insert at point,
-    sets require-final-newline, indent-tabs set to nil, other useful stuff
-    Also set it up so that files have at least one directory prefixed. This is really helpful.
-#+BEGIN_SRC emacs-lisp
-(use-package better-defaults :init (setq uniquify-min-dir-content 1))
-#+END_SRC
-
-** Other little nice settings
-
-#+BEGIN_SRC emacs-lisp
-  (setq sentence-end-double-space nil) ;; when filling, use one space after fullstop
-  (defalias 'yes-or-no-p 'y-or-n-p)
-  (setq column-number-mode 1)
-  (setq backup-directory-alist
-        `((".*" . "~/.tmp/emacs")))
-  (setq auto-save-file-name-transforms
-        `((".*" ,"~/.tmp/emacs" t)))
-  (setq visible-bell nil)
-  (setq inhibit-startup-screen t)
-  (add-to-list 'auto-mode-alist '("Cask" . emacs-lisp-mode))
-  (add-hook 'prog-mode-hook (lambda () (setq tab-width 4))) ; 8 is the default and that is waaaay to much
-  (setq create-lockfiles nil);; might be a bad idea but for 99% of the time should be ok
 #+END_SRC
 
 ** Highlight todos
@@ -497,9 +446,6 @@
    #+END_SRC
 ** Mode line
   #+BEGIN_SRC emacs-lisp
-    (setq-default mode-line-format '("" mode-line-modified
-          mode-line-remote " " mode-line-buffer-identification " "
-          mode-line-position mode-line-modes mode-line-misc-info))
   #+END_SRC
 * Org mode
 ** Install org from the repos
@@ -611,27 +557,56 @@
    #+BEGIN_SRC emacs-lisp
    (global-set-key (kbd "M-;") 'comment-line)
    #+END_SRC
-* Make visiting and reloading the config easy
-** Visit the config file
-#+BEGIN_SRC emacs-lisp
-  (defun rski/visit-config ()
-    (interactive)
-    (find-file (substitute-in-file-name "$HOME/.emacs.d/config.org")))
-  (global-set-key (kbd "C-c v") 'rski/visit-config)
-#+END_SRC
-** Load the config with babel
-#+BEGIN_SRC emacs-lisp
-  (defun rski/load-config ()
-    (interactive)
-    (let ((config-file (substitute-in-file-name "$HOME/.emacs.d/config.org")))
-          (org-babel-load-file config-file)))
-#+END_SRC
-* Modeline stuff
-** Display battery and time
-   #+BEGIN_SRC emacs-lisp
-   (display-time-mode t)
-   (display-battery-mode t)
-   (setq battery-mode-line-format "[%L %b%p%% %t]")
+* Misc
+  #+BEGIN_SRC emacs-lisp
+    (defun rski/visit-config ()
+      (interactive)
+      (find-file (substitute-in-file-name "$HOME/.emacs.d/config.org")))
+    (global-set-key (kbd "C-c v") 'rski/visit-config)
+    (defun rski/load-config ()
+      (interactive)
+      (let ((config-file (substitute-in-file-name "$HOME/.emacs.d/config.org")))
+        (org-babel-load-file config-file)))
+
+    ;;; modeline
+    (setq-default mode-line-format '("" mode-line-modified
+          mode-line-remote " " mode-line-buffer-identification " "
+          mode-line-position mode-line-modes mode-line-misc-info))
+    (display-time-mode t)
+    (display-battery-mode t)
+    (setq battery-mode-line-format "[%L %b%p%% %t]")
+
+    ;;; Don't ask to keep current tags table when changing dirs
+    (setq tags-add-tables nil)
+
+    (use-package eldoc :diminish eldoc-mode)
+
+    ;;; line numbers
+    (setq display-line-numbers-grow-only t) ;; confusing otherwise
+    (add-hook 'prog-mode-hook #'display-line-numbers-mode)
+    (add-hook 'text-mode-hook #'display-line-numbers-mode)
+
+    ;;; shut up
+    (setq ring-bell-function 'ignore)
+
+    ;;; scroll one line at a time
+    (setq scroll-conservatively 1000)
+
+    (setq sentence-end-double-space nil) ;; when filling, use one space after fullstop
+    (defalias 'yes-or-no-p 'y-or-n-p)
+    (setq column-number-mode 1)
+    (setq backup-directory-alist
+          `((".*" . "~/.tmp/emacs")))
+    (setq auto-save-file-name-transforms
+          `((".*" ,"~/.tmp/emacs" t)))
+    (setq visible-bell nil)
+    (setq inhibit-startup-screen t)
+    (add-to-list 'auto-mode-alist '("Cask" . emacs-lisp-mode))
+    (add-hook 'prog-mode-hook (lambda () (setq tab-width 4))) ; 8 is the default and that is waaaay to much
+    (setq create-lockfiles nil);; might be a bad idea but for 99% of the time should be ok
+
+    ;; mostly for fixing the backup etc files being saved next to the files
+    (use-package better-defaults :init (setq uniquify-min-dir-content 1))
    #+END_SRC
 * Applications
 ** Eshell
