@@ -52,13 +52,24 @@
             company-auto-complete nil
             company-selection-wrap-around t
             company-dabbrev-downcase nil)
+      (setq company-backends '(company-css
+                               company-semantic
+                               company-clang
+                               company-cmake
+                               company-capf
+                               company-files
+                               (company-dabbrev-code
+                                company-gtags
+                                company-etags
+                                company-keywords)
+                               company-dabbrev))
       :config (company-tng-configure-default)
       (use-package company-statistics
         :config (company-statistics-mode)))
 
     (defmacro local-backend (mode-hook backend)
       "a macro for local company backends
-    example: (local-backend python-mode-hook company-anaconda)"
+        example: (local-backend python-mode-hook company-anaconda)"
       `(add-hook ',mode-hook
                  (lambda ()
                    (add-to-list (make-local-variable 'company-backends)
