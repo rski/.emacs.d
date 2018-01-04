@@ -25,8 +25,12 @@
     :init (add-hook 'after-init-hook #'global-flycheck-mode)
     (add-hook 'after-init-hook #'flycheck-pos-tip-mode)
     (add-hook 'flyspell-mode-hook #'flycheck-color-mode-line-mode)
+    :after evil-leader
     :diminish flycheck-mode
     :config
+    (evil-leader/set-key
+      "fp" 'flycheck-previous-error
+      "fn" 'flycheck-next-error)
     (use-package flycheck-color-mode-line
       :config (setq flycheck-color-mode-line-show-running nil))
     (use-package flycheck-pos-tip))
@@ -571,7 +575,6 @@
        :init (global-evil-leader-mode)
        :config (evil-leader/set-key
                 "ee" 'eval-last-sexp
-                "f" 'helm-find-files
                 "xb" 'helm-mini
                 "xkk" 'kill-current-buffer
                 "oo" 'other-window
