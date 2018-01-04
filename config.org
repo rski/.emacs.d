@@ -332,42 +332,35 @@
     :bind (("M-i" . swiper-helm)))
 #+END_SRC
 ** Projectile
-*** Base projectile package
-   Enable projectile globally, then C-c p is the prefix for projectile.
-#+BEGIN_SRC emacs-lisp
-  (use-package projectile
-    :init (projectile-mode)
-    (add-to-list 'projectile-globally-ignored-directories "Godeps")
-    :config (setq projectile-mode-line
-                  '(:eval (format " Projectile[%s]"
-                                  (projectile-project-name)))))
-#+END_SRC
-*** Helm projectile for some projectile niceness with helm
   #+BEGIN_SRC emacs-lisp
-  ;Helm-ag is required for helm-projectile-ag below
-  (use-package helm-ag :defer t)
-  (use-package helm-projectile
-    :defer nil
-    :config (helm-projectile-on)
-    :commands (helm-projectile-switch-project helm-projectile-switch-to-buffer)
-    :bind ("M-I" . helm-projectile-ag))
-  (defun rski/c-p-dwim()
-    "If inside a project, do find-file, otherwise switch to a project."
-    (interactive)
-    (if (ignore-errors (projectile-project-root))
-        (helm-projectile-switch-to-buffer)
-      (helm-projectile-switch-project)))
+    (use-package projectile
+      :after evil
+      :init (projectile-mode)
+      (add-to-list 'projectile-globally-ignored-directories "Godeps")
+      :config
+      (setq projectile-mode-line
+            '(:eval (format " Projectile[%s]"
+                            (projectile-project-name))))
+
+      ;;;;Helm-ag is required for helm-projectile-ag below
+      (use-package helm-ag :defer t)
+      (use-package helm-projectile
+        :init (helm-projectile-on)
+        :bind ("M-I" . helm-projectile-ag))
+
+      (defun rski/c-p-dwim()
+        "If inside a project, do helm-mini, otherwise switch to a project."
+        (interactive)
+        (if (ignore-errors (projectile-project-root))
+            (helm-projectile-switch-to-buffer)
+          (helm-projectile-switch-project)))
+      (define-key evil-normal-state-map (kbd "C-p") #'rski/c-p-dwim)
+
+      (use-package treemacs :defer t
+        :config
+        (use-package treemacs-projectile :defer t))
+      )
   #+END_SRC
-** treemacs
-   Treemacs has a built-in persistent tag view. which i want to have.
-   It also looks amazing, much better than neotree.
-   #+BEGIN_SRC emacs-lisp
-   (use-package treemacs :defer t)
-   (use-package treemacs-projectile
-     :defer t
-     :after treemacs
-     :after projectile)
-   #+END_SRC
 * Niceties
 ** Helpful
    #+BEGIN_SRC emacs-lisp
@@ -488,7 +481,6 @@
          "ib" 'rski/indent-buffer
          "," 'execute-extended-command)
        (evil-leader/set-leader ",")
-       (define-key evil-normal-state-map (kbd "C-p") 'rski/c-p-dwim)
 
        (use-package evil
          :init (setq evil-want-C-u-scroll t)
