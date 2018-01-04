@@ -488,8 +488,27 @@
 (add-hook 'prog-mode-hook (lambda () (setq tab-width 4))) ; 8 is the default and that is waaaay to much
 (setq create-lockfiles nil);; might be a bad idea but for 99% of the time should be ok
 
-;;; mostly for fixing the backup etc files being saved next to the files
-(use-package better-defaults :init (setq uniquify-min-dir-content 1))
+;;; inlined from better-defaults, minus the cruft
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+(horizontal-scroll-bar-mode -1)
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'forward)
+(setq uniquify-min-dir-content 1)
+(require 'saveplace)
+(setq-default save-place t)
+(global-set-key (kbd "M-/") 'hippie-expand)
+(show-paren-mode 1)
+(setq-default indent-tabs-mode nil)
+(setq save-interprogram-paste-before-kill t
+      apropos-do-all t
+      mouse-yank-at-point t
+      require-final-newline t
+      load-prefer-newer t
+      ediff-window-setup-function 'ediff-setup-windows-plain
+      save-place-file (concat user-emacs-directory "places")
+      backup-directory-alist `(("." . ,(concat user-emacs-directory "backups"))))
 
 ;;; double misc after here
 (use-package brewery
