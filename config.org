@@ -220,6 +220,7 @@
    #+BEGIN_SRC emacs-lisp
      (use-package go-mode
        :defer t
+       :init (add-hook 'before-save-hook 'gofmt-before-save)
        :config (setq gofmt-command "goimports"
                      gofmt-show-errors nil) ;; what do i have flycheck for?
        (evil-define-key 'normal go-mode-map (kbd "gd") 'godef-jump)
@@ -229,9 +230,6 @@
        (evil-define-key 'visual go-mode-map (kbd "god") 'godef-jump-other-window)
        (evil-define-key 'visual go-mode-map (kbd "K") 'godoc-at-point)
        (evil-define-key 'normal godoc-mode-map (kbd "q") 'quit-window)
-       (evil-leader/set-key-for-mode 'go-mode
-         "tf" 'go-test-current-file
-         "tt" 'go-test-current-test)
        ;; workaround not matching multiline signatures
        ;;  https://github.com/dominikh/go-mode.el/issues/57
        (defun rski/go-mode-setup ()
@@ -243,7 +241,26 @@
          (setq fill-column 100)
          (auto-fill-mode t))
        (add-hook 'go-mode-hook #'rski/go-mode-setup)
-       :init (add-hook 'before-save-hook 'gofmt-before-save))
+
+       ;; running tests
+       (use-package gotest
+         :config
+         (add-hook 'go-test-mode-hook 'visual-line-mode)
+         (defun rski/glog-arg-callback(suite test)
+           " -args -v=9 " )
+         (defun rski/go-current-test-glog-verbose ()
+           "Run go test with maximum glog verbosity"
+           (interactive)
+           ;; let doesn't work but this does so
+           (setq go-test-additional-arguments-function #'rski/glog-arg-callback)
+           (go-test-current-test)
+           (setq go-test-additional-arguments-function nil))
+         (evil-leader/set-key-for-mode 'go-mode
+           "tf" 'go-test-current-file
+           "tt" 'go-test-current-test
+           "tv" 'rski/go-current-test-glog-verbose)
+         (setq go-test-verbose t)) ;; passes -v to go-test so the test names show when running them
+         )
    #+END_SRC
 *** Autocompletion, requires [[https://github.com/nsf/gocode%20][gocode]] and gopath to be set to include it
     FIXME: rebind template fwd, backward and yas fwd should i ever set it up with company
@@ -272,16 +289,6 @@
 *** playground inside emacs
     #+BEGIN_SRC emacs-lisp
     (use-package go-playground :defer t)
-    #+END_SRC
-*** go test to run tests
-    #+BEGIN_SRC emacs-lisp
-      (use-package gotest
-        :after go-mode
-        :defer t
-        :config
-        (add-hook 'go-test-mode-hook 'visual-line-mode)
-        (brewery-go-test-config)
-        (setq go-test-verbose t)) ;; passes -v to go-test so the test names show when running them
     #+END_SRC
 *** go rename for refactoring
     #+BEGIN_SRC emacs-lisp
@@ -768,7 +775,7 @@ to treat commas as decimal separator.")
 #+BEGIN_SRC emacs-lisp
  (use-package brewery
    :defer t
-   :commands brewery-go-test-config ;; Whenever I open a go file, this function gets evaluated, pulling the rest of the file along with other commands that should be autoloaded but aren't, so they become available by chance. Eh.
+   :commands dlv-debug-current-test ;; Whenever I open a go file, this function gets evaluated, pulling the rest of the file along with other commands that should be autoloaded but aren't, so they become available by chance. Eh.
    :ensure nil
    :load-path "~/Code/emacs-brewery/")
 #+END_SRC
