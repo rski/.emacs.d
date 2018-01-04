@@ -8,7 +8,7 @@
 (setq custom-file "~/.emacs-custom.el")
 (load custom-file)
 
-; Enables C-x n n to do narrow-to-region
+;;; Enables C-x n n to do narrow-to-region
 (put 'narrow-to-region 'disabled nil)
 
 (setq user-full-name "Romanos Skiadas"
@@ -445,12 +445,11 @@
 
 (defun rski/visit-config ()
   (interactive)
-  (find-file (substitute-in-file-name "$HOME/.emacs.d/config.org")))
+  (find-file user-init-file))
 (global-set-key (kbd "C-c v") 'rski/visit-config)
 (defun rski/load-config ()
   (interactive)
-  (let ((config-file (substitute-in-file-name "$HOME/.emacs.d/config.org")))
-    (org-babel-load-file config-file)))
+  (load-file user-init-file))
 
 ;;; modeline
 (setq-default mode-line-format '("" mode-line-modified
