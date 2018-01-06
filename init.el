@@ -33,6 +33,9 @@
       column-number-mode 1
       )
 
+(setq-default tab-width 4
+              indent-tabs-mode nil)
+
 (load custom-file)
 
 
@@ -491,7 +494,6 @@
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 (add-to-list 'auto-mode-alist '("Cask" . emacs-lisp-mode))
-(add-hook 'prog-mode-hook (lambda () (setq tab-width 4))) ; 8 is the default and that is waaaay to much TODO setq-default?
 
 (menu-bar-mode -1)
 (tool-bar-mode -1)
@@ -504,7 +506,6 @@
 (setq-default save-place t)
 (global-set-key (kbd "M-/") 'hippie-expand)
 (show-paren-mode 1)
-(setq-default indent-tabs-mode nil)
 
 ;;; double misc after here
 (use-package brewery
