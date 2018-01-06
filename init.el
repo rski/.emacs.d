@@ -283,7 +283,6 @@
   (use-package evil-magit
     :config (evil-magit-init)))
 
-
 (use-package git-gutter
   :defer t
   :config (setq git-gutter:update-interval 0.1)
@@ -330,7 +329,6 @@
   :diminish which-key-mode)
 
 (use-package ws-butler
-  :defer t
   :init
   (add-hook 'text-mode-hook #'ws-butler-mode)
   (add-hook 'prog-mode-hook #'ws-butler-mode)
@@ -436,7 +434,6 @@
   :diminish undo-tree-mode)
 
 (use-package smartparens
-  :defer t
   :init
   (add-hook 'prog-mode-hook #'smartparens-mode)
   (add-hook 'text-mode-hook #'smartparens-mode)
