@@ -483,8 +483,7 @@
 
 ;;; line numbers
 (setq display-line-numbers-grow-only t) ;; confusing otherwise
-(add-hook 'prog-mode-hook #'display-line-numbers-mode)
-(add-hook 'text-mode-hook #'display-line-numbers-mode)
+(global-display-line-numbers-mode 1)
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 (add-to-list 'auto-mode-alist '("Cask" . emacs-lisp-mode))
