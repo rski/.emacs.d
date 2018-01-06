@@ -513,9 +513,11 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (horizontal-scroll-bar-mode -1)
-(require 'uniquify) ;; TODO use-package
-(setq uniquify-buffer-name-style 'forward)
-(setq uniquify-min-dir-content 1)
+
+(use-package uniquify
+  :config
+  (setq uniquify-buffer-name-style 'forward
+                uniquify-min-dir-content 1))
 (require 'saveplace) ;; TODO use-package
 (setq-default save-place t)
 (global-set-key (kbd "M-/") 'hippie-expand)
