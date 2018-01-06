@@ -518,8 +518,7 @@
   :config
   (setq uniquify-buffer-name-style 'forward
                 uniquify-min-dir-content 1))
-(require 'saveplace) ;; TODO use-package
-(setq-default save-place t)
+(save-place-mode 1)
 (global-set-key (kbd "M-/") 'hippie-expand)
 (show-paren-mode 1)
 
