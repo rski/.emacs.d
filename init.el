@@ -5,14 +5,37 @@
 ;; You may delete these explanatory comments.
 (package-initialize)
 
-(setq custom-file "~/.emacs-custom.el")
-(load custom-file)
 
 ;;; Enables C-x n n to do narrow-to-region
 (put 'narrow-to-region 'disabled nil)
 
+;;; Various config options
 (setq user-full-name "Romanos Skiadas"
-      user-mail-address "rom.skiad@gmail.com")
+      user-mail-address "rom.skiad@gmail.com"
+      custom-file "~/.emacs-custom.el"
+      vc-handled-backends nil
+      tags-add-tables nil ;;; Don't ask to keep current tags table when changing dirs
+      ring-bell-function 'ignore ;;; shut up
+      scroll-conservatively 1000 ;;; scroll one line at a time
+      sentence-end-double-space nil ;; when filling, use one space after fullstop
+      visible-bell nil
+      inhibit-startup-screen t
+      create-lockfiles nil;; might be a bad idea but for 99% of the time should be ok
+      save-interprogram-paste-before-kill t
+      apropos-do-all t
+      mouse-yank-at-point t
+      require-final-newline t
+      load-prefer-newer t
+      ediff-window-setup-function 'ediff-setup-windows-plain
+      save-place-file (concat user-emacs-directory "places")
+      backup-directory-alist `((".*" . ,(concat user-emacs-directory "backups")))
+      auto-save-file-name-transforms `((".*" ,(concat user-emacs-directory "backups") t))
+      column-number-mode 1
+      )
+
+(load custom-file)
+
+
 
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
@@ -257,7 +280,6 @@
   (use-package evil-magit
     :config (evil-magit-init)))
 
-(setq vc-handled-backends nil)
 
 (use-package git-gutter
   :defer t
@@ -460,9 +482,6 @@
 (display-battery-mode t)
 (setq battery-mode-line-format "[%L %b%p%% %t]")
 
-;;; Don't ask to keep current tags table when changing dirs
-(setq tags-add-tables nil)
-
 (use-package eldoc :diminish eldoc-mode)
 
 ;;; line numbers
@@ -470,46 +489,22 @@
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 (add-hook 'text-mode-hook #'display-line-numbers-mode)
 
-;;; shut up
-(setq ring-bell-function 'ignore)
-
-;;; scroll one line at a time
-(setq scroll-conservatively 1000)
-
-(setq sentence-end-double-space nil) ;; when filling, use one space after fullstop
 (defalias 'yes-or-no-p 'y-or-n-p)
-(setq column-number-mode 1)
-(setq backup-directory-alist
-      `((".*" . "~/.tmp/emacs")))
-(setq auto-save-file-name-transforms
-      `((".*" ,"~/.tmp/emacs" t)))
-(setq visible-bell nil)
-(setq inhibit-startup-screen t)
 (add-to-list 'auto-mode-alist '("Cask" . emacs-lisp-mode))
-(add-hook 'prog-mode-hook (lambda () (setq tab-width 4))) ; 8 is the default and that is waaaay to much
-(setq create-lockfiles nil);; might be a bad idea but for 99% of the time should be ok
+(add-hook 'prog-mode-hook (lambda () (setq tab-width 4))) ; 8 is the default and that is waaaay to much TODO setq-default?
 
-;;; inlined from better-defaults, minus the cruft
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (horizontal-scroll-bar-mode -1)
-(require 'uniquify)
+(require 'uniquify) ;; TODO use-package
 (setq uniquify-buffer-name-style 'forward)
 (setq uniquify-min-dir-content 1)
-(require 'saveplace)
+(require 'saveplace) ;; TODO use-package
 (setq-default save-place t)
 (global-set-key (kbd "M-/") 'hippie-expand)
 (show-paren-mode 1)
 (setq-default indent-tabs-mode nil)
-(setq save-interprogram-paste-before-kill t
-      apropos-do-all t
-      mouse-yank-at-point t
-      require-final-newline t
-      load-prefer-newer t
-      ediff-window-setup-function 'ediff-setup-windows-plain
-      save-place-file (concat user-emacs-directory "places")
-      backup-directory-alist `(("." . ,(concat user-emacs-directory "backups"))))
 
 ;;; double misc after here
 (use-package brewery
