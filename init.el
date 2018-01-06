@@ -240,27 +240,27 @@
   (use-package gotest
     :config
     (add-hook 'go-test-mode-hook 'visual-line-mode)
-    (defvar dlv-debug-last-command nil "")
-    (defun dlv-debug-current-test()
+    (defvar rski/dlv-debug-last-command nil "")
+    (defun rski/dlv-debug-current-test()
       "Get the current test and run it inside dlv"
       (interactive)
-      (setq dlv-buffer (get-buffer "*gud-test*"))
-      (if dlv-buffer
-          (kill-buffer dlv-buffer))
+      (let ((dlv-buffer (get-buffer "*gud-test*")))
+        (if dlv-buffer
+            (kill-buffer dlv-buffer)))
       (let ((buff (current-buffer)))
         (switch-to-buffer-other-window buff))
       (let* ((test-name (go-test--get-current-test))
-         ;;; TODO something about the -v 9
+             ;;; TODO something about the -v 9, it breaks packages that don't use glog
              (command (format "dlv test -- -test.run %s -v 9" test-name)))
-        (setq dlv-debug-last-command command)
+        (setq rski/dlv-debug-last-command command)
         (message command)
         (dlv command)))
-    (defun dlv-debug-last-test()
+    (defun rski/dlv-debug-last-test()
       "Rerun dlv with the last test debugged."
       (interactive)
-      (unless dlv-debug-last-command
+      (unless rski/dlv-debug-last-command
         (user-error "It seems this was the first time you tried to debug a test, try running dlv-debug-current-test"))
-      (dlv dlv-debug-last-command))
+      (dlv rski/dlv-debug-last-command))
     (defun rski/glog-arg-callback(suite test)
       " -args -v=9 " )
     (defun rski/go-current-test-glog-verbose ()
