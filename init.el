@@ -503,7 +503,7 @@
 ;;; double misc after here
 (use-package brewery
   :defer t
-  :commands dlv-debug-current-test ;; Whenever I open a go file, this function gets evaluated, pulling the rest of the file along with other commands that should be autoloaded but aren't, so they become available by chance. Eh.
+  :commands dlv-debug-current-test
   :ensure nil
   :load-path "~/Code/emacs-brewery/")
 
