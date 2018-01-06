@@ -5,7 +5,6 @@
 ;; You may delete these explanatory comments.
 (package-initialize)
 
-
 ;;; Enables C-x n n to do narrow-to-region
 (put 'narrow-to-region 'disabled nil)
 
@@ -463,9 +462,11 @@
     "sw" 'sp-rewrap-sexp)
   (require 'smartparens-config)
   :diminish smartparens-mode)
+
 (add-hook 'eshell-mode-hook
           (lambda ()
             (setq show-trailing-whitespace nil)))
+
 (use-package erc
   :defer t
   :config
@@ -506,21 +507,21 @@
 (setq display-line-numbers-grow-only t) ;; confusing otherwise
 (global-display-line-numbers-mode 1)
 
-(defalias 'yes-or-no-p 'y-or-n-p)
-(add-to-list 'auto-mode-alist '("Cask" . emacs-lisp-mode))
-
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (horizontal-scroll-bar-mode -1)
+(save-place-mode 1)
+(show-paren-mode 1)
+
+(defalias 'yes-or-no-p 'y-or-n-p)
+(add-to-list 'auto-mode-alist '("Cask" . emacs-lisp-mode))
 
 (use-package uniquify
   :config
   (setq uniquify-buffer-name-style 'forward
                 uniquify-min-dir-content 1))
-(save-place-mode 1)
 (global-set-key (kbd "M-/") 'hippie-expand)
-(show-paren-mode 1)
 
 ;;; double misc after here
 (use-package brewery
