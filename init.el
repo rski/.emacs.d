@@ -31,14 +31,15 @@
       backup-directory-alist `((".*" . ,(concat user-emacs-directory "backups")))
       auto-save-file-name-transforms `((".*" ,(concat user-emacs-directory "backups") t))
       column-number-mode 1
+      whitespace-style '(face lines-tail)
       )
 
 (setq-default tab-width 4
-              indent-tabs-mode nil)
+              indent-tabs-mode nil
+              show-trailing-whitespace t
+              )
 
 (load custom-file)
-
-
 
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
@@ -333,10 +334,6 @@
   (add-hook 'text-mode-hook #'ws-butler-mode)
   (add-hook 'prog-mode-hook #'ws-butler-mode)
   :diminish ws-butler-mode)
-
-(add-hook 'text-mode-hook (lambda () (setq show-trailing-whitespace t)))
-(add-hook 'prog-mode-hook (lambda () (setq show-trailing-whitespace t)))
-(setq whitespace-style '(face lines-tail))
 
 (use-package hl-todo :init (global-hl-todo-mode))
 
