@@ -476,6 +476,7 @@
 
 (use-package erc
   :defer t
+  :ensure nil
   :config
   (erc-notifications-mode 1)
   (add-hook 'erc-connect-pre-hook #'erc-spelling-mode)
@@ -509,7 +510,7 @@
 (display-battery-mode t)
 (setq battery-mode-line-format "[%L %b%p%% %t]")
 
-(use-package eldoc :diminish eldoc-mode)
+(use-package eldoc :diminish eldoc-mode :ensure nil)
 
 ;;; line numbers
 (setq display-line-numbers-grow-only t) ;; confusing otherwise
@@ -526,6 +527,7 @@
 (add-to-list 'auto-mode-alist '("Cask" . emacs-lisp-mode))
 
 (use-package uniquify
+  :ensure nil
   :config
   (setq uniquify-buffer-name-style 'forward
         uniquify-min-dir-content 1))
@@ -564,6 +566,5 @@
 (defun rski/rfc (rfc)
   (interactive "nView RFC>")
   (eww (format "https://tools.ietf.org/html/rfc%s" rfc)))
-
 
 (setq gc-cons-threshold 80000)
