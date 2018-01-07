@@ -470,7 +470,8 @@
 (use-package erc
   :defer t
   :config
-  (add-hook 'erc-mode-hook 'erc-spelling-mode)
+  (erc-notifications-mode 1)
+  (add-hook 'erc-connect-pre-hook #'erc-spelling-mode)
   (setq erc-autojoin-mode t)
   (setq erc-pcomplete-nick-postfix ", "))
 
@@ -520,7 +521,7 @@
 (use-package uniquify
   :config
   (setq uniquify-buffer-name-style 'forward
-                uniquify-min-dir-content 1))
+        uniquify-min-dir-content 1))
 (global-set-key (kbd "M-/") 'hippie-expand)
 
 ;;; double misc after here
