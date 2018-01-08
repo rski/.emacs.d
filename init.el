@@ -443,8 +443,6 @@
                 (";" . evil-ex))
     :config (evil-mode)
     (define-key evil-normal-state-map (kbd "M-.") nil)
-    (add-to-list 'evil-emacs-state-modes 'elfeed-search-mode)
-    (add-to-list 'evil-emacs-state-modes 'elfeed-show-mode)
 
     (use-package evil-escape
       :diminish evil-escape-mode
@@ -491,7 +489,9 @@
                 '(("http://planet.emacsen.org/atom.xml" emacs)
                   ("http://steve-yegge.blogspot.com/atom.xml" blog emacs)
                   ("http://nullprogram.com/feed/" blog emacs)
-                  ("https://jvns.ca/atom.xml" blog))))
+                  ("https://jvns.ca/atom.xml" blog)
+                  ("https://dave.cheney.net/feed/atom" blog golang)
+                  )))
 
 ;;;Rebind M-; to comment out lines instead of insert comments in the end
 (global-set-key (kbd "M-;") 'comment-line)
