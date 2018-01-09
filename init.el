@@ -349,12 +349,16 @@
     :init (counsel-projectile-mode)
     :bind ("M-I". counsel-projectile-ag)) ;; TODO asks for 3 chars min
 
-  (defun rski/c-p-dwim()
-    "If inside a project, list open buffers, otherwise switch to a project."
-    (interactive)
-    (if (ignore-errors (projectile-project-root))
-        (counsel-projectile-switch-to-buffer)
-      (counsel-projectile-switch-project)))
+  (defun rski/c-p-dwim(arg)
+    "If inside a project, perform an action, otherwise switch to a project.
+    Default action is projectile-switch-to-buffer
+    With a numeric argument, the action is projectile-find-file"
+    (interactive "p")
+    (cl-flet ((in-project-action () (if (= arg 4) (counsel-projectile-find-file)
+                                      (counsel-projectile-switch-to-buffer))))
+      (if (ignore-errors (projectile-project-root))
+          (in-project-action)
+        (counsel-projectile-switch-project))))
 
   (define-key evil-normal-state-map (kbd "C-p") #'rski/c-p-dwim)
 
