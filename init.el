@@ -347,7 +347,7 @@
 
   (use-package counsel-projectile
     :init (counsel-projectile-mode)
-    :bind ("M-I". counsel-projectile-ag)) ;; TODO asks for 3 chars min
+    :bind ("M-I". counsel-projectile-rg))
 
   (defun rski/c-p-dwim(arg)
     "If inside a project, perform an action, otherwise switch to a project.
