@@ -145,8 +145,8 @@
   (use-package swiper
     :bind ("M-i" . swiper))
 
-  ;; (use-package ivy-todo)
-  ;; (use-package ivy-xref)
+  (use-package ivy-xref
+    :init (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
 
   ;;; This requires the fonts to be installed, M-x all-the-icons-install-fonts
   (use-package all-the-icons-ivy
