@@ -148,9 +148,9 @@
   ;; (use-package ivy-todo)
   ;; (use-package ivy-xref)
 
-  ;; FIXME this is nice but the icons are garbled
-  ;;(use-package all-the-icons-ivy
-  ;;  :init (all-the-icons-ivy-setup))
+  ;;; This requires the fonts to be installed, M-x all-the-icons-install-fonts
+  (use-package all-the-icons-ivy
+    :init (all-the-icons-ivy-setup))
   )
 
 (use-package anaconda-mode
