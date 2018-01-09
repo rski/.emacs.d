@@ -119,22 +119,39 @@
                                         (emr-initialize)
                                         (bind-key "C-c C-a" 'emr-c-insert-include c-mode-base-map))))
 
-(use-package helm
-  :init (helm-mode 1)
-  :diminish helm-mode
-  :bind (([remap execute-extended-command] . helm-M-x)
-         ("M-y" . helm-show-kill-ring)
-         ([remap find-file] . helm-find-files)
-         ("M-o" . 'helm-semantic-or-imenu)
-         ([remap switch-to-buffer] . helm-mini))
-  :config (setq helm-ff-skip-boring-files t
-                helm-buffer-max-length 50)
+(use-package ivy
+  :init (ivy-mode)
+  :diminish ivy-mode
+  :config (setq ivy-count-format ""
+                ivy-height 20
+                ;;; Add recentf and bookmarks to ivy-switch-buffer
+                ivy-use-virtual-buffers t)
 
-  (use-package swiper-helm
-    :defer t
-    :bind (("M-i" . swiper-helm)))
+  ;;; Required for editing search results with ivy-ag and family
+  (use-package wgrep :defer t)
 
-  (use-package helm-tramp :defer t))
+  (use-package counsel
+    :init (counsel-mode)
+    :diminish counsel-mode
+    :config
+    (setq counsel-yank-pop-height 20
+          counsel-yank-pop-separator "\n--\n"
+        ;;; Hide files with leading dots. This can be toggled with C-c C-a or by typing a dot
+          counsel-find-file-ignore-regexp "\\`\\."
+          )
+    :bind (("M-y" . counsel-yank-pop)
+           ("M-o" . counsel-semantic-or-imenu)))
+
+  (use-package swiper
+    :bind ("M-i" . swiper))
+
+  ;; (use-package ivy-todo)
+  ;; (use-package ivy-xref)
+
+  ;; FIXME this is nice but the icons are garbled
+  ;;(use-package all-the-icons-ivy
+  ;;  :init (all-the-icons-ivy-setup))
+  )
 
 (use-package anaconda-mode
   :defer t
@@ -328,18 +345,17 @@
         '(:eval (format " Projectile[%s]"
                         (projectile-project-name))))
 
-  ;;;;Helm-ag is required for helm-projectile-ag below
-  (use-package helm-ag :defer t)
-  (use-package helm-projectile
-    :init (helm-projectile-on)
-    :bind ("M-I" . helm-projectile-ag))
+  (use-package counsel-projectile
+    :init (counsel-projectile-mode)
+    :bind ("M-I". counsel-projectile-ag)) ;; TODO asks for 3 chars min
 
   (defun rski/c-p-dwim()
-    "If inside a project, do helm-mini, otherwise switch to a project."
+    "If inside a project, list open buffers, otherwise switch to a project."
     (interactive)
     (if (ignore-errors (projectile-project-root))
-        (helm-projectile-switch-to-buffer)
-      (helm-projectile-switch-project)))
+        (counsel-projectile-switch-to-buffer)
+      (counsel-projectile-switch-project)))
+
   (define-key evil-normal-state-map (kbd "C-p") #'rski/c-p-dwim)
 
   (use-package treemacs :defer t
@@ -427,7 +443,7 @@
   :config
   (evil-leader/set-key
     "ee" 'eval-last-sexp
-    "xb" 'helm-mini
+    "xb" 'ivy-switch-buffer
     "xkk" 'kill-current-buffer
     "oo" 'other-window
     "of" 'other-frame
