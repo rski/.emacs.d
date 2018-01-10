@@ -54,7 +54,7 @@
 (use-package flycheck
   :init (add-hook 'after-init-hook #'global-flycheck-mode)
   (add-hook 'after-init-hook #'flycheck-pos-tip-mode)
-  (add-hook 'flyspell-mode-hook #'flycheck-color-mode-line-mode)
+  (add-hook 'flycheck-mode-hook #'flycheck-color-mode-line-mode)
   (setq flycheck-global-modes '(not emacs-lisp-mode))
 
   :after evil-leader
