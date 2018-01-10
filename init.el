@@ -69,6 +69,7 @@
 
 (use-package flyspell
   :defer t
+  :if (executable-find "aspell")
   :init
   (add-hook 'text-mode-hook #'flyspell-mode)
   (add-hook 'prog-mode-hook #'flyspell-prog-mode)
