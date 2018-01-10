@@ -352,10 +352,12 @@
   (defun rski/c-p-dwim(arg)
     "If inside a project, perform an action, otherwise switch to a project.
     Default action is projectile-switch-to-buffer
-    With a numeric argument, the action is projectile-find-file"
+    With a numeric argument, the action is projectile-find-file.
+    With twice the numeric argument, the action is switch-project"
     (interactive "p")
-    (cl-flet ((in-project-action () (if (= arg 4) (counsel-projectile-find-file)
-                                      (counsel-projectile-switch-to-buffer))))
+    (cl-flet ((in-project-action () (cond ((= arg 4) (counsel-projectile-find-file))
+                                          ((= arg 16) (counsel-projectile-switch-project))
+                                          (t (counsel-projectile-switch-to-buffer)))))
       (if (ignore-errors (projectile-project-root))
           (in-project-action)
         (counsel-projectile-switch-project))))
