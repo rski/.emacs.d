@@ -222,7 +222,10 @@
   (user-error "GOPATH unset"))
 (use-package go-mode
   :defer t
-  :init (add-hook 'go-mode-hook (lambda () (add-hook 'before-save-hook 'gofmt nil t)))
+  :init (add-hook 'go-mode-hook (lambda () (add-hook 'before-save-hook
+                                                (lambda ()
+                                                  (gofmt-before-save))
+                                                nil t)))
   :config (setq gofmt-command "goimports"
                 gofmt-show-errors nil) ;; what do i have flycheck for?
   (evil-define-key 'normal go-mode-map (kbd "gd") 'godef-jump)
