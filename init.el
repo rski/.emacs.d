@@ -373,6 +373,7 @@
   :defer t
   :config (evil-define-key 'normal helpful-mode-map
             "q" 'quit-window)
+  ;; FIXME describe-fuction/variable are broken??
   :bind (([remap describe-function] . helpful-callable)
          ([remap describe-variable] . helpful-variable)
          ([remap describe-key] . helpful-key)))
