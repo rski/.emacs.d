@@ -143,6 +143,20 @@
     :bind (("M-y" . counsel-yank-pop)
            ("M-o" . counsel-semantic-or-imenu)))
 
+  ;; requires auth tokens to work
+  (use-package counsel-spotify
+    :defer t
+    :after evil-leader
+    :init
+    (evil-leader/set-key
+      "oss" 'counsel-spotify-search-track
+      "osa" 'counsel-spotify-search-artist)
+    :config
+    (defun counsel-spotify-action-linux (action)
+      "Version of the function that doesn't shell-quote ACTION, which dbus doesn't seem to like."
+      (shell-command (concat counsel-spotify-dbus-call "org.mpris.MediaPlayer2.Player." action)))
+    :commands (counsel-spotify-search-album counsel-spotify-search-track counsel-spotify-search-artist))
+
   (use-package swiper
     :bind ("M-i" . swiper))
 
