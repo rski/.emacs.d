@@ -450,7 +450,9 @@
   (indent-region (point-min) (point-max)))
 
 (use-package evil-leader
-  :init (global-evil-leader-mode)
+  :init
+  (setq evil-want-integration nil)
+  (global-evil-leader-mode)
   :config
   (evil-leader/set-key
     "ee" 'eval-last-sexp
