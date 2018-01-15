@@ -465,7 +465,6 @@
   (evil-leader/set-leader ",")
 
   (use-package evil
-    :init (setq evil-want-C-u-scroll t)
     :after evil-leader
     :bind (:map evil-motion-state-map
                 (":" . evil-repeat-find-char)
