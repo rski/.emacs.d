@@ -5,6 +5,10 @@
 ;; You may delete these explanatory comments.
 (package-initialize)
 
+;;; Overwrite the custom-file clobbering. I think I want this?
+(defun package--save-selected-packages (&optional value)
+  "Do nothing")
+
 ;;; Enables C-x n n to do narrow-to-region
 (put 'narrow-to-region 'disabled nil)
 
