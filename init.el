@@ -364,7 +364,7 @@
   (add-to-list 'projectile-globally-ignored-directories "Godeps")
   :config
   (setq projectile-mode-line
-        '(:eval (format " Projectile[%s]"
+        '(:eval (format " [%s]"
                         (projectile-project-name))))
 
   (use-package counsel-projectile
