@@ -144,6 +144,8 @@
         ;;; Hide files with leading dots. This can be toggled with C-c C-a or by typing a dot
           counsel-find-file-ignore-regexp "\\`\\."
           )
+    (use-package smex
+      :defer nil)
     :bind (("M-y" . counsel-yank-pop)
            ("M-o" . counsel-semantic-or-imenu)))
 
