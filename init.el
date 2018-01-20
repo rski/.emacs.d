@@ -241,9 +241,9 @@
 (use-package go-mode
   :defer t
   :init (add-hook 'go-mode-hook (lambda () (add-hook 'before-save-hook
-                                                (lambda ()
-                                                  (gofmt-before-save))
-                                                nil t)))
+                                                     (lambda ()
+                                                       (gofmt-before-save))
+                                                     nil t)))
   :config (setq gofmt-command "goimports"
                 gofmt-show-errors nil) ;; what do i have flycheck for?
   (evil-define-key 'normal go-mode-map (kbd "gd") 'godef-jump)
@@ -355,6 +355,21 @@
 (use-package git-gutter
   :defer t
   :config (setq git-gutter:update-interval 0.1)
+  ;;; TODO upstream the delete fix
+  (defun git-gutter:live-update ()
+    (git-gutter:awhen (git-gutter:base-file)
+      (when (and git-gutter:enabled
+                 (buffer-modified-p)
+                 (git-gutter:should-update-p))
+        (let ((file (file-name-nondirectory it))
+              (now (make-temp-file "git-gutter-cur"))
+              (original (make-temp-file "git-gutter-orig")))
+          (when (git-gutter:write-original-content original file)
+            (git-gutter:write-current-content now)
+            (git-gutter:start-live-update file original now))
+          (delete-file now)
+          (delete-file original)))))
+
   :init (global-git-gutter-mode t)
   :diminish git-gutter-mode)
 
