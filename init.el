@@ -52,6 +52,7 @@
 
 (setq use-package-always-ensure t)
 (package-refresh-contents t)
+(add-hook 'prog-mode-hook #'bug-reference-prog-mode)
 
 (use-package flycheck
   :init (add-hook 'after-init-hook #'global-flycheck-mode)
