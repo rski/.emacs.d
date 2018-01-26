@@ -600,10 +600,7 @@
 (global-set-key (kbd "M-/") 'hippie-expand)
 
 ;;; double misc after here
-(use-package brewery
-  :defer t
-  :ensure nil
-  :load-path "~/Code/emacs-brewery/")
+(load-file "~/Code/emacs-brewery/brewery.el")
 
 ;;; List some unported remacs functions
 (defun list-unported-remacs-funcs (remacs-dir)
