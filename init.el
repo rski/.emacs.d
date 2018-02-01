@@ -126,8 +126,7 @@
 (use-package ivy
   :init (ivy-mode)
   :diminish ivy-mode
-  :config (setq ivy-count-format ""
-                ivy-height 20
+  :config (setq ivy-height 20
                 ;;; Add recentf and bookmarks to ivy-switch-buffer
                 ivy-use-virtual-buffers t)
 
