@@ -639,4 +639,10 @@
   (interactive "nView RFC>")
   (eww (format "https://tools.ietf.org/html/rfc%s" rfc)))
 
+(defun rski/ediff-wordwise-in-current-buffer ()
+  "Thin wrapper around `ediff-regions-wordwise'.
+I always end up doing it in current buffer so might as well wrap it."
+  (interactive)
+  (ediff-regions-wordwise (current-buffer) (current-buffer)))
+
 (setq gc-cons-threshold 80000)
