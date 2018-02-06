@@ -540,15 +540,9 @@
   (require 'smartparens-config)
   :diminish smartparens-mode)
 
-(add-hook 'eshell-mode-hook
-          (lambda ()
-            (setq show-trailing-whitespace nil)))
-(add-hook 'compilation-mode-hook
-          (lambda ()
-            (setq show-trailing-whitespace nil)))
-(add-hook 'debugger-mode-hook
-          (lambda ()
-            (setq show-trailing-whitespace nil)))
+(dolist (hook '(eshell-mode-hook compilation-mode-hook debugger-mode-hook))
+  (add-hook hook
+            (lambda () (setq show-trailing-whitespace nil))))
 
 (use-package erc
   :defer t
