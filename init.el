@@ -349,7 +349,9 @@
 
 (use-package magit
   :defer t
-  :init (setq magit-bury-buffer-function 'magit-mode-quit-window)
+  :init (setq magit-bury-buffer-function 'magit-mode-quit-window
+              magit-log-section-commit-count 20
+              )
   :bind ("C-c g" . magit-status)
   :config
   (defun rski/magit-push-review()
