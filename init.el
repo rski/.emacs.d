@@ -577,8 +577,8 @@
   (load-file user-init-file))
 
 ;;; modeline
-(setq-default mode-line-format '("" mode-line-modified
-                                 mode-line-remote " " mode-line-buffer-identification " "
+(setq-default mode-line-format '("" mode-line-modified mode-line-remote
+                                 mode-line-buffer-identification " "
                                  mode-line-position mode-line-modes mode-line-misc-info))
 (display-time-mode t)
 (display-battery-mode t)
