@@ -241,9 +241,9 @@
 (use-package go-mode
   :defer t
   :init (add-hook 'go-mode-hook (lambda () (add-hook 'before-save-hook
-                                                     (lambda ()
-                                                       (gofmt-before-save))
-                                                     nil t)))
+                                                (lambda ()
+                                                  (gofmt-before-save))
+                                                nil t)))
   :config (setq gofmt-command "goimports"
                 gofmt-show-errors nil) ;; what do i have flycheck for?
   (evil-define-key 'normal go-mode-map (kbd "gd") 'godef-jump)
@@ -644,10 +644,13 @@
   (interactive "nView RFC>")
   (eww (format "https://tools.ietf.org/html/rfc%s" rfc)))
 
-(defun rski/ediff-wordwise-in-current-buffer ()
-  "Thin wrapper around `ediff-regions-wordwise'.
+(use-package ediff
+  :defer t
+  :init
+  (defun rski/ediff-wordwise-in-current-buffer ()
+    "Thin wrapper around `ediff-regions-wordwise'.
 I always end up doing it in current buffer so might as well wrap it."
-  (interactive)
-  (ediff-regions-wordwise (current-buffer) (current-buffer)))
+    (interactive)
+    (ediff-regions-wordwise (current-buffer) (current-buffer))))
 
 (setq gc-cons-threshold 80000)
