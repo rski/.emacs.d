@@ -544,6 +544,9 @@
 (add-hook 'compilation-mode-hook
           (lambda ()
             (setq show-trailing-whitespace nil)))
+(add-hook 'debugger-mode-hook
+          (lambda ()
+            (setq show-trailing-whitespace nil)))
 
 (use-package erc
   :defer t
