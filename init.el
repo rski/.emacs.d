@@ -356,6 +356,7 @@
               )
   :bind ("C-c g" . magit-status)
   :config
+  (set-face-background 'diff-refine-added "green3")
   (defun rski/magit-push-review()
     (interactive)
     (magit-run-git-async "push" "review"))
@@ -456,6 +457,13 @@
 (use-package monokai-theme :defer t)
 (use-package atom-one-dark-theme :defer t)
 (use-package solarized-theme :init (load-theme 'solarized-dark 'no-confirm))
+
+(use-package whitespace
+  :defer t
+  :ensure nil
+  :config
+  (set-face-foreground 'whitespace-line "#d33682")
+  (set-face-underline 'whitespace-line "#d33682"))
 
 ;;; left fringe arrow face (breakpoint triangle)
 (defface right-triangle-face
