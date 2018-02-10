@@ -542,10 +542,10 @@
   (require 'smartparens-config)
   :diminish smartparens-mode)
 
-(dolist (hook '(eshell-mode-hook compilation-mode-hook debugger-mode-hook shell-mode-hook
-                                 Info-mode-hook))
-  (add-hook hook
-            (lambda () (setq show-trailing-whitespace nil))))
+(dolist (mode '("eshell" "compilation" "debugger" "shell" "Info"))
+  (let ((mode-hook (intern (format "%s-mode-hook" mode))))
+    (add-hook mode-hook
+              (lambda () (setq show-trailing-whitespace nil)))))
 
 (use-package erc
   :defer t
