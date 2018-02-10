@@ -542,7 +542,8 @@
   (require 'smartparens-config)
   :diminish smartparens-mode)
 
-(dolist (hook '(eshell-mode-hook compilation-mode-hook debugger-mode-hook shell-mode-hook))
+(dolist (hook '(eshell-mode-hook compilation-mode-hook debugger-mode-hook shell-mode-hook
+                                 Info-mode-hook))
   (add-hook hook
             (lambda () (setq show-trailing-whitespace nil))))
 
