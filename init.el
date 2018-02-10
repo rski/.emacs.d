@@ -436,6 +436,16 @@
   :diminish ws-butler-mode)
 
 (use-package hl-todo :init (global-hl-todo-mode))
+(use-package highlight-blocks
+  :defer t
+  :config
+  ;;; only highlight the current block, not its parents
+  (setq highlight-blocks-max-innermost-block-count 1)
+  (set-face-background 'highlight-blocks-depth-1-face "#002f3f")
+  ;;; solarized-dark default bg is "#002b36"
+  :init
+  (add-hook 'emacs-lisp-mode-hook
+            (lambda () (highlight-blocks-mode t))))
 
 (use-package anzu
   :diminish anzu-mode
