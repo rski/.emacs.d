@@ -541,7 +541,17 @@
       :config (evil-escape-mode))
 
     (use-package evil-surround :config(global-evil-surround-mode))
-    (use-package evil-collection :config (evil-collection-init))))
+
+    (use-package evil-collection
+      :init
+      (setq evil-collection-mode-list
+            '(anaconda-mode bookmark calendar comint company compile custom debug diff-mode dired doc-view edebug elfeed elisp-mode elisp-refs eshell eval-sexp-fu eww flycheck ggtags help info ivy macrostep
+                            (occur replace)
+                            (package-menu package)
+                            profiler python racer ruby-mode rtags
+                            (term term ansi-term multi-term)
+                            woman xref))
+      :config (evil-collection-init))))
 
 (use-package undo-tree
   :defer t
