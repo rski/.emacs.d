@@ -595,6 +595,8 @@
                   ("http://nullprogram.com/feed/" blog emacs)
                   ("https://jvns.ca/atom.xml" blog)
                   ("https://dave.cheney.net/feed/atom" blog golang)
+                  ("https://hackaday.com/blog/feed/" hacks)
+                  ("feeds.feedburner.com/Airs-IanLanceTaylor" blog)
                   )))
 
 ;;;Rebind M-; to comment out lines instead of insert comments in the end
