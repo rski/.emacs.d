@@ -665,9 +665,9 @@
   (interactive)
   (list-unported-remacs-funcs "~/Code/rust/remacs"))
 
-(defun rski/rfc (rfc)
-  (interactive "nView RFC>")
-  (eww (format "https://tools.ietf.org/html/rfc%s" rfc)))
+(defun rski/yang-rfc ()
+  (interactive)
+  (eww "https://tools.ietf.org/html/rfc6020"))
 
 (use-package ediff
   :defer t
