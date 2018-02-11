@@ -35,6 +35,7 @@
       auto-save-file-name-transforms `((".*" ,(concat user-emacs-directory "backups") t))
       column-number-mode 1
       whitespace-style '(face lines-tail)
+      default-input-method "greek" ;; C-\ will switch between default-input-method and the actual kb layout
       )
 
 (setq-default tab-width 4
