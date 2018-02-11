@@ -679,4 +679,11 @@ I always end up doing it in current buffer so might as well wrap it."
     (interactive)
     (ediff-regions-wordwise (current-buffer) (current-buffer))))
 
+(use-package comint
+  :defer t
+  :ensure nil
+  :config
+  (set-face-attribute 'comint-highlight-input nil :underline "light gray" :weight 'bold)
+  (set-face-attribute 'comint-highlight-prompt nil :foreground "deep sky blue"))
+
 (setq gc-cons-threshold 80000)
