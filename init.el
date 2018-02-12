@@ -481,6 +481,12 @@
   (setq org-todo-keywords
         '((sequence "TODO" "|" "DONE" "ABANDONED")))
   (setq org-hide-leading-stars t)
+  ;; in long folding buffers, show-paren-mode + display-line-numbers causes the test to move around
+  (defun rski/maybe-disable-show-paren-mode ()
+    (if (> (point-max) 100)
+        (show-paren-mode -1)))
+  (add-hook 'org-mode-hook
+            #'rski/maybe-disable-show-paren-mode)
   :bind (("\C-col" . org-store-link)
          ("\C-coa" . org-agenda)
          ("\C-coc" . org-capture)
