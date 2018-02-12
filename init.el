@@ -88,8 +88,7 @@
         company-auto-complete nil
         company-selection-wrap-around t
         company-dabbrev-downcase nil)
-  (setq company-backends '(company-css
-                           company-semantic
+  (setq company-backends '(company-semantic
                            company-clang
                            company-cmake
                            company-capf
