@@ -525,6 +525,7 @@
     "ww" 'evil-window-next
     "ws" 'evil-window-split
     "ib" 'rski/indent-buffer
+    "gb" 'magit-blame
     "," 'execute-extended-command)
   (evil-leader/set-leader ",")
 
