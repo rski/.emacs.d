@@ -689,4 +689,9 @@ I always end up doing it in current buffer so might as well wrap it."
   (set-face-attribute 'comint-highlight-input nil :underline "light gray" :weight 'bold)
   (set-face-attribute 'comint-highlight-prompt nil :foreground "deep sky blue"))
 
+(use-package tex-mode
+  :defer t
+  :ensure nil
+  :config (setq tex-dvi-view-command "evince"))
+
 (setq gc-cons-threshold 80000)
