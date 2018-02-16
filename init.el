@@ -279,6 +279,7 @@
 
   ;;; requires the gometalinter binary
   (use-package flycheck-gometalinter
+    :if (executable-find "gometalinter")
     :init (add-hook 'go-mode-hook (lambda () (flycheck-select-checker 'gometalinter)))
     :config
     (setq flycheck-gometalinter-fast t)
