@@ -43,6 +43,9 @@
               show-trailing-whitespace t
               )
 
+;; compose-mail
+(global-unset-key (kbd "C-x m"))
+
 (load custom-file)
 
 (add-to-list 'package-archives
