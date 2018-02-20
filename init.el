@@ -73,7 +73,9 @@
     "fn" 'flycheck-next-error)
   (use-package flycheck-color-mode-line
     :config (setq flycheck-color-mode-line-show-running nil))
-  (use-package flycheck-pos-tip))
+  (use-package flycheck-pos-tip)
+  (put 'flycheck-yang-path 'safe-local-variable #'stringp)
+  )
 
 (use-package flyspell
   :defer t
