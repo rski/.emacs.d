@@ -544,6 +544,15 @@
                 (":" . evil-repeat-find-char)
                 (";" . evil-ex))
     :config (evil-mode)
+    ;;; allow the cursor to this:
+    ;;; )\n
+    ;;; )I
+    ;;; pressing esc:
+    ;;; )N
+    ;;; before )I -> pressing escape moves cursor on top of the )
+    ;;; This is the emacs default behaviour and most useful in flycheck that puts errors beyond eol
+    (setq evil-move-beyond-eol t)
+    (setq evil-move-cursor-back nil)
     (define-key evil-normal-state-map (kbd "M-.") nil)
 
     (use-package evil-escape
