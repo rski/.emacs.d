@@ -354,6 +354,8 @@
     (add-hook 'rust-mode-hook 'racer-mode)
     (add-hook 'racer-mode-hook 'eldoc-mode)))
 
+(use-package rpm-spec-mode :defer t)
+
 (use-package magit
   :defer t
   :init (setq magit-bury-buffer-function 'magit-mode-quit-window
