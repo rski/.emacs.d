@@ -139,6 +139,12 @@
   ;;; Required for editing search results with ivy-ag and family
   (use-package wgrep :defer t)
 
+  (use-package ivy-posframe
+    :init
+    (ivy-posframe-setup)
+    (setq ivy-display-function #'ivy-posframe-display-at-point)
+    :commands ( ivy-posframe-setup ))
+
   (use-package counsel
     :init (counsel-mode)
     :diminish counsel-mode
