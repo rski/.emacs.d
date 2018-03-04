@@ -589,7 +589,7 @@
   (require 'smartparens-config)
   :diminish smartparens-mode)
 
-(dolist (mode '("eshell" "compilation" "debugger" "shell" "Info" "eww" "elfeed-show"))
+(dolist (mode '("eshell" "compilation" "debugger" "shell" "Info" "eww" "elfeed-show" "Buffer-menu"))
   (let ((mode-hook (intern (format "%s-mode-hook" mode))))
     (add-hook mode-hook
               (lambda () (setq show-trailing-whitespace nil)))))
