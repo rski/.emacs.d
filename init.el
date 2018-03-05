@@ -722,4 +722,9 @@ I always end up doing it in current buffer so might as well wrap it."
   :ensure nil
   :config (setq tex-dvi-view-command "evince"))
 
+(use-package simple
+  :defer t
+  :ensure nil
+  :config (evil-leader/set-key "rc" 'shell-command-on-region))
+
 (setq gc-cons-threshold 80000)
