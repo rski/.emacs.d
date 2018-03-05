@@ -139,11 +139,7 @@
   ;;; Required for editing search results with ivy-ag and family
   (use-package wgrep :defer t)
 
-  (use-package ivy-posframe
-    :init
-    (ivy-posframe-setup)
-    (setq ivy-display-function #'ivy-posframe-display-at-point)
-    :commands ( ivy-posframe-setup ))
+
 
   (use-package counsel
     :init (counsel-mode)
@@ -172,6 +168,15 @@
       "Version of the function that doesn't shell-quote ACTION, which dbus doesn't seem to like."
       (shell-command (concat counsel-spotify-dbus-call "org.mpris.MediaPlayer2.Player." action)))
     :commands (counsel-spotify-search-album counsel-spotify-search-track counsel-spotify-search-artist))
+
+  (use-package ivy-posframe
+    :after counsel
+    :init
+    (ivy-posframe-setup)
+    (push '(counsel-M-x . ivy-posframe-display-at-point) ivy-display-functions-alist)
+    (push '(ivy-switch-buffer . ivy-posframe-display-at-point) ivy-display-functions-alist)
+    :commands ( ivy-posframe-setup ))
+
 
   (use-package swiper
     :bind ("M-i" . swiper))
