@@ -496,7 +496,7 @@
   ;; in long folding buffers, show-paren-mode + display-line-numbers causes the test to move around
   (defun rski/maybe-disable-show-paren-mode ()
     (if (> (point-max) 100)
-        (show-paren-mode -1)))
+        (setq-local show-paren-mode nil)))
   (add-hook 'org-mode-hook
             #'rski/maybe-disable-show-paren-mode)
   (defun rski/org-mode-hook ()
