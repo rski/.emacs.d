@@ -585,7 +585,7 @@
   (require 'smartparens-config)
   :diminish smartparens-mode)
 
-(dolist (mode '("eshell" "compilation" "debugger" "shell" "Info" "eww" "elfeed-show" "Buffer-menu"))
+(dolist (mode '("eshell" "compilation" "debugger" "shell" "Info" "eww" "elfeed-show" "Buffer-menu" "erc"))
   (let ((mode-hook (intern (format "%s-mode-hook" mode))))
     (add-hook mode-hook
               (lambda () (setq show-trailing-whitespace nil)))))
@@ -593,8 +593,6 @@
 (use-package erc
   :defer t
   :ensure nil
-  :init
-  (add-hook 'erc-mode-hook (lambda () (setq show-trailing-whitespace nil)))
   :config
   (erc-notifications-mode 1)
   (add-hook 'erc-connect-pre-hook #'erc-spelling-mode)
