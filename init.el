@@ -63,7 +63,6 @@
 (require 'use-package)
 
 (setq use-package-always-ensure t)
-(package-refresh-contents t)
 (add-hook 'prog-mode-hook #'bug-reference-prog-mode)
 
 (use-package flycheck
