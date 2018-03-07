@@ -146,8 +146,6 @@
   ;;; Required for editing search results with ivy-ag and family
   (use-package wgrep :defer t)
 
-
-
   (use-package counsel
     :init (counsel-mode)
     :diminish counsel-mode
@@ -192,6 +190,7 @@
     :init (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
 
   ;;; This requires the fonts to be installed, M-x all-the-icons-install-fonts
+  ;;; Also note that only 1 transformer can be active, so this effectively prevents me from using say ivy-rich
   (use-package all-the-icons-ivy
     :init (all-the-icons-ivy-setup))
   )
