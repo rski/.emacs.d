@@ -1,4 +1,8 @@
-(setq gc-cons-threshold 80000000)
+(setq gc-cons-threshold 80000000
+      gc-cons-percentage 0.6)
+(defvar rski-file-name-handler-alist file-name-handler-alist)
+(setq file-name-handler-alist nil)
+
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
@@ -730,4 +734,6 @@ I always end up doing it in current buffer so might as well wrap it."
   :ensure nil
   :config (evil-leader/set-key "rc" 'shell-command-on-region))
 
-(setq gc-cons-threshold 80000)
+(setq gc-cons-threshold 80000
+      gc-cons-percentage 0.1
+      file-name-handler-alist rski-file-name-handler-alist)
