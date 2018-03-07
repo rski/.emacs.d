@@ -529,15 +529,9 @@
   :config
   (evil-leader/set-key
     "ee" 'eval-last-sexp
-    "xb" 'ivy-switch-buffer
     "xkk" 'kill-current-buffer
-    "oo" 'other-window
-    "of" 'other-frame
-    "ww" 'evil-window-next
-    "ws" 'evil-window-split
     "ib" 'rski/indent-buffer
-    "gb" 'magit-blame
-    "," 'execute-extended-command)
+    "gb" 'magit-blame)
   (evil-leader/set-leader ",")
 
   (use-package evil
