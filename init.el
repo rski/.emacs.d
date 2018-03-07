@@ -618,9 +618,6 @@
   (interactive)
   (find-file user-init-file))
 (global-set-key (kbd "C-c v") 'rski/visit-config)
-(defun rski/load-config ()
-  (interactive)
-  (load-file user-init-file))
 
 ;;; modeline
 (setq-default mode-line-format '("" mode-line-modified mode-line-remote
