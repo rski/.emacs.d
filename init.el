@@ -371,7 +371,11 @@
   (defun rski/magit-push-review()
     (interactive)
     (magit-run-git-async "push" "review"))
-  (magit-define-popup-action 'magit-push-popup ?g "Push to gerrit" 'rski/magit-push-review)
+  (defun rski/magit-push-review-with-reviewers()
+    (interactive)
+    (magit-run-git-async "push" "review-with-reviewers"))
+  (magit-define-popup-action 'magit-push-popup ?g "Push to gerrit" 'rski/magit-push-review-with-reviewers)
+  (magit-define-popup-action 'magit-push-popup ?G "Push to gerrit (no reviewers)" 'rski/magit-push-review)
   (use-package evil-magit
     :config (evil-magit-init)))
 
