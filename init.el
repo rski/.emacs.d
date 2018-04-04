@@ -628,8 +628,6 @@
                                  mode-line-buffer-identification " "
                                  mode-line-position mode-line-modes mode-line-misc-info))
 (display-time-mode t)
-(display-battery-mode t)
-(setq battery-mode-line-format "[%L %b%p%% %t]")
 
 (use-package eldoc :diminish eldoc-mode :ensure nil)
 
