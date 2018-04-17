@@ -707,6 +707,9 @@ I always end up doing it in current buffer so might as well wrap it."
 (use-package simple
   :defer t
   :ensure nil
+  ;;; I had wanted to bind these, but magit binds them to go up/down
+  ;;; historic commit messages and I do use that. Maybe if I just bind them to prog mode or something.
+  ;;; :bind (("M-n" . next-error) ("M-p" . previous-error))
   :config (evil-leader/set-key "rc" 'shell-command-on-region))
 
 (setq gc-cons-threshold 80000
