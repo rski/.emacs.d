@@ -363,7 +363,8 @@
   :init (setq magit-bury-buffer-function 'magit-mode-quit-window
               magit-log-section-commit-count 20
               ;;; word-wise diffs. This is for the current hunk because all makes magit-status really slow in many big hunks
-              magit-diff-refine-hunk 't
+              ;; It is quite distracting so disable it.
+              ;; magit-diff-refine-hunk 't
               )
   :bind ("C-c g" . magit-status)
   :config
