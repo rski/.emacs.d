@@ -554,6 +554,8 @@
     (setq evil-move-beyond-eol t)
     (setq evil-move-cursor-back nil)
     (define-key evil-normal-state-map (kbd "M-.") nil)
+    ;;; make h move and not pop up describe mode
+    (define-key compilation-mode-map (kbd "h") nil)
 
     (use-package evil-escape
       :diminish evil-escape-mode
