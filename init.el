@@ -462,7 +462,10 @@
 (set-face-attribute 'default nil :family "Source Code Pro" :height 105)
 (use-package monokai-theme :defer t)
 (use-package atom-one-dark-theme :defer t)
-(use-package solarized-theme :init (load-theme 'solarized-dark 'no-confirm))
+(use-package solarized-theme :defer t)
+
+;; move it out of the use-packages so that the diffs won't be as weird when I change themes
+(load-theme 'monokai 'no-confirm)
 
 (use-package whitespace
   :defer t
