@@ -70,6 +70,9 @@
   (add-hook 'after-init-hook #'flycheck-pos-tip-mode)
   (add-hook 'flycheck-mode-hook #'flycheck-color-mode-line-mode)
   (setq flycheck-global-modes '(not emacs-lisp-mode))
+  ;; The manual says doing this doesn't work, but it does?
+  ;;; maybe in the :config statnza it won't work
+  (setq flycheck-keymap-prefix (kbd "C-c f"))
 
   :after evil-leader
   :diminish flycheck-mode
