@@ -73,13 +73,8 @@
   ;; The manual says doing this doesn't work, but it does?
   ;;; maybe in the :config statnza it won't work
   (setq flycheck-keymap-prefix (kbd "C-c f"))
-
-  :after evil-leader
   :diminish flycheck-mode
   :config
-  (evil-leader/set-key
-    "fp" 'flycheck-previous-error
-    "fn" 'flycheck-next-error)
   (use-package flycheck-color-mode-line
     :config (setq flycheck-color-mode-line-show-running nil))
   (use-package flycheck-pos-tip)
@@ -255,15 +250,12 @@
                                                 (lambda ()
                                                   (gofmt-before-save))
                                                 nil t)))
+  (add-hook 'go-mode-hook (lambda ()
+                            (local-set-key (kbd "M-.") 'godef-jump)
+                            (local-set-key (kbd "M-4 M-.") 'godef-jump-other-window)))
+
   :config (setq gofmt-command "goimports"
                 gofmt-show-errors nil) ;; what do i have flycheck for?
-  (evil-define-key 'normal go-mode-map (kbd "gd") 'godef-jump)
-  (evil-define-key 'normal go-mode-map (kbd "god") 'godef-jump-other-window)
-  (evil-define-key 'normal go-mode-map (kbd "K") 'godoc-at-point)
-  (evil-define-key 'visual go-mode-map (kbd "gd") 'godef-jump)
-  (evil-define-key 'visual go-mode-map (kbd "god") 'godef-jump-other-window)
-  (evil-define-key 'visual go-mode-map (kbd "K") 'godoc-at-point)
-  (evil-define-key 'normal godoc-mode-map (kbd "q") 'quit-window)
   ;; workaround not matching multiline signatures
   ;;  https://github.com/dominikh/go-mode.el/issues/57
   (defun rski/go-mode-setup ()
@@ -335,17 +327,14 @@
       (with-current-buffer (get-buffer "*Go Test*")
         (recompile)))
 
-    (evil-leader/set-key-for-mode 'go-mode
-      "tr" 'rski/re-run-go-test
-      "tf" 'go-test-current-file
-      "tt" 'go-test-current-test
-      "tv" 'rski/go-current-test-glog-verbose)
+    ;; (evil-leader/set-key-for-mode 'go-mode
+    ;; "tr" 'rski/re-run-go-test
+    ;; "tf" 'go-test-current-file
+    ;; "tt" 'go-test-current-test
+    ;; "tv" 'rski/go-current-test-glog-verbose)
     (setq go-test-verbose t)) ;; passes -v to go-test so the test names show when running them
 
-  (use-package go-rename
-    :init
-    (evil-leader/set-key-for-mode 'go-mode
-      "rr" 'go-rename)))
+  (use-package go-rename :defer))
 
 (use-package protobuf-mode :defer t)
 
@@ -380,8 +369,7 @@
     (magit-run-git-async "push" "review-with-reviewers"))
   (magit-define-popup-action 'magit-push-popup ?g "Push to gerrit" 'rski/magit-push-review-with-reviewers)
   (magit-define-popup-action 'magit-push-popup ?G "Push to gerrit (no reviewers)" 'rski/magit-push-review)
-  (use-package evil-magit
-    :config (evil-magit-init)))
+  )
 
 (use-package git-gutter
   :defer t
@@ -405,7 +393,6 @@
   :diminish git-gutter-mode)
 
 (use-package projectile
-  :after evil
   :init (projectile-mode)
   (add-to-list 'projectile-globally-ignored-directories "Godeps")
   :config
@@ -417,29 +404,12 @@
     :init (counsel-projectile-mode)
     :bind ("M-I". counsel-projectile-rg))
 
-  (defun rski/c-p-dwim(arg)
-    "If inside a project, perform an action, otherwise switch to a project.
-    Default action is projectile-switch-to-buffer
-    With a numeric argument, the action is projectile-find-file.
-    With twice the numeric argument, the action is switch-project"
-    (interactive "p")
-    (cl-flet ((in-project-action () (cond ((= arg 4) (counsel-projectile-find-file))
-                                          ((= arg 16) (counsel-projectile-switch-project))
-                                          (t (counsel-projectile-switch-to-buffer)))))
-      (if (ignore-errors (projectile-project-root))
-          (in-project-action)
-        (counsel-projectile-switch-project))))
-
-  (define-key evil-normal-state-map (kbd "C-p") #'rski/c-p-dwim)
-
   (use-package treemacs :defer t
     :config
     (use-package treemacs-projectile :defer t)))
 
 (use-package helpful
   :defer t
-  :config (evil-define-key 'normal helpful-mode-map
-            "q" 'quit-window)
   ;; FIXME describe-fuction/variable are broken??
   :bind (([remap describe-function] . helpful-callable)
          ([remap describe-variable] . helpful-variable)
@@ -533,68 +503,11 @@
   (interactive)
   (indent-region (point-min) (point-max)))
 
-(use-package evil-leader
-  :init
-  (setq evil-want-integration nil)
-  (global-evil-leader-mode)
-  :config
-  (evil-leader/set-key
-    "ee" 'eval-last-sexp
-    "xkk" 'kill-current-buffer
-    "ib" 'rski/indent-buffer
-    "gb" 'magit-blame)
-  (evil-leader/set-leader ",")
-
-  (use-package evil
-    :after evil-leader
-    :bind (:map evil-motion-state-map
-                (":" . evil-repeat-find-char)
-                (";" . evil-ex))
-    :config (evil-mode)
-    ;;; allow the cursor to this:
-    ;;; )\n
-    ;;; )I
-    ;;; pressing esc:
-    ;;; )N
-    ;;; before )I -> pressing escape moves cursor on top of the )
-    ;;; This is the emacs default behaviour and most useful in flycheck that puts errors beyond eol
-    (setq evil-move-beyond-eol t)
-    (setq evil-move-cursor-back nil)
-    (define-key evil-normal-state-map (kbd "M-.") nil)
-    ;;; make h move and not pop up describe mode
-    (define-key compilation-mode-map (kbd "h") nil)
-
-    (use-package evil-escape
-      :diminish evil-escape-mode
-      :config (evil-escape-mode))
-
-    (use-package evil-surround :config(global-evil-surround-mode))
-
-    (use-package evil-collection
-      :init
-      (setq evil-collection-mode-list
-            '(anaconda-mode bookmark calendar comint company compile custom debug diff-mode dired doc-view edebug elfeed elisp-mode elisp-refs eshell eval-sexp-fu eww flycheck ggtags help info ivy macrostep
-                            (occur replace)
-                            (package-menu package)
-                            profiler python racer ruby-mode rtags
-                            (term term ansi-term multi-term)
-                            woman xref))
-      :config (evil-collection-init))))
-
-(use-package undo-tree
-  :defer t
-  :diminish undo-tree-mode)
-
 (use-package smartparens
   :init
   (add-hook 'prog-mode-hook #'smartparens-mode)
   (add-hook 'text-mode-hook #'smartparens-mode)
   :config
-  (evil-leader/set-key
-    "sl" 'sp-forward-slurp-sexp
-    "sh" 'sp-backward-slurp-sexp
-    "su" 'sp-unwrap-sexp
-    "sw" 'sp-rewrap-sexp)
   (require 'smartparens-config)
   :diminish smartparens-mode)
 
@@ -715,11 +628,11 @@ I always end up doing it in current buffer so might as well wrap it."
 
 (use-package simple
   :defer t
-  :ensure nil
   ;;; I had wanted to bind these, but magit binds them to go up/down
   ;;; historic commit messages and I do use that. Maybe if I just bind them to prog mode or something.
+  ;;; There always is M-g M-n
   ;;; :bind (("M-n" . next-error) ("M-p" . previous-error))
-  :config (evil-leader/set-key "rc" 'shell-command-on-region))
+  :ensure nil)
 
 (setq gc-cons-threshold 80000
       gc-cons-percentage 0.1
