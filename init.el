@@ -634,6 +634,12 @@ I always end up doing it in current buffer so might as well wrap it."
   ;;; :bind (("M-n" . next-error) ("M-p" . previous-error))
   :ensure nil)
 
+;; FIXME https://github.com/company-mode/company-mode/issues/409
+(use-package eshell
+ :config  (defun my-eshell-remove-pcomplete ()
+  (remove-hook 'completion-at-point-functions #'pcomplete-completions-at-point t))
+ (add-hook 'eshell-mode-hook #'my-eshell-remove-pcomplete))
+
 (setq gc-cons-threshold 80000
       gc-cons-percentage 0.1
       file-name-handler-alist rski-file-name-handler-alist)
