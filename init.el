@@ -45,6 +45,9 @@
       frame-resize-pixelwise t
       )
 
+;; make C-z do nothing
+(defun suspend-frame() (interactive) )
+
 (setq-default tab-width 4
               indent-tabs-mode nil
               show-trailing-whitespace t
