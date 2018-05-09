@@ -332,7 +332,10 @@
     ;; "tf" 'go-test-current-file
     ;; "tt" 'go-test-current-test
     ;; "tv" 'rski/go-current-test-glog-verbose)
-    (setq go-test-verbose t)) ;; passes -v to go-test so the test names show when running them
+    (setq go-test-verbose t) ;; passes -v to go-test so the test names show when running them
+    :bind (:map go-mode-map
+                ("<C-return>" . go-test-current-test))
+    )
 
   (use-package go-rename :defer))
 
