@@ -326,15 +326,8 @@
       (go-test-current-test)
       (setq go-test-additional-arguments-function nil))
 
-    ;; the -args -v=0 is because it fails with
-    ;; go test -run SomeTest\$ -count=1 \$ . -v
-    ;; can't load package: package $: cannot find package "$" in any of:
-	;; /usr/local/go/src/$ (from $GOROOT)
-	;; /home/rski/go/src/$ (from $GOPATH)
-    ;; but that breaks tests that don't use glog >.>
-    ;; I really dislike this go test frontend tbh, I should write my own
     (defun rski/no-go-cache-test-callback(suite test)
-      " -count=1 -args -v=0 ")
+      " -test.count=1 ")
     (defun rski/go-test-current-test ()
       "Run go test -run=CurrrentTest without caching"
       (interactive)
