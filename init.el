@@ -315,13 +315,30 @@
       (unless rski/dlv-debug-last-command
         (user-error "It seems this was the first time you tried to debug a test, try running dlv-debug-current-test"))
       (dlv rski/dlv-debug-last-command))
+
     (defun rski/glog-arg-callback(suite test)
-      " -args -v=9 " )
+      " -count=1 -args -v=9 " )
     (defun rski/go-current-test-glog-verbose ()
       "Run go test with maximum glog verbosity"
       (interactive)
       ;; let doesn't work but this does so
       (setq go-test-additional-arguments-function #'rski/glog-arg-callback)
+      (go-test-current-test)
+      (setq go-test-additional-arguments-function nil))
+
+    ;; the -args -v=0 is because it fails with
+    ;; go test -run SomeTest\$ -count=1 \$ . -v
+    ;; can't load package: package $: cannot find package "$" in any of:
+	;; /usr/local/go/src/$ (from $GOROOT)
+	;; /home/rski/go/src/$ (from $GOPATH)
+    ;; but that breaks tests that don't use glog >.>
+    ;; I really dislike this go test frontend tbh, I should write my own
+    (defun rski/no-go-cache-test-callback(suite test)
+      " -count=1 -args -v=0 ")
+    (defun rski/go-test-current-test ()
+      "Run go test -run=CurrrentTest without caching"
+      (interactive)
+      (setq go-test-additional-arguments-function #'rski/no-go-cache-test-callback)
       (go-test-current-test)
       (setq go-test-additional-arguments-function nil))
 
@@ -331,7 +348,7 @@
     ;; "tv" 'rski/go-current-test-glog-verbose)
     (setq go-test-verbose t) ;; passes -v to go-test so the test names show when running them
     :bind (:map go-mode-map
-                ("<C-return>" . go-test-current-test))
+                ("<C-return>" . rski/go-test-current-test))
     )
 
   (use-package go-rename :defer))
