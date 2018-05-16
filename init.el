@@ -325,13 +325,7 @@
       (go-test-current-test)
       (setq go-test-additional-arguments-function nil))
 
-    (defun rski/re-run-go-test ()
-      (interactive)
-      (with-current-buffer (get-buffer "*Go Test*")
-        (recompile)))
-
     ;; (evil-leader/set-key-for-mode 'go-mode
-    ;; "tr" 'rski/re-run-go-test
     ;; "tf" 'go-test-current-file
     ;; "tt" 'go-test-current-test
     ;; "tv" 'rski/go-current-test-glog-verbose)
