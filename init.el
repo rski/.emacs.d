@@ -327,7 +327,7 @@
       (setq go-test-additional-arguments-function nil))
 
     (defun rski/no-go-cache-test-callback(suite test)
-      " -test.count=1 ")
+      " -count=1 -args -v=1 ")
     (defun rski/go-test-current-test ()
       "Run go test -run=CurrrentTest without caching"
       (interactive)
