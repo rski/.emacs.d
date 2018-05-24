@@ -644,11 +644,11 @@ I always end up doing it in current buffer so might as well wrap it."
   ;;; :bind (("M-n" . next-error) ("M-p" . previous-error))
   :ensure nil)
 
-;; FIXME https://github.com/company-mode/company-mode/issues/409
 (use-package eshell
- :config  (defun my-eshell-remove-pcomplete ()
-  (remove-hook 'completion-at-point-functions #'pcomplete-completions-at-point t))
- (add-hook 'eshell-mode-hook #'my-eshell-remove-pcomplete))
+  :config
+  (defun no-company()
+    (company-mode -1))
+  (add-hook 'eshell-mode-hook #'no-company))
 
 (setq gc-cons-threshold 80000
       gc-cons-percentage 0.1
