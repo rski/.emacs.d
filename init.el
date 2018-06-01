@@ -650,6 +650,9 @@ I always end up doing it in current buffer so might as well wrap it."
     (company-mode -1))
   (add-hook 'eshell-mode-hook #'no-company))
 
+
+(setq battery-echo-area-format "%L %B (%p%% %t)")
+
 (setq gc-cons-threshold 80000
       gc-cons-percentage 0.1
       file-name-handler-alist rski-file-name-handler-alist)
