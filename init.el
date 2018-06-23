@@ -222,14 +222,14 @@
 (use-package yang-mode :defer t
   :bind (:map yang-mode-map
               ("C-c u" . sp-backward-up-sexp)) ;; Take me to your parent. sp is *brilliant*
-  :init (add-hook 'yang-mode-hook (lambda ()
-                                    (setq imenu-generic-expression
-                                          '(("leaf" "leaf \\(.*\\) {" 1)
-                                            ("container" "container \\(.*\\) {" 1)
-                                            ("list" "list \\(.*\\) {" 1)
-                                            ("grouping" "grouping \\(.*\\) {" 1)
-                                            ("import" "import \\(.*\\) {" 1)
-                                            )))))
+  :hook (yang-mode . (lambda ()
+                       (setq imenu-generic-expression
+                             '(("leaf" "leaf \\(.*\\) {" 1)
+                               ("container" "container \\(.*\\) {" 1)
+                               ("list" "list \\(.*\\) {" 1)
+                               ("grouping" "grouping \\(.*\\) {" 1)
+                               ("import" "import \\(.*\\) {" 1)
+                               )))))
 
 (use-package nix-mode :defer t)
 (use-package company-nixos-options
