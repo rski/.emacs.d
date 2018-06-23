@@ -503,9 +503,7 @@
   (indent-region (point-min) (point-max)))
 
 (use-package smartparens
-  :init
-  (add-hook 'prog-mode-hook #'smartparens-mode)
-  (add-hook 'text-mode-hook #'smartparens-mode)
+  :hook ((prog-mode text-mode) . smartparens-mode)
   :config
   (require 'smartparens-config)
   :diminish smartparens-mode)
