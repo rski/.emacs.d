@@ -132,9 +132,9 @@
 
 (use-package emr
   :commands (emr-initialize)
-  :init (add-hook 'c-mode-common-hook (lambda ()
-                                        (emr-initialize)
-                                        (bind-key "C-c C-a" 'emr-c-insert-include c-mode-base-map))))
+  :hook (c-mode-common . (lambda ()
+                           (emr-initialize)
+                           (bind-key "C-c C-a" 'emr-c-insert-include c-mode-base-map))))
 
 (use-package ivy
   :init (ivy-mode)
@@ -183,9 +183,8 @@
 
 (use-package anaconda-mode
   :defer t
-  :init
-  (add-hook 'python-mode-hook 'anaconda-mode)
-  (add-hook 'python-mode-hook 'anaconda-eldoc-mode))
+  :hook ((python-mode . anaconda-mode)
+         (python-mode . anaconda-eldoc-mode)))
 (use-package company-anaconda
   :after company
   :defer t
@@ -218,8 +217,8 @@
 
 (use-package emmet-mode
   :defer t
-  :init (add-hook 'web-mode-hook 'emmet-mode)
-  (add-hook 'html-mode-hook 'emmet-mode))
+  :hook ((web-mode . emmet-mode)
+         (html-mode . emmet-mode)))
 
 (use-package dockerfile-mode :defer t)
 
