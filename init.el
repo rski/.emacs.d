@@ -123,13 +123,6 @@
                (add-to-list (make-local-variable 'company-backends)
                             ',backend))))
 
-(defun rski/pretty-symbols()
-  "make some word or string show as pretty Unicode symbols"
-  (setq prettify-symbols-alist
-        '(("lambda" . ?λ)))
-  (prettify-symbols-mode))
-(add-hook 'emacs-lisp-mode-hook #'rski/pretty-symbols)
-
 (use-package emr
   :commands (emr-initialize)
   :hook (c-mode-common . (lambda ()
@@ -240,7 +233,7 @@
 
 (use-package nix-mode :defer t)
 (use-package company-nixos-options
-  :after  company
+  :after company
   :defer t
   :init (local-backend nixos-mode-hook company-nixos-options))
 
