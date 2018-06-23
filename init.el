@@ -492,7 +492,7 @@
   ;;; org reveal (for some reason called ox-reveal too, kinda confusing) for exporting to reveal.js
   (use-package ox-reveal
     :defer t
-    :init (add-hook 'org-mode 'reveal-mode)
+    :hook (org-mode . reveal-mode)
     :config
     (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
     (use-package htmlize :defer t)))
