@@ -421,16 +421,14 @@
   :diminish which-key-mode)
 
 (use-package ws-butler
-  :init
-  (add-hook 'text-mode-hook #'ws-butler-mode)
-  (add-hook 'prog-mode-hook #'ws-butler-mode)
+  :hook ((text-mode prog-mode) . ws-butler-mode)
   :diminish ws-butler-mode)
 
 (use-package hl-todo :init (global-hl-todo-mode))
 
 (use-package anzu
   :diminish anzu-mode
-  :init (add-hook 'after-init-hook 'global-anzu-mode))
+  :hook (after-init . global-anzu-mode))
 
 ;;; fonts
 (set-face-attribute 'default nil :family "Source Code Pro" :height 105)
@@ -455,7 +453,7 @@
 (set-fringe-bitmap-face 'right-triangle 'right-triangle-face)
 
 (use-package rainbow-delimiters :defer t
-  :init (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode))
+  :hook (emacs-lisp-mode . rainbow-delimiters-mode))
 
 (use-package org
   :defer t
