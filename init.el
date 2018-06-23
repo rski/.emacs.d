@@ -343,11 +343,11 @@
   :defer t
   :config
   (use-package flycheck-rust
-    :init (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+    :hook (flycheck-mode . flycheck-rust-setup))
   (use-package racer
-    :init
-    (add-hook 'rust-mode-hook 'racer-mode)
-    (add-hook 'racer-mode-hook 'eldoc-mode)))
+    :hook
+    ((rust-mode  . racer-mode)
+     (racer-mode . eldoc-mode))))
 
 (use-package rpm-spec-mode :defer t)
 
