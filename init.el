@@ -241,14 +241,13 @@
   (user-error "GOPATH unset"))
 (use-package go-mode
   :defer t
-  :init (add-hook 'go-mode-hook (lambda () (add-hook 'before-save-hook
-                                                (lambda ()
-                                                  (gofmt-before-save))
-                                                nil t)))
-  (add-hook 'go-mode-hook (lambda ()
-                            (local-set-key (kbd "M-.") 'godef-jump)
-                            (local-set-key (kbd "M-4 M-.") 'godef-jump-other-window)))
-
+  :hook ((go-mode . (lambda () (add-hook 'before-save-hook
+                                        (lambda ()
+                                          (gofmt-before-save))
+                                        nil t)))
+         (go-mode . (lambda ()
+                      (local-set-key (kbd "M-.") 'godef-jump)
+                      (local-set-key (kbd "M-4 M-.") 'godef-jump-other-window))))
   :config (setq gofmt-command "goimports"
                 gofmt-show-errors nil) ;; what do i have flycheck for?
   ;; workaround not matching multiline signatures
@@ -263,8 +262,8 @@
     (auto-fill-mode t))
   (add-hook 'go-mode-hook #'rski/go-mode-setup)
 
-  (use-package go-eldoc :init (add-hook 'go-mode-hook 'go-eldoc-setup))
-  (use-package go-guru :init (add-hook 'go-mode-hook 'go-guru-hl-identifier-mode))
+  (use-package go-eldoc :hook (go-mode . go-eldoc-setup))
+  (use-package go-guru :hook (go-mode . go-guru-hl-identifier-mode))
   (use-package go-playground :defer t)
 
   ;;; requires nfs/gocode
@@ -277,15 +276,15 @@
   ;;; requires the gometalinter binary
   (use-package flycheck-gometalinter
     :if (executable-find "gometalinter")
-    :init (add-hook 'go-mode-hook (lambda () (flycheck-select-checker 'gometalinter)))
+    :hook (go-mode . (lambda () (flycheck-select-checker 'gometalinter)))
     :config
     (setq flycheck-gometalinter-fast t)
     (setq flycheck-gometalinter-disable-linters '("gocyclo" "goconst" "vetshadow"))
     (flycheck-gometalinter-setup))
 
   (use-package gotest
+    :hook (go-test-mode . visual-line-mode)
     :config
-    (add-hook 'go-test-mode-hook 'visual-line-mode)
     (defvar rski/dlv-debug-last-command nil "")
     (defun rski/dlv-debug-current-test()
       "Get the current test and run it inside dlv"
