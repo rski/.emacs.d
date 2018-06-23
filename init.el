@@ -88,14 +88,13 @@
 (use-package flyspell
   :defer t
   :if (executable-find "aspell")
-  :init
-  (add-hook 'text-mode-hook #'flyspell-mode)
-  (add-hook 'prog-mode-hook #'flyspell-prog-mode)
+  :hook ((text-mode . flyspell-mode)
+         (prog-mode . flyspell-prog-mode))
   :diminish 'flyspell-mode)
 
 (use-package company
+  :hook (after-init . global-company-mode)
   :init
-  (add-hook 'after-init-hook 'global-company-mode)
   (setq company-minimum-prefix-length 3
         company-idle-delay 0
         company-require-match nil
