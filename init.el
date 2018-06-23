@@ -69,11 +69,12 @@
 (add-hook 'prog-mode-hook #'bug-reference-prog-mode)
 
 (use-package flycheck
-  :init (add-hook 'after-init-hook #'global-flycheck-mode)
-  (add-hook 'after-init-hook #'flycheck-pos-tip-mode)
-  (add-hook 'flycheck-mode-hook #'flycheck-color-mode-line-mode)
+  :hook ((after-init    . global-flycheck-mode)
+         (after-init    . flycheck-pos-tip-mode)
+         (flycheck-mode . flycheck-color-mode-line-mode))
+  :init
   (setq flycheck-global-modes '(not emacs-lisp-mode))
-  ;; The manual says doing this doesn't work, but it does?
+  ;;; The manual says doing this doesn't work, but it does?
   ;;; maybe in the :config statnza it won't work
   (setq flycheck-keymap-prefix (kbd "C-c f"))
   :diminish flycheck-mode
