@@ -516,9 +516,9 @@
 (use-package erc
   :defer t
   :ensure nil
+  :hook (erc-connect-pre . erc-spelling-mode)
   :config
   (erc-notifications-mode 1)
-  (add-hook 'erc-connect-pre-hook #'erc-spelling-mode)
   (setq erc-autojoin-mode t)
   (setq erc-pcomplete-nick-postfix ", "))
 
@@ -632,11 +632,7 @@ I always end up doing it in current buffer so might as well wrap it."
   :ensure nil)
 
 (use-package eshell
-  :config
-  (defun no-company()
-    (company-mode -1))
-  (add-hook 'eshell-mode-hook #'no-company))
-
+  :hook (eshell-mode . (lambda () (company-mode -1))))
 
 (setq battery-echo-area-format "%L %B (%p%% %t)")
 
