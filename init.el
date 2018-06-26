@@ -131,6 +131,7 @@
 
 (use-package ivy
   :init (ivy-mode)
+  (setq ivy-initial-inputs-alist nil)
   :diminish ivy-mode
   :config (setq ivy-height 20
                 ;;; Add recentf and bookmarks to ivy-switch-buffer
@@ -376,6 +377,7 @@
   :defer t
   :config (setq git-gutter:update-interval 0.1)
   ;;; TODO upstream the delete fix
+  ;; dont fill up /tmp with trash
   (defun git-gutter:live-update ()
     (git-gutter:awhen (git-gutter:base-file)
       (when (and git-gutter:enabled
