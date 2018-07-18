@@ -318,19 +318,12 @@
       (go-test-current-test)
       (setq go-test-additional-arguments-function nil))
 
-    (defun rski/no-go-cache-test-callback(suite test)
-      " -count=1 -args -v=1 ")
     (defun rski/go-test-current-test ()
       "Run go test -run=CurrrentTest without caching"
       (interactive)
-      (setq go-test-additional-arguments-function #'rski/no-go-cache-test-callback)
-      (go-test-current-test)
-      (setq go-test-additional-arguments-function nil))
+      (let ((current-prefix-arg 1)) ;; emulate C-1
+        (call-interactively 'go-test-current-test)))
 
-    ;; (evil-leader/set-key-for-mode 'go-mode
-    ;; "tf" 'go-test-current-file
-    ;; "tt" 'go-test-current-test
-    ;; "tv" 'rski/go-current-test-glog-verbose)
     (setq go-test-verbose t) ;; passes -v to go-test so the test names show when running them
     :bind (:map go-mode-map
                 ("<C-return>" . rski/go-test-current-test))
