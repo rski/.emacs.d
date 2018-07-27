@@ -344,6 +344,7 @@
      (racer-mode . eldoc-mode))))
 
 (use-package rpm-spec-mode :defer t)
+(use-package yaml-mode :defer t)
 
 (use-package magit
   :defer t
