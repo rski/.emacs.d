@@ -400,10 +400,8 @@
   (use-package counsel-projectile
     :init (counsel-projectile-mode)
     :bind ("M-I". counsel-projectile-rg))
+  )
 
-  (use-package treemacs :defer t
-    :config
-    (use-package treemacs-projectile :defer t)))
 
 (use-package helpful
   :defer t
