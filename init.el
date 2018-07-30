@@ -55,6 +55,8 @@
 
 ;; compose-mail
 (global-unset-key (kbd "C-x m"))
+;; set-goal-column. Displays that annoying warning
+(global-unset-key (kbd "C-x C-n"))
 
 (load custom-file)
 
