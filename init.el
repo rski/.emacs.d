@@ -392,7 +392,9 @@
   :diminish git-gutter-mode)
 
 (use-package projectile
-  :init (projectile-mode)
+  :init
+  (setq projectile-keymap-prefix (kbd "C-c p"))
+  (projectile-mode)
   (add-to-list 'projectile-globally-ignored-directories "Godeps")
   :config
   (setq projectile-mode-line
