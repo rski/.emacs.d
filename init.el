@@ -20,7 +20,6 @@
 (setq user-full-name "Romanos Skiadas"
       user-mail-address "rom.skiad@gmail.com"
       custom-file "~/.emacs-custom.el"
-      vc-handled-backends nil
       tags-add-tables nil ;;; Don't ask to keep current tags table when changing dirs
       ring-bell-function 'ignore ;;; shut up
       scroll-conservatively 1000 ;;; scroll one line at a time
@@ -72,8 +71,7 @@
 
 (use-package flycheck
   :hook ((after-init    . global-flycheck-mode)
-         (after-init    . flycheck-pos-tip-mode)
-         (flycheck-mode . flycheck-color-mode-line-mode))
+         (after-init    . flycheck-pos-tip-mode))
   :init
   (setq flycheck-global-modes '(not emacs-lisp-mode))
   ;;; The manual says doing this doesn't work, but it does?
@@ -81,8 +79,6 @@
   (setq flycheck-keymap-prefix (kbd "C-c f"))
   :diminish flycheck-mode
   :config
-  (use-package flycheck-color-mode-line
-    :config (setq flycheck-color-mode-line-show-running nil))
   (use-package flycheck-pos-tip)
   (put 'flycheck-yang-path 'safe-local-variable #'stringp)
   )
@@ -436,6 +432,11 @@
 
 ;; move it out of the use-packages so that the diffs won't be as weird when I change themes
 (load-theme 'monokai 'no-confirm)
+
+(use-package doom-modeline
+      :ensure t
+      :defer t
+      :hook (after-init . doom-modeline-init))
 
 (use-package whitespace
   :defer t
