@@ -394,7 +394,7 @@
   :init
   (setq projectile-keymap-prefix (kbd "C-c p"))
   (projectile-mode)
-  (add-to-list 'projectile-globally-ignored-directories "Godeps")
+  (add-to-list 'projectile-globally-ignored-directories "vendor")
   :config
   (setq projectile-mode-line
         '(:eval (format " [%s]"
