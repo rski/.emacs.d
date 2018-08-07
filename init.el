@@ -352,7 +352,10 @@
               ;; It is quite distracting so disable it.
               ;; magit-diff-refine-hunk 't
               )
-  :bind ("C-c g" . magit-status)
+  :bind (("C-c g" . magit-status)
+         ("C-c m l" . magit-log-buffer-file)
+         ("C-c m b" . magit-blame)
+         )
   :config
   (set-face-background 'diff-refine-added "green3")
   (defun rski/magit-push-review()
