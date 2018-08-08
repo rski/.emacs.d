@@ -261,11 +261,13 @@
     (auto-fill-mode t))
   (add-hook 'go-mode-hook #'rski/go-mode-setup)
 
+  ;; requires gocode
   (use-package go-eldoc :hook (go-mode . go-eldoc-setup))
+  ;; golang.org/x/tools/cmd/guru
   (use-package go-guru :hook (go-mode . go-guru-hl-identifier-mode))
   (use-package go-playground :defer t)
 
-  ;;; requires nfs/gocode
+  ;;; requires github.com/mdempsky/gocode (fork of nfs/gocode)
   (use-package company-go
     :after company
     :init (local-backend go-mode-hook company-go)
@@ -327,6 +329,7 @@
                 ("<C-return>" . rski/go-test-current-test))
     )
 
+  ;; requires golang.org/x/tools/cmd/gorename
   (use-package go-rename :defer))
 
 (use-package protobuf-mode :defer t)
