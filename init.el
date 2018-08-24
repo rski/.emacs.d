@@ -152,15 +152,6 @@
     :bind (("M-y" . counsel-yank-pop)
            ("M-o" . counsel-semantic-or-imenu)))
 
-  (use-package ivy-posframe
-    :after counsel
-    :init
-    (ivy-posframe-setup)
-    (push '(counsel-M-x . ivy-posframe-display-at-point) ivy-display-functions-alist)
-    (push '(ivy-switch-buffer . ivy-posframe-display-at-point) ivy-display-functions-alist)
-    :commands ( ivy-posframe-setup ))
-
-
   (use-package swiper
     :bind ("M-i" . swiper))
 
