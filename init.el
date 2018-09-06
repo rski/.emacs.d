@@ -422,7 +422,7 @@
   :hook (after-init . global-anzu-mode))
 
 ;;; fonts
-(set-face-attribute 'default nil :family "Source Code Pro" :height 105)
+(set-face-attribute 'default nil :family "Source Code Pro" :height 110)
 (use-package monokai-theme :defer t)
 (use-package atom-one-dark-theme :defer t)
 (use-package solarized-theme :defer t)
