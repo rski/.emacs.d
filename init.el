@@ -638,6 +638,10 @@ I always end up doing it in current buffer so might as well wrap it."
   :init (setq eshell-banner-message "Eshell, because the existing shells were not bad enough already.\n\n")
   :hook (eshell-mode . (lambda () (company-mode -1))))
 
+(use-package with-editor
+  :hook ((eshell-mode . with-editor-export-editor)
+         (eshell-mode . with-editor-export-git-editor)))
+
 (setq battery-echo-area-format "%L %B (%p%% %t)")
 
 (setq gc-cons-threshold 80000
