@@ -437,10 +437,22 @@
 ;; move it out of the use-packages so that the diffs won't be as weird when I change themes
 (load-theme 'monokai 'no-confirm)
 
-(use-package doom-modeline
-      :ensure t
-      :defer t
-      :hook (after-init . doom-modeline-init))
+;;; This lad adds a hook linear to the number of buffers, it makes EVERY magit operation unbearably slow.
+;; (defun doom-modeline-magit-post-refresh ()
+;;   "Update vcs state in mode-line after refreshing in magit."
+;;   (dolist (buf (buffer-list))
+;;     (when (and (not (buffer-modified-p buf))
+;;                (buffer-file-name buf)
+;;                (file-exists-p (buffer-file-name buf))
+;;                (file-in-directory-p (buffer-file-name buf) (magit-toplevel)))
+;;       (with-current-buffer buf
+;;         (vc-refresh-state)
+;;         (doom-modeline--update-vcs)))))
+;; (add-hook 'magit-post-refresh-hook #'doom-modeline-magit-post-refresh)
+;; (use-package doom-modeline
+      ;; :ensure t
+      ;; :defer t
+      ;; :hook (after-init . doom-modeline-init))
 
 (use-package whitespace
   :defer t
