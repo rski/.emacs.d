@@ -334,6 +334,7 @@
 
 (use-package rust-mode
   :defer t
+  :hook (rust-mode . rust-enable-format-on-save)
   :config
   (use-package flycheck-rust
     :hook (flycheck-mode . flycheck-rust-setup))
