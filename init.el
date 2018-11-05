@@ -663,3 +663,6 @@ I always end up doing it in current buffer so might as well wrap it."
 (setq gc-cons-threshold 80000
       gc-cons-percentage 0.1
       file-name-handler-alist rski-file-name-handler-alist)
+;;; pressing "a" in dired visits the thing (directory/file) and kills the previous buffer.
+;;; Much better than pressing RET and leaving buffers
+(put 'dired-find-alternate-file 'disabled nil)
