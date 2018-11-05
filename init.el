@@ -649,7 +649,10 @@ I always end up doing it in current buffer so might as well wrap it."
 
 (use-package eshell
   :init (setq eshell-banner-message "Eshell, because the existing shells were not bad enough already.\n\n")
-  :hook (eshell-mode . (lambda () (company-mode -1))))
+  :hook (eshell-mode . (lambda ()
+                         (company-mode -1)
+                         ;;; by abo-abo @https://emacs.stackexchange.com/questions/27849/how-can-i-setup-eshell-to-use-ivy-for-tab-completion
+                         (define-key eshell-mode-map (kbd "<tab>") 'completion-at-point))))
 
 (use-package with-editor
   :hook ((eshell-mode . with-editor-export-editor)
