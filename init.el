@@ -648,6 +648,7 @@ I always end up doing it in current buffer so might as well wrap it."
   :ensure nil)
 
 (use-package eshell
+  :bind ("C-c e" . eshell)
   :init (setq eshell-banner-message "Eshell, because the existing shells were not bad enough already.\n\n")
   :hook (eshell-mode . (lambda ()
                          (company-mode -1)
