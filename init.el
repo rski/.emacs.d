@@ -335,6 +335,8 @@
 (use-package rust-mode
   :defer t
   :hook (rust-mode . rust-enable-format-on-save)
+  :bind (:map rust-mode-map
+                ("<C-return>" . cargo-process-current-test))
   :config
   (use-package flycheck-rust
     :hook (flycheck-mode . flycheck-rust-setup))
