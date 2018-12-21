@@ -223,6 +223,12 @@
 
 (unless (getenv "GOPATH")
   (user-error "GOPATH unset"))
+
+(defvar rski/go-packages '() "A list of packages that my editor needs")
+(defun rski/install-go-packages ()
+  (interactive)
+  (compile (format "go get -u -v %s" (mapconcat 'identity rski/go-packages ""))))
+
 (use-package go-mode
   :defer t
   :hook ((go-mode . (lambda () (add-hook 'before-save-hook
@@ -247,12 +253,16 @@
   (add-hook 'go-mode-hook #'rski/go-mode-setup)
 
   ;; requires gocode
+  (add-to-list 'rski/go-packages "github.com/mdempsky/gocode")
   (use-package go-eldoc :hook (go-mode . go-eldoc-setup))
-  ;; golang.org/x/tools/cmd/guru
+
+  (add-to-list 'rski/go-packages "golang.org/x/tools/cmd/guru")
   (use-package go-guru :hook (go-mode . go-guru-hl-identifier-mode))
+
   (use-package go-playground :defer t)
 
   ;;; requires github.com/mdempsky/gocode (fork of nfs/gocode)
+  (add-to-list 'rski/go-packages "github.com/mdempsky/gocode")
   (use-package company-go
     :after company
     :init (local-backend go-mode-hook company-go)
@@ -322,6 +332,7 @@
     )
 
   ;; requires golang.org/x/tools/cmd/gorename
+  (add-to-list 'rski/go-packages "golang.org/x/tools/cmd/gorename")
   (use-package go-rename :defer))
 
 (use-package protobuf-mode :defer t)
