@@ -79,6 +79,7 @@
 
 (use-package flyspell
   :defer t
+  :ensure nil
   :if (executable-find "aspell")
   :hook ((text-mode . flyspell-mode)
          (prog-mode . flyspell-prog-mode))
@@ -627,6 +628,7 @@
 
 (use-package ediff
   :defer t
+  :ensure nil
   :init
   (defun rski/ediff-wordwise-in-current-buffer ()
     "Thin wrapper around `ediff-regions-wordwise'.
@@ -655,6 +657,8 @@ I always end up doing it in current buffer so might as well wrap it."
   :ensure nil)
 
 (use-package eshell
+  :ensure nil
+  :defer t
   :bind ("C-c e" . eshell)
   :init (setq eshell-banner-message "Eshell, because the existing shells were not bad enough already.\n\n")
   :hook (eshell-mode . (lambda ()
