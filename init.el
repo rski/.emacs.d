@@ -654,6 +654,11 @@ I always end up doing it in current buffer so might as well wrap it."
   ;;; historic commit messages and I do use that. Maybe if I just bind them to prog mode or something.
   ;;; There always is M-g M-n
   ;;; :bind (("M-n" . next-error) ("M-p" . previous-error))
+  :init (defun rski/delete-hz-space ()
+           (interactive)
+           (delete-horizontal-space)
+           (insert " "))
+  :bind (("M-\\" . rski/delete-hz-space))
   :ensure nil)
 
 (use-package eshell
