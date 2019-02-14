@@ -75,6 +75,14 @@
   :config
   (use-package flycheck-pos-tip)
   (put 'flycheck-yang-path 'safe-local-variable #'stringp)
+  (defvar flycheck-error-list-format
+  `[("File" 20)
+    ("Line" 5 flycheck-error-list-entry-< :right-align t)
+    ("Col" 3 nil :right-align t)
+    ("Level" 8 flycheck-error-list-entry-level-<)
+    ("ID" 3 t)
+    (,(flycheck-error-list-make-last-column "Message" 'Checker) 0 t)]
+  "Table format for the error list.")
   )
 
 (use-package flyspell
