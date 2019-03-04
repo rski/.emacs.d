@@ -224,6 +224,9 @@
                                ("import" "import \\(.*\\) {" 1)
                                )))))
 
+;; also for Jenkinsfiles
+(use-package groovy-mode :defer t)
+
 (use-package nix-mode :defer t)
 (use-package company-nixos-options
   :after company
