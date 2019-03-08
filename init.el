@@ -375,7 +375,7 @@
               )
   :bind (("C-c g" . magit-status)
          ("C-c m l" . magit-log-buffer-file)
-         ("C-c m b" . magit-blame)
+         ("C-c m b" . magit-blame-addition)
          )
   :config
   (set-face-background 'diff-refine-added "green3")
