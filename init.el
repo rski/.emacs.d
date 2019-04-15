@@ -273,14 +273,15 @@
 
   (use-package go-playground :defer t)
 
-  ;;; requires github.com/mdempsky/gocode (fork of nfs/gocode)
-  (add-to-list 'rski/go-packages "github.com/mdempsky/gocode")
-  (use-package company-go
-    :after company
-    :init (local-backend go-mode-hook company-go)
-    ;;; this is broken with company-tng
-    (setq company-go-insert-arguments nil))
-
+  (add-to-list 'rski/go-packages "golang.org/x/tools/cmd/gopls")
+  (use-package lsp-mode
+    :ensure t
+    :commands lsp
+    :config
+    (lsp-register-client
+     (make-lsp-client :new-connection (lsp-stdio-connection "gopls")
+                     :major-modes '(go-mode)
+                      :server-id 'gopls)))
   ;;; requires the gometalinter binary
   (use-package flycheck-gometalinter
     :if (and (executable-find "gometalinter")
