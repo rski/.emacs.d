@@ -247,6 +247,7 @@
                                         (lambda ()
                                           (gofmt-before-save))
                                         nil t)))
+         (go-mode . lsp)
          (go-mode . (lambda ()
                       (local-set-key (kbd "M-.") 'godef-jump)
                       (local-set-key (kbd "M-4 M-.") 'godef-jump-other-window))))
