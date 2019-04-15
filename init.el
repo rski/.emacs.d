@@ -239,7 +239,7 @@
 (defvar rski/go-packages '() "A list of packages that my editor needs")
 (defun rski/install-go-packages ()
   (interactive)
-  (compile (format "go get -u -v %s" (mapconcat 'identity rski/go-packages ""))))
+  (compile (format "go get -u -v %s" (mapconcat 'identity rski/go-packages " "))))
 
 (use-package go-mode
   :defer t
