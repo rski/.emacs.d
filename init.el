@@ -582,7 +582,7 @@
 
 ;;; modeline
 (setq rski/hostname (system-name))
-(setq-default mode-line-format '("" mode-line-modified mode-line-remote
+(setq-default mode-line-format '("" current-input-method-title mode-line-modified mode-line-remote
                                  mode-line-buffer-identification " "
                                  mode-line-position mode-line-modes mode-line-misc-info rski/hostname))
 (display-time-mode t)
