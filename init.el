@@ -278,6 +278,7 @@
   (use-package lsp-mode
     :ensure t
     :commands lsp
+    :init (setq lsp-prefer-flymake nil)
     :config
     (lsp-register-client
      (make-lsp-client :new-connection (lsp-stdio-connection "gopls")
