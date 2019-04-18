@@ -265,10 +265,6 @@
     (auto-fill-mode t))
   (add-hook 'go-mode-hook #'rski/go-mode-setup)
 
-  ;; requires gocode
-  (add-to-list 'rski/go-packages "github.com/mdempsky/gocode")
-  (use-package go-eldoc :hook (go-mode . go-eldoc-setup))
-
   (add-to-list 'rski/go-packages "golang.org/x/tools/cmd/guru")
   (use-package go-guru :hook (go-mode . go-guru-hl-identifier-mode))
 
