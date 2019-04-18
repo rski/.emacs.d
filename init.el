@@ -581,9 +581,10 @@
 (global-set-key (kbd "C-c v") 'rski/visit-config)
 
 ;;; modeline
+(setq rski/hostname (system-name))
 (setq-default mode-line-format '("" mode-line-modified mode-line-remote
                                  mode-line-buffer-identification " "
-                                 mode-line-position mode-line-modes mode-line-misc-info))
+                                 mode-line-position mode-line-modes mode-line-misc-info rski/hostname))
 (display-time-mode t)
 
 (use-package eldoc :diminish eldoc-mode :ensure nil)
