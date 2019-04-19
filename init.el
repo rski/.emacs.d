@@ -76,13 +76,13 @@
   (use-package flycheck-pos-tip)
   (put 'flycheck-yang-path 'safe-local-variable #'stringp)
   (defvar flycheck-error-list-format
-  `[("File" 20)
-    ("Line" 5 flycheck-error-list-entry-< :right-align t)
-    ("Col" 3 nil :right-align t)
-    ("Level" 8 flycheck-error-list-entry-level-<)
-    ("ID" 3 t)
-    (,(flycheck-error-list-make-last-column "Message" 'Checker) 0 t)]
-  "Table format for the error list.")
+    `[("File" 20)
+      ("Line" 5 flycheck-error-list-entry-< :right-align t)
+      ("Col" 3 nil :right-align t)
+      ("Level" 8 flycheck-error-list-entry-level-<)
+      ("ID" 3 t)
+      (,(flycheck-error-list-make-last-column "Message" 'Checker) 0 t)]
+    "Table format for the error list.")
   )
 
 (use-package flyspell
@@ -343,7 +343,7 @@
   :defer t
   :hook (rust-mode . rust-enable-format-on-save)
   :bind (:map rust-mode-map
-                ("<C-return>" . cargo-process-current-test))
+              ("<C-return>" . cargo-process-current-test))
   :config
   (use-package flycheck-rust
     :hook (flycheck-mode . flycheck-rust-setup))
@@ -653,9 +653,9 @@ I always end up doing it in current buffer so might as well wrap it."
   ;;; There always is M-g M-n
   ;;; :bind (("M-n" . next-error) ("M-p" . previous-error))
   :init (defun rski/delete-hz-space ()
-           (interactive)
-           (delete-horizontal-space)
-           (insert " "))
+          (interactive)
+          (delete-horizontal-space)
+          (insert " "))
   :bind (("M-\\" . rski/delete-hz-space))
   :ensure nil)
 
