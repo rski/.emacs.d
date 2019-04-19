@@ -167,15 +167,6 @@
     :init (all-the-icons-ivy-setup))
   )
 
-(use-package anaconda-mode
-  :defer t
-  :hook ((python-mode . anaconda-mode)
-         (python-mode . anaconda-eldoc-mode)))
-(use-package company-anaconda
-  :after company
-  :defer t
-  :init (local-backend python-mode-hook company-anaconda))
-
 (use-package puppet-mode :defer t)
 
 (use-package markdown-mode
@@ -243,7 +234,8 @@
 
 (use-package lsp-mode
   :ensure t
-  :init (setq lsp-prefer-flymake :none))
+  :config (setq lsp-prefer-flymake :none)
+  :hook (python-mode . lsp))
 
 (use-package go-mode
   :defer t
