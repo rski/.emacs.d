@@ -224,6 +224,12 @@
   :defer t
   :init (local-backend nixos-mode-hook company-nixos-options))
 
+(use-package lsp-mode
+  :ensure t
+  :config (setq lsp-prefer-flymake :none)
+  ;;; https://github.com/palantir/python-language-server
+  :hook (python-mode . lsp))
+
 (unless (getenv "GOPATH")
   (user-error "GOPATH unset"))
 
@@ -232,10 +238,6 @@
   (interactive)
   (compile (format "go get -u -v %s" (mapconcat 'identity rski/go-packages " "))))
 
-(use-package lsp-mode
-  :ensure t
-  :config (setq lsp-prefer-flymake :none)
-  :hook (python-mode . lsp))
 
 (use-package go-mode
   :defer t
