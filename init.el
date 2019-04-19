@@ -249,8 +249,7 @@
                                         nil t)))
          (go-mode . lsp)
          (go-mode . (lambda ()
-                      (local-set-key (kbd "M-.") 'godef-jump)
-                      (local-set-key (kbd "M-4 M-.") 'godef-jump-other-window))))
+                      (local-set-key (kbd "M-.") 'lsp-find-definition))))
   :config (setq gofmt-command "goimports"
                 gofmt-show-errors nil) ;; what do i have flycheck for?
   ;; workaround not matching multiline signatures
