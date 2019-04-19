@@ -241,6 +241,10 @@
   (interactive)
   (compile (format "go get -u -v %s" (mapconcat 'identity rski/go-packages " "))))
 
+(use-package lsp-mode
+  :ensure t
+  :init (setq lsp-prefer-flymake :none))
+
 (use-package go-mode
   :defer t
   :hook ((go-mode . (lambda () (add-hook 'before-save-hook
@@ -252,6 +256,11 @@
                       (local-set-key (kbd "M-.") 'lsp-find-definition))))
   :config (setq gofmt-command "goimports"
                 gofmt-show-errors nil) ;; what do i have flycheck for?
+  (add-to-list 'rski/go-packages "golang.org/x/tools/cmd/gopls")
+  (lsp-register-client
+   (make-lsp-client :new-connection (lsp-stdio-connection "gopls")
+                    :major-modes '(go-mode)
+                    :server-id 'gopls))
   ;; workaround not matching multiline signatures
   ;;  https://github.com/dominikh/go-mode.el/issues/57
   (defun rski/go-mode-setup ()
@@ -268,17 +277,6 @@
   (use-package go-guru :hook (go-mode . go-guru-hl-identifier-mode))
 
   (use-package go-playground :defer t)
-
-  (add-to-list 'rski/go-packages "golang.org/x/tools/cmd/gopls")
-  (use-package lsp-mode
-    :ensure t
-    :commands lsp
-    :init (setq lsp-prefer-flymake nil)
-    :config
-    (lsp-register-client
-     (make-lsp-client :new-connection (lsp-stdio-connection "gopls")
-                     :major-modes '(go-mode)
-                      :server-id 'gopls)))
   ;;; requires the gometalinter binary
   (use-package flycheck-gometalinter
     :if (and (executable-find "gometalinter")
