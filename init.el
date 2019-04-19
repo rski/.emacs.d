@@ -377,15 +377,11 @@
          )
   :config
   (set-face-background 'diff-refine-added "green3")
-  (defun rski/magit-push-review()
+  (defun magit-push-to-gerrit ()
     (interactive)
-    (magit-run-git-async "push" "review"))
-  (defun rski/magit-push-review-with-reviewers()
-    (interactive)
-    (magit-run-git-async "push" "review-with-reviewers"))
-  (magit-define-popup-action 'magit-push-popup ?g "Push to gerrit" 'rski/magit-push-review-with-reviewers)
-  (magit-define-popup-action 'magit-push-popup ?G "Push to gerrit (no reviewers)" 'rski/magit-push-review)
-  )
+    (magit-git-command-topdir "git push origin HEAD:refs/for/master"))
+  (transient-append-suffix 'magit-push "m"
+    '("G" "Push to gerrit" magit-push-to-gerrit)))
 
 (use-package git-gutter
   :defer t
