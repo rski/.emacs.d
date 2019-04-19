@@ -341,16 +341,13 @@
 
 (use-package rust-mode
   :defer t
-  :hook (rust-mode . rust-enable-format-on-save)
+  :hook ((rust-mode . rust-enable-format-on-save)
+         (rust-mode . lsp))
   :bind (:map rust-mode-map
               ("<C-return>" . cargo-process-current-test))
   :config
   (use-package flycheck-rust
-    :hook (flycheck-mode . flycheck-rust-setup))
-  (use-package racer
-    :hook
-    ((rust-mode  . racer-mode)
-     (racer-mode . eldoc-mode))))
+    :hook (flycheck-mode . flycheck-rust-setup)))
 
 (use-package rpm-spec-mode :defer t)
 (use-package yaml-mode :defer t)
