@@ -231,7 +231,7 @@
   :hook (python-mode . lsp))
 
 (unless (getenv "GOPATH")
-  (user-error "GOPATH unset"))
+  (setenv "GOPATH" "/home/rski/go"))
 
 (defvar rski/go-packages '() "A list of packages that my editor needs")
 (defun rski/install-go-packages ()
