@@ -285,6 +285,7 @@
   (use-package flycheck-golangci-lint
     :hook (go-mode . flycheck-golangci-lint-setup)
     :config (setq flycheck-golangci-lint-tests t
+                  flycheck-golangci-lint-disable-linters '("structcheck")
                   flycheck-golangci-lint-fast t)
     )
 
