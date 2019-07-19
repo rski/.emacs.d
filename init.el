@@ -253,10 +253,6 @@
   :config (setq gofmt-command "goimports"
                 gofmt-show-errors nil) ;; what do i have flycheck for?
   (add-to-list 'rski/go-packages "golang.org/x/tools/cmd/gopls")
-  (lsp-register-client
-   (make-lsp-client :new-connection (lsp-stdio-connection "gopls")
-                    :major-modes '(go-mode)
-                    :server-id 'gopls))
   ;; workaround not matching multiline signatures
   ;;  https://github.com/dominikh/go-mode.el/issues/57
   (defun rski/go-mode-setup ()
