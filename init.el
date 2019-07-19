@@ -145,7 +145,7 @@
     :init (counsel-mode)
     :diminish counsel-mode
     :config
-    (setq counsel-yank-pop-height 20
+    (setq ;; counsel-yank-pop-height 20 XXX fixme? use ivy-height-alist
           counsel-yank-pop-separator "\n--\n"
         ;;; Hide files with leading dots. This can be toggled with C-c C-a or by typing a dot
           counsel-find-file-ignore-regexp "\\`\\."
