@@ -687,3 +687,6 @@ I always end up doing it in current buffer so might as well wrap it."
 ;;; pressing "a" in dired visits the thing (directory/file) and kills the previous buffer.
 ;;; Much better than pressing RET and leaving buffers
 (put 'dired-find-alternate-file 'disabled nil)
+
+(if (file-exists-p "~/.ssh/id_rsa_gerrit")
+    (shell-command "keychain --eval --agents ssh id_rsa_gerrit --quiet"))
