@@ -224,6 +224,7 @@
   :defer t
   :init (local-backend nixos-mode-hook company-nixos-options))
 
+(use-package yasnippet :ensure t)
 (use-package lsp-mode
   :ensure t
   :commands lsp-register-client
