@@ -247,9 +247,7 @@
                                         (lambda ()
                                           (gofmt-before-save))
                                         nil t)))
-         (go-mode . lsp)
-         (go-mode . (lambda ()
-                      (local-set-key (kbd "M-.") 'lsp-find-definition))))
+         (go-mode . lsp))
   :config (setq gofmt-command "goimports"
                 gofmt-show-errors nil) ;; what do i have flycheck for?
   (add-to-list 'rski/go-packages "golang.org/x/tools/cmd/gopls")
