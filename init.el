@@ -670,6 +670,13 @@ I always end up doing it in current buffer so might as well wrap it."
 
 (setq battery-echo-area-format "%L %B (%p%% %t)")
 
+
+;; shut up shut up shut up shut up
+(eval-after-load "flyspell"
+  '(define-key flyspell-mode-map (kbd "C-.") nil))
+(eval-after-load "flyspell"
+  '(define-key flyspell-mode-map (kbd "C-,") nil))
+
 (setq gc-cons-threshold 80000
       gc-cons-percentage 0.1
       file-name-handler-alist rski-file-name-handler-alist)
