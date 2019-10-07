@@ -228,6 +228,7 @@
 (use-package lsp-mode
   :ensure t
   :commands lsp-register-client
+  :init (setq lsp-gopls-server-args '("--debug=localhost:6060"))
   :config (setq lsp-prefer-flymake :none))
   ;;; https://github.com/palantir/python-language-server
   ;; :hook (python-mode . lsp))
