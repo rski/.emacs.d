@@ -228,9 +228,9 @@
 (use-package lsp-mode
   :ensure t
   :commands lsp-register-client
-  :config (setq lsp-prefer-flymake :none)
+  :config (setq lsp-prefer-flymake :none))
   ;;; https://github.com/palantir/python-language-server
-  :hook (python-mode . lsp))
+  ;; :hook (python-mode . lsp))
 
 (unless (getenv "GOPATH")
   (setenv "GOPATH" "/home/rski/go"))
