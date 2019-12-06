@@ -132,7 +132,6 @@
 
 (use-package ivy
   :init (ivy-mode)
-  (setq ivy-initial-inputs-alist nil)
   :diminish ivy-mode
   :config (setq ivy-height 20
                 ;;; Add recentf and bookmarks to ivy-switch-buffer
@@ -165,6 +164,7 @@
   ;;; Also note that only 1 transformer can be active, so this effectively prevents me from using say ivy-rich
   (use-package all-the-icons-ivy
     :init (all-the-icons-ivy-setup))
+  (setq ivy-initial-inputs-alist nil)
   )
 
 (use-package puppet-mode :defer t)
