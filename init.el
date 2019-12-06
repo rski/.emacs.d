@@ -224,7 +224,11 @@
   :defer t
   :init (local-backend nixos-mode-hook company-nixos-options))
 
-(use-package yasnippet :ensure t)
+(use-package yasnippet
+  :ensure t
+  :bind (("C-c r" . yas-insert-snippet))
+  )
+(use-package yasnippet-snippets :ensure t)
 (use-package lsp-mode
   :ensure t
   :init (setq lsp-gopls-server-args '("--debug=localhost:6060"))
