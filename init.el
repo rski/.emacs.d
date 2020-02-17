@@ -532,7 +532,7 @@
   (require 'smartparens-config)
   :diminish smartparens-mode)
 
-(dolist (mode '("eshell" "compilation" "debugger" "shell" "Info" "eww" "elfeed-show" "Buffer-menu" "erc" "term"))
+(dolist (mode '("eshell" "compilation" "debugger" "shell" "Info" "eww" "elfeed-show" "Buffer-menu" "erc" "term" "vterm"))
   (let ((mode-hook (intern (format "%s-mode-hook" mode))))
     (add-hook mode-hook
               (lambda () (setq show-trailing-whitespace nil)))))
@@ -670,6 +670,9 @@ I always end up doing it in current buffer so might as well wrap it."
                          (company-mode -1)
                          ;;; by abo-abo @https://emacs.stackexchange.com/questions/27849/how-can-i-setup-eshell-to-use-ivy-for-tab-completion
                          (define-key eshell-mode-map (kbd "<tab>") 'completion-at-point))))
+
+;; I shbould probably if this on module support, but eh
+(use-package vterm :defer t)
 
 (use-package with-editor
   :hook ((eshell-mode . with-editor-export-editor)
