@@ -101,6 +101,7 @@
         company-require-match nil
         company-auto-complete nil
         company-selection-wrap-around t
+        company-show-numbers t ;; M-n completes
         company-dabbrev-downcase nil)
   (setq company-backends '(company-semantic
                            company-clang
