@@ -286,6 +286,10 @@
 
   (use-package gotest
     :hook (go-test-mode . visual-line-mode)
+    :init
+    (defun go-test-current-project-rski ()
+      (interactive)
+      (go-test--go-test "./..."))
     :config
     (defvar rski/dlv-debug-last-command nil "")
     (defun rski/dlv-debug-current-test()
