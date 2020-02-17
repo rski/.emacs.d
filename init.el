@@ -275,15 +275,6 @@
   (use-package go-guru :hook (go-mode . go-guru-hl-identifier-mode))
 
   (use-package go-playground :defer t)
-  ;;; requires the gometalinter binary
-  (use-package flycheck-gometalinter
-    :if (and (executable-find "gometalinter")
-             nil) ;; disable for now
-    :hook (go-mode . (lambda () (flycheck-select-checker 'gometalinter)))
-    :config
-    (setq flycheck-gometalinter-fast t)
-    (setq flycheck-gometalinter-disable-linters '("gocyclo" "goconst" "vetshadow"))
-    (flycheck-gometalinter-setup))
 
   (use-package flycheck-golangci-lint
     :hook (go-mode . flycheck-golangci-lint-setup)
