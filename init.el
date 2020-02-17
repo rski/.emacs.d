@@ -441,9 +441,10 @@
 (use-package monokai-theme :defer t)
 (use-package atom-one-dark-theme :defer t)
 (use-package solarized-theme :defer t)
+(use-package doom-themes :defer t)
 
 ;; move it out of the use-packages so that the diffs won't be as weird when I change themes
-(load-theme 'monokai 'no-confirm)
+(load-theme 'doom-dark+ 'no-confirm)
 
 ;;; This lad adds a hook linear to the number of buffers, it makes EVERY magit operation unbearably slow.
 ;; (defun doom-modeline-magit-post-refresh ()
