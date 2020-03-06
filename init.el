@@ -235,6 +235,7 @@
   :init (setq lsp-gopls-server-args '("--debug=localhost:6060"))
   :config
   (setq lsp-prefer-flymake :none)
+  (setq lsp-enable-file-watchers nil)
   (lsp-register-custom-settings
    '(("gopls.completeUnimported" t t))))
   ;;; https://github.com/palantir/python-language-server
