@@ -668,9 +668,6 @@ I always end up doing it in current buffer so might as well wrap it."
                          ;;; by abo-abo @https://emacs.stackexchange.com/questions/27849/how-can-i-setup-eshell-to-use-ivy-for-tab-completion
                          (define-key eshell-mode-map (kbd "<tab>") 'completion-at-point))))
 
-;; I shbould probably if this on module support, but eh
-(use-package vterm :defer t)
-
 (use-package with-editor
   :hook ((eshell-mode . with-editor-export-editor)
          (eshell-mode . with-editor-export-git-editor)))
