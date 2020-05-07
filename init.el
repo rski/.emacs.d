@@ -250,10 +250,11 @@
 
 (use-package go-mode
   :defer t
-  :hook ((go-mode . (lambda () (add-hook 'before-save-hook
-                                        (lambda ()
-                                          (gofmt-before-save))
-                                        nil t)))
+  :hook ((go-mode . (lambda ()
+                      (add-hook 'before-save-hook
+                                #'lsp-format-buffer t t)
+                      (add-hook 'before-save-hook
+                                #'lsp-organize-imports t t )))
          (go-mode . lsp))
   :config (setq gofmt-command "goimports"
                 gofmt-show-errors nil) ;; what do i have flycheck for?
