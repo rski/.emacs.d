@@ -112,10 +112,7 @@
                             company-gtags
                             company-etags
                             company-keywords)
-                           company-dabbrev))
-  :config (company-tng-configure-default)
-  (use-package company-statistics
-    :config (company-statistics-mode)))
+                           company-dabbrev)))
 
 (defmacro local-backend (mode-hook backend)
   "a macro for local company backends
