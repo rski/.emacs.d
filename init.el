@@ -344,6 +344,8 @@
   :defer t
   :hook ((rust-mode . rust-enable-format-on-save)
          (rust-mode . lsp))
+  :init
+  (setq lsp-rust-server 'rust-analyzer)
   :bind (:map rust-mode-map
               ("<C-return>" . cargo-process-current-test))
   :config
