@@ -695,5 +695,6 @@ I always end up doing it in current buffer so might as well wrap it."
 ;;; Much better than pressing RET and leaving buffers
 (put 'dired-find-alternate-file 'disabled nil)
 
-(if (file-exists-p "~/.ssh/id_rsa_gerrit")
-    (shell-command "keychain --eval --agents ssh id_rsa_gerrit --quiet"))
+;; have to manually call keychain-refresh-environment because emacs usually starts after a terminal.
+;; Not sure how to streamline this better
+(use-package keychain-environment)
