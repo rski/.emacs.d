@@ -230,7 +230,9 @@
 (use-package yasnippet-snippets :ensure t)
 (use-package lsp-mode
   :ensure t
-  :init (setq lsp-gopls-server-args '("--debug=localhost:6060"))
+  :init
+  (setq lsp-auto-guess-root t)
+  (setq lsp-gopls-server-args '("--debug=localhost:6060"))
   :config
   (setq lsp-prefer-flymake :none)
   (setq lsp-enable-file-watchers nil)
