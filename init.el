@@ -697,6 +697,12 @@ I always end up doing it in current buffer so might as well wrap it."
 ;;; Much better than pressing RET and leaving buffers
 (put 'dired-find-alternate-file 'disabled nil)
 
-;; have to manually call keychain-refresh-environment because emacs usually starts after a terminal.
-;; Not sure how to streamline this better
-(use-package keychain-environment)
+(use-package keychain-environment
+  ;; fish also does this using after unlocking the keys,
+  ;; using
+  ;; emacsclient  -e "(keychain-refresh-environment)"
+  ;; This is for when emacs restarts after fish has sent the eval.
+  ;; There's some states where emacs won't get the environment set correctly
+  ;; e.g. starting a non-daemon without having started a login shell, but
+  ;; that will probably be too infrequent to matter.
+  :config (keychain-refresh-environment))
