@@ -269,7 +269,7 @@
   (add-hook 'go-mode-hook #'rski/go-mode-setup)
 
   (add-to-list 'rski/go-packages "golang.org/x/tools/cmd/guru")
-  (use-package go-guru :hook (go-mode . go-guru-hl-identifier-mode))
+  (use-package go-guru)
 
   (use-package go-playground :defer t)
 
