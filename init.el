@@ -254,8 +254,7 @@
                       (add-hook 'before-save-hook
                                 #'lsp-organize-imports t t )))
          (go-mode . lsp))
-  :config (setq gofmt-command "goimports"
-                gofmt-show-errors nil) ;; what do i have flycheck for?
+  :config
   (add-to-list 'rski/go-packages "golang.org/x/tools/cmd/gopls")
   ;; workaround not matching multiline signatures
   ;;  https://github.com/dominikh/go-mode.el/issues/57
