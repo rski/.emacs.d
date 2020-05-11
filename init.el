@@ -169,7 +169,7 @@
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
-  :config (setq markdown-command "multimarkdown"))
+  :custom (markdown-command "multimarkdown"))
 
 (use-package lua-mode :defer t)
 (use-package company-lua
@@ -181,10 +181,10 @@
   :defer t
   :config
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-  (setq web-mode-engines-alist
-        '(("django" . "\\.html\\'")))
-  (setq web-mode-enable-auto-closing t)
-  (setq web-mode-enable-css-colorization t))
+  :custom
+  (web-mode-engines-alist '(("django" . "\\.html\\'")))
+  (web-mode-enable-auto-closing t)
+  (web-mode-enable-css-colorization t))
 
 (use-package emmet-mode
   :defer t
