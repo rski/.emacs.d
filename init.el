@@ -380,15 +380,15 @@
   :diminish git-gutter-mode)
 
 (use-package projectile
+  :custom
+  (projectile-keymap-prefix (kbd "C-c p"))
+  (projectile-mode-line
+   '(:eval (format " [%s]"
+                   (projectile-project-name))))
   :init
-  (setq projectile-keymap-prefix (kbd "C-c p"))
   (projectile-mode)
   (add-to-list 'projectile-globally-ignored-directories "vendor")
   :config
-  (setq projectile-mode-line
-        '(:eval (format " [%s]"
-                        (projectile-project-name))))
-
   (use-package counsel-projectile
     :init (counsel-projectile-mode)
     :bind ("M-I". counsel-projectile-rg))
