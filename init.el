@@ -226,12 +226,12 @@
 (use-package yasnippet-snippets :ensure t)
 (use-package lsp-mode
   :ensure t
-  :init
-  (setq lsp-auto-guess-root t)
-  (setq lsp-gopls-server-args '("--debug=localhost:6060"))
+  :custom
+  (lsp-auto-guess-root t)
+  (lsp-gopls-server-args '("--debug=localhost:6060"))
+  (lsp-prefer-flymake :none)
+  (lsp-enable-file-watchers nil)
   :config
-  (setq lsp-prefer-flymake :none)
-  (setq lsp-enable-file-watchers nil)
   (lsp-register-custom-settings
    '(("gopls.completeUnimported" t t))))
   ;;; https://github.com/palantir/python-language-server
