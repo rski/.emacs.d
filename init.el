@@ -131,24 +131,21 @@
 (use-package ivy
   :init (ivy-mode)
   :diminish ivy-mode
-  :config (setq ivy-height 20
-                ;;; Add recentf and bookmarks to ivy-switch-buffer
-                ivy-use-virtual-buffers t)
-
+  :custom
+  (ivy-height 20 )
+  (ivy-use-virtual-buffers t "Add recentf and bookmarks to ivy-switch-buffer")
+  :config
   ;;; Required for editing search results with ivy-ag and family
   (use-package wgrep :defer t)
 
   (use-package counsel
     :init (counsel-mode)
     :diminish counsel-mode
-    :config
-    (setq ;; counsel-yank-pop-height 20 XXX fixme? use ivy-height-alist
-          counsel-yank-pop-separator "\n--\n"
-        ;;; Hide files with leading dots. This can be toggled with C-c C-a or by typing a dot
-          counsel-find-file-ignore-regexp "\\`\\."
-          )
-    (use-package smex
-      :defer nil)
+    :custom
+    (counsel-yank-pop-separator "\n--\n")
+    (counsel-find-file-ignore-regexp "\\`\\." "Hide files with leading dots. This can be toggled with C-c C-a or by typing a dot")
+    (ivy-initial-inputs-alist nil)
+    :config (use-package smex :defer nil)
     :bind (("M-y" . counsel-yank-pop)
            ("M-o" . counsel-semantic-or-imenu)))
 
@@ -162,7 +159,6 @@
   ;;; Also note that only 1 transformer can be active, so this effectively prevents me from using say ivy-rich
   (use-package all-the-icons-ivy
     :init (all-the-icons-ivy-setup))
-  (setq ivy-initial-inputs-alist nil)
   )
 
 (use-package puppet-mode :defer t)
