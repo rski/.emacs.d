@@ -277,6 +277,7 @@
     :hook (go-mode . flycheck-golangci-lint-setup)
     :config (setq flycheck-golangci-lint-tests t
                   flycheck-golangci-lint-disable-linters '("structcheck")
+                  ;; XXX add "errcheck" "deadcode"?
                   flycheck-golangci-lint-enable-linters '("golint")
                   flycheck-golangci-lint-fast t)
     )
@@ -326,7 +327,6 @@
       (let ((current-prefix-arg 1)) ;; emulate C-1
         (call-interactively 'go-test-current-test)))
 
-    (setq go-test-verbose t) ;; passes -v to go-test so the test names show when running them
     :bind (:map go-mode-map
                 ("<C-return>" . rski/go-test-current-test))
     )
