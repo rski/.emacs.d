@@ -341,8 +341,8 @@
   :defer t
   :hook ((rust-mode . rust-enable-format-on-save)
          (rust-mode . lsp))
-  :init
-  (setq lsp-rust-server 'rust-analyzer)
+  :custom
+  (lsp-rust-server 'rust-analyzer)
   :bind (:map rust-mode-map
               ("<C-return>" . cargo-process-current-test))
   :config
@@ -354,12 +354,13 @@
 
 (use-package magit
   :defer t
-  :init (setq magit-bury-buffer-function 'magit-mode-quit-window
-              magit-log-section-commit-count 20
-              ;;; word-wise diffs. This is for the current hunk because all makes magit-status really slow in many big hunks
-              ;; It is quite distracting so disable it.
-              ;; magit-diff-refine-hunk 't
-              )
+  :custom
+  (magit-bury-buffer-function 'magit-mode-quit-window)
+  (magit-log-section-commit-count 20)
+  ;;; word-wise diffs. This is for the current hunk because all makes magit-status really slow in many big hunks
+  ;;; It is quite distracting so disable it.
+  ;;; magit-diff-refine-hunk 't
+
   :bind (("C-c g" . magit-status)
          ("C-c m l" . magit-log-buffer-file)
          ("C-c m b" . magit-blame-addition)
