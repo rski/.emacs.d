@@ -570,9 +570,9 @@
 
 (use-package uniquify
   :ensure nil
-  :config
-  (setq uniquify-buffer-name-style 'forward
-        uniquify-min-dir-content 1))
+  :custom
+  (uniquify-buffer-name-style 'forward)
+  (uniquify-min-dir-content 1))
 (global-set-key (kbd "M-/") 'hippie-expand)
 
 ;;; double misc after here
@@ -626,7 +626,7 @@ I always end up doing it in current buffer so might as well wrap it."
 (use-package tex-mode
   :defer t
   :ensure nil
-  :config (setq tex-dvi-view-command "evince"))
+  :custom (tex-dvi-view-command "evince"))
 
 (use-package simple
   :defer t
@@ -645,7 +645,7 @@ I always end up doing it in current buffer so might as well wrap it."
   :ensure nil
   :defer t
   :bind ("C-c e" . eshell)
-  :init (setq eshell-banner-message "Eshell, because the existing shells were not bad enough already.\n\n")
+  :custom (eshell-banner-message "Eshell, because the existing shells were not bad enough already.\n\n")
   :hook (eshell-mode . (lambda ()
                          (company-mode -1)
                          ;;; by abo-abo @https://emacs.stackexchange.com/questions/27849/how-can-i-setup-eshell-to-use-ivy-for-tab-completion
