@@ -537,6 +537,7 @@
                   ("feeds.feedburner.com/Airs-IanLanceTaylor" blog)
                   ("https://memo.barrucadu.co.uk/atom.xml" blog)
                   ("https://weekly.nixos.org/feeds/all.rss.xml" snobbery nix)
+                  ("https://lwn.net/headlines/rss")
                   )))
 
 ;;;Rebind M-; to comment out lines instead of insert comments in the end
