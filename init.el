@@ -529,7 +529,7 @@
 (use-package elfeed
   :defer t
   :config (setq elfeed-feeds
-                '(("http://planet.emacsen.org/atom.xml" emacs)
+                '(("https://planet.emacslife.com/atom.xml" emacs)
                   ("http://steve-yegge.blogspot.com/atom.xml" blog emacs)
                   ("http://nullprogram.com/feed/" blog emacs)
                   ("https://jvns.ca/atom.xml" blog)
