@@ -535,6 +535,8 @@
                   ("https://jvns.ca/atom.xml" blog)
                   ("https://dave.cheney.net/feed/atom" blog golang)
                   ("feeds.feedburner.com/Airs-IanLanceTaylor" blog)
+                  ("https://memo.barrucadu.co.uk/atom.xml" blog)
+                  ("https://weekly.nixos.org/feeds/all.rss.xml" snobbery nix)
                   )))
 
 ;;;Rebind M-; to comment out lines instead of insert comments in the end
