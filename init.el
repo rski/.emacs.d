@@ -223,7 +223,8 @@
   (lsp-enable-file-watchers nil)
   :config
   (lsp-register-custom-settings
-   '(("gopls.completeUnimported" t t))))
+   '(("gopls.completeUnimported" t t)
+        ("gopls.staticcheck" nil t))))
   ;;; https://github.com/palantir/python-language-server
   ;; :hook (python-mode . lsp))
 
