@@ -218,7 +218,6 @@
   :ensure t
   :custom
   (lsp-auto-guess-root t)
-  (lsp-gopls-server-args '("--debug=localhost:6060"))
   (lsp-prefer-flymake :none)
   (lsp-enable-file-watchers nil)
   :config
