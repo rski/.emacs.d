@@ -122,12 +122,6 @@
                (add-to-list (make-local-variable 'company-backends)
                             ',backend))))
 
-(use-package emr
-  :commands (emr-initialize)
-  :hook (c-mode-common . (lambda ()
-                           (emr-initialize)
-                           (bind-key "C-c C-a" 'emr-c-insert-include c-mode-base-map))))
-
 (use-package ivy
   :init (ivy-mode)
   :diminish ivy-mode
@@ -172,10 +166,6 @@
   :custom (markdown-command "multimarkdown"))
 
 (use-package lua-mode :defer t)
-(use-package company-lua
-  :defer t
-  :after 'company
-  :init (local-backend lua-mode-hook company-lua))
 
 (use-package web-mode
   :defer t
