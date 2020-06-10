@@ -36,6 +36,9 @@
       default-input-method "greek"
       ;;this makes resizing not trunkate the frame size and create gaps underneath it in awesome
       frame-resize-pixelwise t
+
+      ;;; shut the fuck up vc forever and ever
+      vc-handled-backends nil
       )
 
 ;; make C-z do nothing
