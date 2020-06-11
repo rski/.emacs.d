@@ -572,7 +572,9 @@
 (global-set-key (kbd "M-/") 'hippie-expand)
 
 ;;; double misc after here
-(load-file "~/Code/emacs-brewery/brewery.el")
+(let ((brewery "~/Code/emacs-brewery/brewery.el"))
+  (if (file-exists-p brewery)
+      (load-file brewery)))
 
 ;;; List some unported remacs functions
 (defun list-unported-remacs-funcs (remacs-dir)
