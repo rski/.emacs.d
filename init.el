@@ -538,7 +538,7 @@
 
 (defun rski/visit-config ()
   (interactive)
-  (find-file user-init-file))
+  (find-file "~/.emacs.d/init.el"))
 (global-set-key (kbd "C-c v") 'rski/visit-config)
 
 ;;; modeline
