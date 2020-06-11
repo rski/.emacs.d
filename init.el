@@ -177,11 +177,6 @@
   (web-mode-enable-auto-closing t)
   (web-mode-enable-css-colorization t))
 
-(use-package emmet-mode
-  :defer t
-  :hook ((web-mode . emmet-mode)
-         (html-mode . emmet-mode)))
-
 (use-package dockerfile-mode :defer t)
 
 (use-package company-c-headers
