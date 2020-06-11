@@ -216,6 +216,7 @@
   (lsp-auto-guess-root t)
   (lsp-prefer-flymake :none)
   (lsp-enable-file-watchers nil)
+  (lsp-signature-doc-lines 1)
   :config
   (lsp-register-custom-settings
    '(("gopls.completeUnimported" t t)
