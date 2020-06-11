@@ -32,8 +32,6 @@
       auto-save-file-name-transforms `((".*" ,(concat user-emacs-directory "backups") t))
       column-number-mode 1
       whitespace-style '(face lines-tail)
-      ;; C-\ will switch between default-input-method and the actual kb layout
-      default-input-method "greek"
       ;;this makes resizing not trunkate the frame size and create gaps underneath it in awesome
       frame-resize-pixelwise t
 
