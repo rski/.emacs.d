@@ -220,9 +220,15 @@
   :config
   (lsp-register-custom-settings
    '(("gopls.completeUnimported" t t)
-        ("gopls.staticcheck" nil t))))
-  ;;; https://github.com/palantir/python-language-server
-  ;; :hook (python-mode . lsp))
+     ("gopls.staticcheck" nil t))))
+
+(use-package lsp-python-ms
+  :ensure t
+  :hook (python-mode . (lambda ()
+                         (require 'lsp-python-ms)
+                         (lsp)))
+  :init
+  (setq lsp-python-ms-executable (executable-find "python-language-server")))
 
 (unless (getenv "GOPATH")
   (setenv "GOPATH" "/home/rski/go"))
