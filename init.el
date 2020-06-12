@@ -374,12 +374,12 @@
 
 (use-package projectile
   :custom
-  (projectile-keymap-prefix (kbd "C-c p"))
   (projectile-mode-line
    '(:eval (format " [%s]"
                    (projectile-project-name))))
   :init
   (projectile-mode)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (add-to-list 'projectile-globally-ignored-directories "vendor")
   :config
   (use-package counsel-projectile
