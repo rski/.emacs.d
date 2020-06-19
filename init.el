@@ -217,7 +217,6 @@
   (lsp-prefer-flymake :none)
   (lsp-enable-file-watchers nil)
   (lsp-signature-doc-lines 1)
-  (lsp-gopls-codelens nil) ;; https://github.com/emacs-lsp/lsp-mode/issues/1778
   :config
   (lsp-register-custom-settings
    '(("gopls.completeUnimported" t t)
