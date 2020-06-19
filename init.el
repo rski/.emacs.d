@@ -246,7 +246,9 @@
                                 #'lsp-format-buffer t t)
                       (add-hook 'before-save-hook
                                 #'lsp-organize-imports t t )))
-         (go-mode . lsp))
+         (go-mode . lsp)
+         (go-dot-mod-mode . lsp) ;; needs https://github.com/emacs-lsp/lsp-mode/pull/1822/files
+         )
   :config
   (add-to-list 'rski/go-packages "golang.org/x/tools/cmd/gopls")
   ;; workaround not matching multiline signatures
