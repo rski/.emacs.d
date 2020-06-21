@@ -37,6 +37,9 @@
 
       ;;; shut the fuck up vc forever and ever
       vc-handled-backends nil
+
+      ;; makes lsp-mode faster
+      read-process-output-max (* 1024 1024)
       )
 
 ;; make C-z do nothing
@@ -217,6 +220,7 @@
   (lsp-prefer-flymake :none)
   (lsp-enable-file-watchers nil)
   (lsp-signature-doc-lines 1)
+  (lsp-imenu-sort-methods '(position))
   :config
   (lsp-register-custom-settings
    '(("gopls.completeUnimported" t t)
