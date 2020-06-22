@@ -221,6 +221,7 @@
   (lsp-enable-file-watchers nil)
   (lsp-signature-doc-lines 1)
   (lsp-imenu-sort-methods '(position))
+  (lsp-restart 'ignore)
   :config
   (lsp-register-custom-settings
    '(("gopls.completeUnimported" t t)
