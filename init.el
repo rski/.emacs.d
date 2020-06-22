@@ -231,6 +231,8 @@
   :hook (python-mode . (lambda ()
                          (require 'lsp-python-ms)
                          (lsp)))
+  :custom
+  (lsp-python-ms-python-executable-cmd "python3")
   :init
   (setq lsp-python-ms-executable (executable-find "python-language-server")))
 
