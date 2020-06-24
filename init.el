@@ -40,6 +40,9 @@
 
       ;; makes lsp-mode faster
       read-process-output-max (* 1024 1024)
+      ;; autsave on compilation
+      compilation-ask-about-save nil
+
       )
 
 ;; make C-z do nothing
