@@ -225,6 +225,7 @@
   (lsp-signature-doc-lines 1)
   (lsp-imenu-sort-methods '(position))
   (lsp-restart 'ignore)
+  (lsp-response-timeout 2)
   :config
   (lsp-register-custom-settings
    '(("gopls.completeUnimported" t t)
