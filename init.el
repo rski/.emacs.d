@@ -70,6 +70,8 @@
 (setq use-package-always-ensure t)
 (add-hook 'prog-mode-hook #'bug-reference-prog-mode)
 
+(use-package diminish)
+
 (use-package flycheck
   :hook ((after-init    . global-flycheck-mode)
          (after-init    . flycheck-pos-tip-mode))
@@ -101,6 +103,7 @@
   :diminish 'flyspell-mode)
 
 (use-package company
+  :diminish company-mode
   :hook (after-init . global-company-mode)
   :init
   (setq company-minimum-prefix-length 3
@@ -213,6 +216,7 @@
 (use-package yasnippet
   :ensure t
   :init (yas-global-mode t)
+  :diminish yas-minor-mode
   :bind (("C-c r" . yas-insert-snippet))
   )
 (use-package yasnippet-snippets :ensure t)
@@ -270,8 +274,11 @@
                   ("func" "^func \\(.*\\)(" 1)))
     (setq-local whitespace-line-column 100)
     (whitespace-mode t)
+    (diminish 'whitespace-mode)
     (setq fill-column 100)
-    (auto-fill-mode t))
+    (auto-fill-mode t)
+    (diminish 'auto-fill-mode)
+    )
   (add-hook 'go-mode-hook #'rski/go-mode-setup)
 
   (add-to-list 'rski/go-packages "golang.org/x/tools/cmd/guru")
@@ -475,7 +482,9 @@
             #'rski/maybe-disable-show-paren-mode)
   (defun rski/org-mode-hook ()
     (set-fill-column 100)
-    (auto-fill-mode t))
+    (auto-fill-mode t)
+    (diminish 'auto-fill-mode)
+    )
   (add-hook 'org-mode-hook #'rski/org-mode-hook)
   :bind (("\C-col" . org-store-link)
          ("\C-coa" . org-agenda)
