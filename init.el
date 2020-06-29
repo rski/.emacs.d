@@ -418,10 +418,6 @@
 
 (use-package hl-todo :init (global-hl-todo-mode))
 
-(use-package anzu
-  :diminish anzu-mode
-  :hook (after-init . global-anzu-mode))
-
 ;;; fonts
 (set-face-attribute 'default nil :family "DejaVu Sans Mono" :height 110)
 (use-package monokai-theme :defer t)
