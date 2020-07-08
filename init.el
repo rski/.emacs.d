@@ -550,6 +550,8 @@
                   ("https://weekly.nixos.org/feeds/all.rss.xml" snobbery nix)
                   ("https://lwn.net/headlines/rss")
                   ("https://fasterthanli.me/index.xml" blog)
+                  ("https://github.com/golang/tools/releases.atom" releases golang)
+                  ("https://github.com/golangci/golangci-lint/releases.atom" releases golang)
                   )))
 
 ;;;Rebind M-; to comment out lines instead of insert comments in the end
