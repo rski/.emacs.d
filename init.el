@@ -552,6 +552,7 @@
                   ("https://fasterthanli.me/index.xml" blog)
                   ("https://github.com/golang/tools/releases.atom" releases golang)
                   ("https://github.com/golangci/golangci-lint/releases.atom" releases golang)
+                  ("https://christine.website/blog.rss" blog)
                   )))
 
 ;;;Rebind M-; to comment out lines instead of insert comments in the end
