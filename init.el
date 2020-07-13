@@ -693,6 +693,9 @@ I always end up doing it in current buffer so might as well wrap it."
 ;;; Much better than pressing RET and leaving buffers
 (put 'dired-find-alternate-file 'disabled nil)
 
+(setq xref-after-jump-hook '(recenter))
+(setq xref-after-return-hook '())
+
 (use-package keychain-environment
   ;; fish also does this using after unlocking the keys,
   ;; using
