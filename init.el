@@ -286,15 +286,6 @@
 
   (use-package go-playground :defer t)
 
-  (use-package flycheck-golangci-lint
-    :hook (go-mode . flycheck-golangci-lint-setup)
-    :config (setq flycheck-golangci-lint-tests t
-                  flycheck-golangci-lint-disable-linters '("structcheck")
-                  ;; XXX add "errcheck" "deadcode"?
-                  flycheck-golangci-lint-enable-linters '("golint")
-                  flycheck-golangci-lint-fast t)
-    )
-
   (use-package gotest
     :hook (go-test-mode . visual-line-mode)
     :init
