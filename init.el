@@ -576,6 +576,7 @@
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 (add-to-list 'auto-mode-alist '("Cask" . emacs-lisp-mode))
+(add-to-list 'auto-mode-alist '(".g4" . antlr-mode))
 
 (use-package uniquify
   :ensure nil
