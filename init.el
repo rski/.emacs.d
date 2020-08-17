@@ -45,6 +45,8 @@
 
       )
 
+(setq shell-file-name (executable-find "bash"))
+
 ;; make C-z do nothing
 (defun suspend-frame() (interactive) )
 
