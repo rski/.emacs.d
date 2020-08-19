@@ -235,7 +235,7 @@
   :config
   (lsp-register-custom-settings
    '(("gopls.completeUnimported" t t)
-     ("gopls.staticcheck" t t))))
+     ("gopls.staticcheck" t nil))))
 
 (use-package lsp-python-ms
   :ensure t
