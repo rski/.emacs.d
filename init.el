@@ -259,13 +259,8 @@
 (use-package go-mode
   :defer t
   :hook ((go-mode . (lambda ()
-                      (add-hook 'before-save-hook
-                                #'lsp-format-buffer t t)
-                      (add-hook 'before-save-hook
-                                #'lsp-organize-imports t t )))
-         (go-mode . lsp)
-         (go-dot-mod-mode . lsp) ;; needs https://github.com/emacs-lsp/lsp-mode/pull/1822/files
-         )
+                      (add-hook 'before-save-hook 'gofmt-before-save))))
+  :custom (gofmt-command "goimports")
   :config
   (add-to-list 'rski/go-packages "golang.org/x/tools/cmd/gopls")
   ;; workaround not matching multiline signatures
