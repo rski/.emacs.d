@@ -250,12 +250,6 @@
 (unless (getenv "GOPATH")
   (setenv "GOPATH" "/home/rski/go"))
 
-(defvar rski/go-packages '() "A list of packages that my editor needs")
-(defun rski/install-go-packages ()
-  (interactive)
-  (compile (format "go get -u -v %s" (mapconcat 'identity rski/go-packages " "))))
-
-
 (use-package go-mode
   :defer t
   :hook ((go-mode . (lambda ()
@@ -267,7 +261,6 @@
          (go-dot-mod-mode . lsp) ;; needs https://github.com/emacs-lsp/lsp-mode/pull/1822/files
          )
   :config
-  (add-to-list 'rski/go-packages "golang.org/x/tools/cmd/gopls")
   ;; workaround not matching multiline signatures
   ;;  https://github.com/dominikh/go-mode.el/issues/57
   (defun rski/go-mode-setup ()
@@ -282,9 +275,6 @@
     (diminish 'auto-fill-mode)
     )
   (add-hook 'go-mode-hook #'rski/go-mode-setup)
-
-  (add-to-list 'rski/go-packages "golang.org/x/tools/cmd/guru")
-  (use-package go-guru)
 
   (use-package go-playground :defer t)
 
@@ -335,11 +325,7 @@
 
     :bind (:map go-mode-map
                 ("<C-return>" . rski/go-test-current-test))
-    )
-
-  ;; requires golang.org/x/tools/cmd/gorename
-  (add-to-list 'rski/go-packages "golang.org/x/tools/cmd/gorename")
-  (use-package go-rename :defer))
+    ))
 
 (use-package protobuf-mode :defer t)
 
