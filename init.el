@@ -43,6 +43,9 @@
       ;; autsave on compilation
       compilation-ask-about-save nil
 
+      inhibit-startup-echo-area-message t
+
+      find-file-visit-truename t
       )
 
 (setq shell-file-name (executable-find "bash"))
