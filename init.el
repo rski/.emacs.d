@@ -257,7 +257,6 @@
                       (add-hook 'before-save-hook
                                 #'lsp-organize-imports t t )))
          (go-mode . lsp)
-         (go-dot-mod-mode . lsp) ;; needs https://github.com/emacs-lsp/lsp-mode/pull/1822/files
          )
   :config
   ;; workaround not matching multiline signatures
