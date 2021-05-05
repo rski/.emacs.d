@@ -46,6 +46,9 @@
       inhibit-startup-echo-area-message t
 
       find-file-visit-truename t
+      ;; https://lists.gnu.org/archive/html/emacs-devel/2021-04/msg00799.html
+      ;; silence compilation messages
+      comp-async-report-warnings-error nil
       )
 
 (setq shell-file-name (executable-find "bash"))
