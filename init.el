@@ -528,6 +528,8 @@
                   ("https://github.com/golang/tools/releases.atom" releases golang)
                   ("https://github.com/golangci/golangci-lint/releases.atom" releases golang)
                   ("https://christine.website/blog.rss" blog)
+                  ("https://drewdevault.com/blog/index.xml" blog)
+                  ("https://rachelbythebay.com/w/atom.xml" blog)
                   )))
 
 ;;;Rebind M-; to comment out lines instead of insert comments in the end
