@@ -55,7 +55,6 @@
 
 (setq-default tab-width 4
               indent-tabs-mode nil
-              show-trailing-whitespace t
               )
 
 ;; compose-mail
@@ -74,6 +73,7 @@
 
 (setq use-package-always-ensure t)
 (add-hook 'prog-mode-hook #'bug-reference-prog-mode)
+(add-hook 'prog-mode-hook (lambda () (setq show-trailing-whitespace t)))
 
 (use-package diminish)
 
@@ -499,11 +499,6 @@
   :config
   (require 'smartparens-config)
   :diminish smartparens-mode)
-
-(dolist (mode '("eshell" "compilation" "debugger" "shell" "Info" "eww" "elfeed-show" "Buffer-menu" "erc" "term" "vterm"))
-  (let ((mode-hook (intern (format "%s-mode-hook" mode))))
-    (add-hook mode-hook
-              (lambda () (setq show-trailing-whitespace nil)))))
 
 (use-package erc
   :defer t
