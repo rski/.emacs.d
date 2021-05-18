@@ -460,12 +460,6 @@
         (setq-local show-paren-mode nil)))
   (add-hook 'org-mode-hook
             #'rski/maybe-disable-show-paren-mode)
-  (defun rski/org-mode-hook ()
-    (set-fill-column 100)
-    (auto-fill-mode t)
-    (diminish 'auto-fill-mode)
-    )
-  (add-hook 'org-mode-hook #'rski/org-mode-hook)
   :bind (("\C-col" . org-store-link)
          ("\C-coa" . org-agenda)
          ("\C-coc" . org-capture)
