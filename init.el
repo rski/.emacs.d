@@ -471,7 +471,10 @@
      (octave . t)))
   (setq org-directory (expand-file-name "~/org"))
   (setq org-agenda-files
-        '("~/org/todo.org" "~/org/arista.org" "~/org/buy.org" "~/org/daily.org" "~/org/learning.org"))
+        '("~/org/todo.org" "~/org/arista.org" "~/org/buy.org" "~/org/daily.org" "~/org/learning.org" "~/org/agenda.org"))
+  (setq org-tag-alist '((:startgroup . nil) ("@work" . ?w) ("@home" . ?h) (:endgroup . nil)
+                        (:startgroup . nil) ("@read" . ?r) ("@unread" . ?u) (:endgroup . nil)
+                        ))
   (setq org-default-notes-file (concat org-directory "/agenda.org"))
   (setq org-src-fontify-natively t)
 
