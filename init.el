@@ -524,6 +524,7 @@
                   ("https://christine.website/blog.rss" blog)
                   ("https://drewdevault.com/blog/index.xml" blog)
                   ("https://rachelbythebay.com/w/atom.xml" blog)
+                  ("https://deprogrammaticaipsum.com/rss" blog)
                   )))
 
 ;;;Rebind M-; to comment out lines instead of insert comments in the end
