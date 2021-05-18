@@ -406,7 +406,7 @@
 (use-package hl-todo :init (global-hl-todo-mode))
 
 ;;; fonts
-(set-face-attribute 'default nil :family "DejaVu Sans Mono" :height 110)
+(set-face-attribute 'default nil :family "Iosevka Mono" :height 110)
 (use-package monokai-theme :defer t)
 (use-package atom-one-dark-theme :defer t)
 (use-package solarized-theme :defer t)
