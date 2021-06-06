@@ -567,39 +567,6 @@
   (uniquify-min-dir-content 1))
 (global-set-key (kbd "M-/") 'hippie-expand)
 
-;;; double misc after here
-(let ((brewery "~/Code/emacs-brewery/brewery.el"))
-  (if (file-exists-p brewery)
-      (load-file brewery)))
-
-;;; List some unported remacs functions
-(defun list-unported-remacs-funcs (remacs-dir)
-  (unless (file-directory-p remacs-dir)
-    (user-error "dir \"%s\" not found" remacs-dir))
-  (let* ((default-directory (concat (file-name-as-directory remacs-dir) "src"))
-         (defuns (shell-command-to-string "grep -rnIH \"^DEFUN\""))
-         (defun-list (split-string defuns "\n" t)))
-    (let ((buff (get-buffer-create "*unported functions*"))
-          prev-file)
-      (switch-to-buffer-other-window buff)
-      (delete-region (point-min) (point-max))
-      (org-mode)
-      (dolist (line defun-list)
-        (let ((current-file (car (split-string line ":" t))))
-          (unless (string-equal prev-file current-file)
-            (setq prev-file current-file)
-            (insert "* " prev-file "\n"))
-          (insert "  - " (cadr (split-string line "\"")) "\n")
-          )))))
-
-(defun rski/list-unported-emacs-funcs ()
-  (interactive)
-  (list-unported-remacs-funcs "~/Code/rust/remacs"))
-
-(defun rski/yang-rfc ()
-  (interactive)
-  (eww "https://tools.ietf.org/html/rfc6020"))
-
 (use-package ediff
   :defer t
   :ensure nil
