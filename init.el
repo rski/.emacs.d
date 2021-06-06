@@ -10,6 +10,11 @@
 ;;; Enables C-x n n to do narrow-to-region
 (put 'narrow-to-region 'disabled nil)
 
+(defun rski/visit-config ()
+  (interactive)
+  (find-file "~/.emacs.d/init.el"))
+(global-set-key (kbd "C-c v") 'rski/visit-config)
+
 ;;; Various config options
 (setq user-full-name "Romanos Skiadas"
       user-mail-address "rom.skiad@gmail.com"
@@ -530,11 +535,6 @@
 
 ;;;Rebind M-; to comment out lines instead of insert comments in the end
 (global-set-key (kbd "M-;") 'comment-line)
-
-(defun rski/visit-config ()
-  (interactive)
-  (find-file "~/.emacs.d/init.el"))
-(global-set-key (kbd "C-c v") 'rski/visit-config)
 
 ;;; modeline
 (setq rski/hostname (system-name))
