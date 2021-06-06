@@ -254,16 +254,14 @@
 
 (use-package go-mode
   :defer t
-  :hook ((go-mode . (lambda ()
-                      (add-hook 'before-save-hook
-                                #'lsp-format-buffer t t)
-                      (add-hook 'before-save-hook
-                                #'lsp-organize-imports t t )))
-         (go-mode . lsp)
+  :hook ( (go-mode . (lambda ()
+                      (add-hook 'before-save-hook #'gofmt-before-save)))
+         ;; (go-mode . lsp)
          )
   :config
   ;; workaround not matching multiline signatures
   ;;  https://github.com/dominikh/go-mode.el/issues/57
+  (setq gofmt-command "goimports")
   (defun rski/go-mode-setup ()
     (setq-local imenu-generic-expression
                 '(("type" "^type *\\([^ \t\n\r\f]*(\\)" 1)
