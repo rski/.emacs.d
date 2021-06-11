@@ -250,6 +250,7 @@
 
 (use-package lsp-pyright
   :ensure t
+  :init (setq lsp-pyright-multi-root nil)
   :hook (python-mode . (lambda ()
                           (require 'lsp-pyright)
                           (lsp))))
