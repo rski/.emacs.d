@@ -368,7 +368,29 @@
     (interactive)
     (magit-git-command-topdir "git push origin HEAD:refs/for/master"))
   (transient-append-suffix 'magit-push "m"
-    '("G" "Push to gerrit" magit-push-to-gerrit)))
+    '("G" "Push to gerrit" magit-push-to-gerrit))
+  ;; taken from https://tsdh.org/posts/2021-06-21-using-eldoc-with-magit.html
+  (defun th/magit-eldoc-for-commit (_callback)
+  (let ((commit (magit-commit-at-point)))
+    (when commit
+      (with-temp-buffer
+        (magit-git-insert "show"
+                          "--format=format:%an <%ae>, %ar"
+                          (format "--stat=%d" (window-width))
+                          commit)
+        (goto-char (point-min))
+        (put-text-property (point-min)
+                           (line-end-position)
+                           'face 'bold)
+        (buffer-string)))))
+  (defun th/magit-eldoc-setup ()
+  (add-hook 'eldoc-documentation-functions
+            #'th/magit-eldoc-for-commit nil t)
+  (eldoc-mode 1))
+  (add-hook 'magit-status-mode-hook #'th/magit-eldoc-setup)
+  (add-hook 'magit-log-mode-hook #'th/magit-eldoc-setup)
+  (eldoc-add-command 'magit-next-line)
+  (eldoc-add-command 'magit-previous-line))
 
 (use-package git-gutter
   :defer t
