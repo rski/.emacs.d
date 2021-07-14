@@ -519,6 +519,9 @@
   (interactive)
   (indent-region (point-min) (point-max)))
 
+(use-package editorconfig
+  :config (editorconfig-mode 1))
+
 (use-package smartparens
   :hook ((prog-mode text-mode) . smartparens-mode)
   :config
