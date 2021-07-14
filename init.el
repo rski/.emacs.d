@@ -660,11 +660,4 @@ I always end up doing it in current buffer so might as well wrap it."
 (setq xref-after-return-hook '())
 
 (use-package keychain-environment
-  ;; fish also does this using after unlocking the keys,
-  ;; using
-  ;; emacsclient  -e "(keychain-refresh-environment)"
-  ;; This is for when emacs restarts after fish has sent the eval.
-  ;; There's some states where emacs won't get the environment set correctly
-  ;; e.g. starting a non-daemon without having started a login shell, but
-  ;; that will probably be too infrequent to matter.
   :config (keychain-refresh-environment))
