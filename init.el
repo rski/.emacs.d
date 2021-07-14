@@ -528,15 +528,6 @@
   (require 'smartparens-config)
   :diminish smartparens-mode)
 
-(use-package erc
-  :defer t
-  :ensure nil
-  :hook (erc-connect-pre . erc-spelling-mode)
-  :config
-  (erc-notifications-mode 1)
-  (setq erc-autojoin-mode t)
-  (setq erc-pcomplete-nick-postfix ", "))
-
 (use-package elfeed
   :defer t
   :config (setq elfeed-feeds
