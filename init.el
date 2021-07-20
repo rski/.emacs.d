@@ -409,7 +409,9 @@
   (add-to-list 'projectile-globally-ignored-directories "vendor")
   :config
   (use-package counsel-projectile
-    :init (counsel-projectile-mode)
+    :init
+    (counsel-projectile-find-file-more-chars 3) ;; nb this needs to be set before enabling the mode
+    (counsel-projectile-mode)
     :bind ("M-I". counsel-projectile-rg))
   )
 
