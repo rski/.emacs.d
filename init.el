@@ -53,7 +53,7 @@
       find-file-visit-truename t
       ;; https://lists.gnu.org/archive/html/emacs-devel/2021-04/msg00799.html
       ;; silence compilation messages
-      comp-async-report-warnings-error nil
+      comp-async-report-warnings-errors 'silent
       )
 
 (setq shell-file-name (executable-find "bash"))
